@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -24,14 +28,20 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $two_factor_confirmed_at
  * @property string|null $remember_token
  * @property int|null $current_team_id
+ * @property int|null $cooperative_id
+ * @property string|null $phone_number
+ * @property string|null $role
+ * @property string|null $conversation_state
+ * @property Carbon|null $joined_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Team|null $currentTeam
+ * @property-read Cooperative|null $cooperative
  * @property-read Collection<int, Team> $ownedTeams
  * @property-read Collection<int, Membership> $teamMemberships
  * @property-read Collection<int, Team> $teams
  */
-#[Fillable(['name', 'email', 'password', 'current_team_id'])]
+#[Fillable(['name', 'email', 'password', 'current_team_id', 'cooperative_id', 'phone_number', 'role', 'conversation_state', 'joined_at'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -47,7 +57,46 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'joined_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function cooperative(): BelongsTo
+    {
+        return $this->belongsTo(Cooperative::class);
+    }
+
+    public function memberProfile(): HasOne
+    {
+        return $this->hasOne(MemberProfile::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function pointsLedgers(): HasMany
+    {
+        return $this->hasMany(PointsLedger::class);
+    }
+
+    public function memberBadges(): HasMany
+    {
+        return $this->hasMany(MemberBadge::class);
+    }
+
+    /**
+     * Get the badges earned by the user.
+     *
+     * @return BelongsToMany<Badge, $this, MemberBadge, 'pivot'>
+     */
+    public function badges(): BelongsToMany
+    {
+        return $this->belongsToMany(Badge::class, 'member_badges')
+            ->using(MemberBadge::class)
+            ->withPivot(['earned_at'])
+            ->withTimestamps();
     }
 }

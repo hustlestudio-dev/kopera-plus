@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\TeamRole;
+use App\Models\Cooperative;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -75,6 +76,20 @@ class UserFactory extends Factory
             'two_factor_secret' => encrypt('secret'),
             'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1'])),
             'two_factor_confirmed_at' => now(),
+        ]);
+    }
+
+    /**
+     * Indicate that the user belongs to a cooperative.
+     */
+    public function forCooperative(Cooperative $cooperative, string $role = 'member'): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'cooperative_id' => $cooperative->id,
+            'phone_number' => fake()->numerify('08##########'),
+            'role' => $role,
+            'conversation_state' => 'onboarding_complete',
+            'joined_at' => now(),
         ]);
     }
 }
