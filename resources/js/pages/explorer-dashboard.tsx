@@ -417,7 +417,6 @@ export default function ExplorerDashboard() {
                     <footer className="px-8 py-8 border-t border-zinc-200 bg-white">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
                             <div className="flex items-center gap-2">
-                                <img alt="KOPERA-PLUS Logo" className="w-8 h-8 rounded-md grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAghwedj2tFNxqbbxH59PE6WsqXRMnNOvO-1fU9_JYGL_tDKuMfiFAyBrnSX0s-84WuLeYdPFkogH9RbWFU42dUrKL76LCivu8XBv6HzjZZ_56LE5IKKS7meGN4e28A6m_SGP54_TPldxBnQp-jJz5k1RDnwMJrbnvAMUehfJYSqmAa0Q7hsRdVsCbdU19LKKRSX5SrHaP82u2VIOPIFoZQx-LJkTU13JVGGtPpmVIfOF6wVGO80vHTlrufJdLrRAOcemvjBlbEA" />
                                 <span className="text-zinc-500">© 2024 KOPERA-PLUS. All rights reserved.</span>
                             </div>
                             <div className="flex gap-6 text-zinc-500">
