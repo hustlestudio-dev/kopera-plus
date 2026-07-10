@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { Search, Brain, Users, BarChart3, TrendingUp, RefreshCw, AlertCircle, ShoppingCart, Activity, ShieldCheck, Settings, HelpCircle, Layers, Bell, MessageSquare, ChevronRight, Play } from 'lucide-react';
+import { Search, Brain, AlertCircle, Activity, ShieldCheck, HelpCircle, Bell, MessageSquare, ChevronRight } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 

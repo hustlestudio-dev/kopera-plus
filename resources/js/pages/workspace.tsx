@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { Search, Bell, Settings, Award, Cpu, ShieldCheck, Compass, Info, MessageSquare, Send, Paperclip, Mic, HelpCircle, LayoutDashboard, Brain, Store, ArrowRight, Star, Settings2, Plus, Calendar, Moon } from 'lucide-react';
+import { Search, Bell, ShieldCheck, Send, Paperclip, Mic, Plus, Moon } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 

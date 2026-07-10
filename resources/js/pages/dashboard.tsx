@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { Search, Bell, Settings, Award, Cpu, ShieldCheck, Compass, Info, MessageSquare, Send, Paperclip, Mic, HelpCircle, LayoutDashboard, Brain, Store, ArrowRight, Star, Settings2, Plus, Calendar, Moon, Sparkles, TrendingUp, Vote, User, Trash2, Heart, CheckCircle2, ChevronRight, Share2, LogOut, BookOpen } from 'lucide-react';
+import { Search, Bell, ShieldCheck, Compass, Send, Brain, ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
@@ -24,7 +24,7 @@ export default function Dashboard() {
         }
     ]);
     const [chatInput, setChatInput] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
+    const [, setIsTyping] = useState(false);
 
     // Community feed states
     const [feedPosts, setFeedPosts] = useState([
