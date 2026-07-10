@@ -15,7 +15,7 @@ export default function Onboarding() {
                             KOPERA-PLUS
                         </Link>
                         <div className="flex gap-4">
-                            <Link href="/demo/auth" className="px-5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full">
+                            <Link href="/login" className="px-5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full">
                                 Login
                             </Link>
                             <button className="px-5 py-2 font-label-md text-label-md bg-primary text-on-primary hover:opacity-90 transition-all rounded-full">

@@ -61,7 +61,7 @@ export default function Welcome() {
                             <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#journey">Journey</a>
                         </div>
                         <div className="flex items-center gap-4">
-                            <Link href="/demo/auth" className="hidden md:block text-on-surface font-label-md text-label-md hover:bg-surface-container-low px-4 py-2 rounded-lg transition-all duration-200">
+                            <Link href="/login" className="hidden md:block text-on-surface font-label-md text-label-md hover:bg-surface-container-low px-4 py-2 rounded-lg transition-all duration-200">
                                 Login
                             </Link>
                             <Link href="/onboarding" className="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:shadow-lg active:scale-95 transition-all duration-200">

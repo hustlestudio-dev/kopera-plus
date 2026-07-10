@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Route;
 Route::inertia('/', 'welcome')->name('home');
 
 Route::inertia('/onboarding', 'onboarding')->name('onboarding');
-Route::inertia('/workspace', 'workspace')->name('workspace');
-Route::inertia('/assistant', 'assistant')->name('assistant');
-Route::inertia('/admin-dashboard', 'admin-dashboard')->name('admin-dashboard');
-Route::inertia('/explorer-dashboard', 'explorer-dashboard')->name('explorer-dashboard');
-Route::inertia('/demo/auth', 'auth/login')->name('demo-auth');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::inertia('/workspace', 'workspace')->name('workspace');
+    Route::inertia('/assistant', 'assistant')->name('assistant');
+    Route::inertia('/admin-dashboard', 'admin-dashboard')->name('admin-dashboard');
+    Route::inertia('/explorer-dashboard', 'explorer-dashboard')->name('explorer-dashboard');
+});
+
+Route::redirect('/demo/auth', '/login', 301);
 
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])

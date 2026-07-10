@@ -14,7 +14,7 @@ export default function PrototypeHud() {
 
     const screens: ScreenItem[] = [
         { name: '1. Landing Page', path: '/', icon: <Home className="h-4 w-4" /> },
-        { name: '2. Authentication', path: '/demo/auth', icon: <UserCheck className="h-4 w-4" /> },
+        { name: '2. Authentication', path: '/login', icon: <UserCheck className="h-4 w-4" /> },
         { name: '3. Onboarding', path: '/onboarding', icon: <ArrowRightLeft className="h-4 w-4" /> },
         { name: '4. AI Commerce Assistant', path: '/assistant', icon: <ShoppingCart className="h-4 w-4" /> },
         { name: '5. AI Workspace', path: '/workspace', icon: <Cpu className="h-4 w-4" /> },

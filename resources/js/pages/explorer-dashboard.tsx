@@ -134,7 +134,7 @@ export default function ExplorerDashboard() {
                     </nav>
 
                     <div className="mt-auto px-4 pb-4">
-                        <Link href="/demo/auth" className="w-full py-3 bg-primary text-white font-label-md text-sm font-semibold rounded-xl shadow-lg hover:brightness-110 transition-all text-center block">
+                        <Link href="/login" className="w-full py-3 bg-primary text-white font-label-md text-sm font-semibold rounded-xl shadow-lg hover:brightness-110 transition-all text-center block">
                             Upgrade to Member
                         </Link>
                     </div>
