@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>KOPERA-PLUS | Authentication</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#007e37",
+                        "tertiary": "#006229",
+                        "secondary-container": "#8a4cfc",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-surface-variant": "#434655",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "inverse-primary": "#b4c5ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#6bff8f",
+                        "surface-container": "#e5eeff",
+                        "secondary": "#712ae2",
+                        "on-tertiary-container": "#c1ffc5",
+                        "surface-variant": "#d3e4fe",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#eeefff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#213145",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#0b1c30",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed": "#dbe1ff",
+                        "outline": "#737686",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed": "#eaddff",
+                        "on-tertiary-fixed": "#002109",
+                        "primary": "#004ac6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "background": "#f8f9ff",
+                        "primary-container": "#2563eb",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0b1c30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max-width": "1440px",
+                        "grid-margin": "32px",
+                        "grid-gutter": "24px",
+                        "base-unit": "4px",
+                        "bento-gap": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "display-sm": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-sm": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-entrance {
+            animation: fadeInSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .animate-delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .bento-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .bento-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #E2E8F0;
+        }
+
+        .glow-button {
+            transition: all 0.3s ease;
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #7C3AED, #2563EB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <main class="min-h-screen flex flex-col md:flex-row">
+        <!-- Left Side: Branding Panel (45%) -->
+        <section
+            class="w-full md:w-[45%] bg-gradient-to-br from-[#F8FAFC] to-[#EFF6FF] p-8 md:p-16 flex flex-col justify-between items-start relative overflow-hidden min-h-[400px] md:min-h-screen">
+            <!-- Brand Identity -->
+            <div class="z-10 w-full animate-entrance">
+                <div class="flex items-center gap-2 mb-12">
+                    <div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white"
+                            style="font-variation-settings: 'FILL' 1;">hub</span>
+                    </div>
+                    <span class="font-headline-lg text-headline-sm tracking-tight text-primary">KOPERA-PLUS</span>
+                </div>
+                <h1 class="font-headline-lg text-display-sm text-on-surface mb-4">
+                    Welcome to <span class="ai-gradient-text">KOPERA AI</span>
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Empowering communities through intelligent cooperative experiences.
+                </p>
+            </div>
+            <!-- AI Illustration Placeholder -->
+            <div class="z-10 w-full flex justify-center py-12 animate-entrance animate-delay-1">
+                <div class="relative w-full max-w-lg aspect-square">
+                    <img alt="KOPERA AI Illustration"
+                        class="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuANFZUBvSPEBzuY_lnYbbAEvun86U4ANjFNJtwlF7_uAzdx9qTtlji-q3wotLNk22oziQf7YzxKvy6I3TMNvy5JcChkKR2j4oV_-lKr_mAmNZlh5aTBlnX6un3Pl6jUNp7liXrOpk03H8CXTmZyQqt17gN9c9Sr91FIElmN6otZ8dS_mRPdC6p1O70MffIG3Omf3Sd1Vsgk6e4UWu_ZE3phYs-4Z3RhYJr_iuZlg0K7Z-Nk6BKUWQI7ymeLYuK2H6a349GVj57jZHs" />
+                </div>
+            </div>
+            <!-- Trust Badges -->
+            <div class="z-10 w-full grid grid-cols-1 gap-4 animate-entrance animate-delay-2">
+                <div
+                    class="flex items-center gap-3 bg-surface/50 backdrop-blur-sm p-4 rounded-xl border border-outline-variant/30">
+                    <div class="w-8 h-8 rounded-full bg-tertiary-container/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-tertiary text-[20px]"
+                            style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    </div>
+                    <span class="font-label-md text-label-md">Secure Authentication</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 bg-surface/50 backdrop-blur-sm p-4 rounded-xl border border-outline-variant/30">
+                    <div class="w-8 h-8 rounded-full bg-secondary-container/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-secondary text-[20px]"
+                            style="font-variation-settings: 'FILL' 1;">psychology</span>
+                    </div>
+                    <span class="font-label-md text-label-md">AI Personalized Experience</span>
+                </div>
+                <div
+                    class="flex items-center gap-3 bg-surface/50 backdrop-blur-sm p-4 rounded-xl border border-outline-variant/30">
+                    <div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary text-[20px]"
+                            style="font-variation-settings: 'FILL' 1;">groups</span>
+                    </div>
+                    <span class="font-label-md text-label-md">Trusted Cooperative Platform</span>
+                </div>
+            </div>
+            <!-- Background Decorative Elements -->
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-[100px]"></div>
+            <div class="absolute top-1/4 -right-24 w-64 h-64 bg-secondary/5 rounded-full blur-[80px]"></div>
+        </section>
+        <!-- Right Side: Auth Card (55%) -->
+        <section class="w-full md:w-[55%] flex items-center justify-center p-6 md:p-12 bg-surface-bright relative">
+            <div class="w-full max-w-[520px] animate-entrance animate-delay-1">
+                <!-- Authentication Card -->
+                <div class="bento-card p-8 md:p-10 border border-outline-variant/20" id="auth-card">
+                    <!-- Journey Indicator -->
+                    <div class="flex items-center justify-between mb-8 pb-6 border-b border-outline-variant/20">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">You're signing in as
+                                <strong class="text-on-surface">Cooperative Member</strong></span>
+                        </div>
+                        <button class="text-primary font-label-sm text-label-sm hover:underline transition-all">Change
+                            Journey</button>
+                    </div>
+                    <!-- Login Form Container -->
+                    <div id="login-container">
+                        <div class="mb-8">
+                            <h2 class="font-headline-md text-headline-md mb-2">Member Login</h2>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Enter your credentials to
+                                access your dashboard.</p>
+                        </div>
+                        <form class="space-y-5" onsubmit="event.preventDefault();">
+                            <div class="space-y-1.5">
+                                <label class="font-label-md text-label-md text-on-surface-variant" for="email">Email
+                                    Address</label>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                    id="email" placeholder="name@coop.com" type="email" />
+                            </div>
+                            <div class="space-y-1.5">
+                                <div class="flex justify-between items-center">
+                                    <label class="font-label-md text-label-md text-on-surface-variant"
+                                        for="password">Password</label>
+                                    <a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Forgot
+                                        Password?</a>
+                                </div>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                    id="password" placeholder="••••••••" type="password" />
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input class="w-4 h-4 text-primary rounded border-outline-variant focus:ring-primary"
+                                    id="remember" type="checkbox" />
+                                <label class="font-body-sm text-body-sm text-on-surface-variant" for="remember">Remember
+                                    me for 30 days</label>
+                            </div>
+                            <button
+                                class="w-full py-4 bg-primary text-white font-headline-sm text-headline-sm rounded-xl glow-button flex items-center justify-center gap-2">
+                                Login
+                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                            </button>
+                        </form>
+                        <div class="relative my-8">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-outline-variant/30"></div>
+                            </div>
+                            <div class="relative flex justify-center text-label-sm"><span
+                                    class="bg-white px-4 text-outline font-label-sm uppercase tracking-widest">or
+                                    continue with</span></div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button
+                                class="flex items-center justify-center gap-3 px-4 py-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors font-label-md text-label-md">
+                                <svg class="w-5 h-5" viewbox="0 0 24 24">
+                                    <path
+                                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                        fill="#4285F4"></path>
+                                    <path
+                                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                        fill="#34A853"></path>
+                                    <path
+                                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                                        fill="#FBBC05"></path>
+                                    <path
+                                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                        fill="#EA4335"></path>
+                                </svg>
+                                Google
+                            </button>
+                            <button
+                                class="flex items-center justify-center gap-3 px-4 py-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors font-label-md text-label-md">
+                                <svg class="w-5 h-5" viewbox="0 0 23 23">
+                                    <path d="M0 0h23v23H0z" fill="#f3f3f3"></path>
+                                    <path d="M1 1h10v10H1z" fill="#f35325"></path>
+                                    <path d="M12 1h10v10H12z" fill="#81bc06"></path>
+                                    <path d="M1 12h10v10H1z" fill="#05a6f0"></path>
+                                    <path d="M12 12h10v10H12z" fill="#ffba08"></path>
+                                </svg>
+                                Microsoft
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Register Form Container (Hidden by default) -->
+                    <div class="hidden" id="register-container">
+                        <div class="mb-8">
+                            <h2 class="font-headline-md text-headline-md mb-2">Create Account</h2>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Join the KOPERA-PLUS community
+                                today.</p>
+                        </div>
+                        <form class="space-y-4" onsubmit="event.preventDefault();">
+                            <div class="space-y-1.5">
+                                <label class="font-label-md text-label-md text-on-surface-variant" for="fullname">Full
+                                    Name</label>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                    id="fullname" placeholder="John Doe" type="text" />
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-1.5">
+                                    <label class="font-label-md text-label-md text-on-surface-variant"
+                                        for="reg-email">Email</label>
+                                    <input
+                                        class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                        id="reg-email" placeholder="name@coop.com" type="email" />
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="font-label-md text-label-md text-on-surface-variant"
+                                        for="phone">Phone</label>
+                                    <input
+                                        class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                        id="phone" placeholder="+1 (555) 000-0000" type="tel" />
+                                </div>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="font-label-md text-label-md text-on-surface-variant"
+                                    for="reg-password">Password</label>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                    id="reg-password" placeholder="••••••••" type="password" />
+                                <!-- Password Strength Indicator -->
+                                <div class="mt-2 flex gap-1 h-1.5">
+                                    <div class="flex-1 bg-tertiary-container rounded-full"></div>
+                                    <div class="flex-1 bg-tertiary-container rounded-full"></div>
+                                    <div class="flex-1 bg-outline-variant rounded-full"></div>
+                                    <div class="flex-1 bg-outline-variant rounded-full"></div>
+                                </div>
+                                <p class="text-[10px] text-on-surface-variant font-medium mt-1">Strong Password: Use
+                                    symbols and mixed case.</p>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="font-label-md text-label-md text-on-surface-variant"
+                                    for="confirm-password">Confirm Password</label>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface"
+                                    id="confirm-password" placeholder="••••••••" type="password" />
+                            </div>
+                            <button
+                                class="w-full mt-4 py-4 bg-primary text-white font-headline-sm text-headline-sm rounded-xl glow-button flex items-center justify-center gap-2">
+                                Create Account
+                                <span class="material-symbols-outlined text-[20px]">person_add</span>
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Toggle Button -->
+                    <div class="mt-8 text-center">
+                        <p class="font-body-sm text-body-sm text-on-surface-variant" id="toggle-text">
+                            Don't have an account?
+                            <button class="text-primary font-label-md text-label-md hover:underline ml-1"
+                                onclick="toggleAuth()">Create Account</button>
+                        </p>
+                    </div>
+                </div>
+                <!-- Footer Links -->
+                <div class="mt-8 flex justify-center gap-6 animate-entrance animate-delay-3">
+                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors"
+                        href="#">Privacy Policy</a>
+                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors"
+                        href="#">Terms of Service</a>
+                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors"
+                        href="#">Help Center</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        function toggleAuth() {
+            const loginContainer = document.getElementById('login-container');
+            const registerContainer = document.getElementById('register-container');
+            const toggleText = document.getElementById('toggle-text');
+
+            if (loginContainer.classList.contains('hidden')) {
+                // Switch to Login
+                loginContainer.classList.remove('hidden');
+                registerContainer.classList.add('hidden');
+                toggleText.innerHTML = `Don't have an account? <button onclick="toggleAuth()" class="text-primary font-label-md text-label-md hover:underline ml-1">Create Account</button>`;
+            } else {
+                // Switch to Register
+                loginContainer.classList.add('hidden');
+                registerContainer.classList.remove('hidden');
+                toggleText.innerHTML = `Already have an account? <button onclick="toggleAuth()" class="text-primary font-label-md text-label-md hover:underline ml-1">Login</button>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

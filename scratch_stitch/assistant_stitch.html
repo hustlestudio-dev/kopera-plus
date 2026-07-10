@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KOPERA-PLUS | AI Commerce Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#00174b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#c1ffc5",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "outline": "#737686",
+                    "on-background": "#0b1c30",
+                    "primary-container": "#2563eb",
+                    "on-tertiary-fixed": "#002109",
+                    "on-secondary-fixed": "#25005a",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "surface": "#f8f9ff",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed": "#eaddff",
+                    "surface-tint": "#0053db",
+                    "surface-container": "#e5eeff",
+                    "inverse-primary": "#b4c5ff",
+                    "tertiary-container": "#007e37",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "outline-variant": "#c3c6d7",
+                    "inverse-surface": "#213145",
+                    "secondary-container": "#8a4cfc",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "background": "#f8f9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "primary": "#004ac6",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-secondary-container": "#fffbff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container-high": "#dce9ff",
+                    "secondary": "#712ae2",
+                    "on-surface-variant": "#434655",
+                    "tertiary": "#006229",
+                    "on-surface": "#0b1c30",
+                    "tertiary-fixed": "#6bff8f",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#eeefff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px",
+                    "bento": "20px"
+            },
+            "spacing": {
+                    "grid-margin": "32px",
+                    "container-max-width": "1440px",
+                    "bento-gap": "20px",
+                    "base-unit": "4px",
+                    "grid-gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "display-sm": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "display-sm": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #0b1c30; }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .bento-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-color: #E2E8F0;
+            transform: translateY(-2px);
+        }
+        .ai-gradient-text {
+            background: linear-gradient(to right, #7C3AED, #2563EB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ai-gradient-bg {
+            background: linear-gradient(135deg, #7C3AED, #2563EB);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill { font-variation-settings: 'FILL' 1; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex overflow-hidden">
+<!-- Left Sidebar (SideNavBar) -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-surface-container-low border-r border-outline-variant/30 py-8 z-50">
+<div class="px-6 mb-10 flex flex-col">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">KOPERA-PLUS</span>
+<span class="font-label-sm text-on-surface-variant opacity-70">Premium AI Assistant</span>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                AI Assistant
+            </a>
+<!-- Active Navigation -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-primary font-bold bg-primary-container/10 border-r-4 border-primary" href="#">
+<span class="material-symbols-outlined active-pill" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+                AI Commerce
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">storefront</span>
+                Marketplace
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">redeem</span>
+                Rewards
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+                Community
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                Digital RAT
+            </a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full ai-gradient-bg text-white font-label-md text-label-md py-3 rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+                Upgrade to Pro
+            </button>
+</div>
+</aside>
+<!-- Main View Area -->
+<main class="ml-64 flex-1 flex flex-col h-screen overflow-hidden bg-surface relative">
+<!-- TopNavBar -->
+<header class="h-16 sticky top-0 z-40 w-full flex justify-between items-center px-grid-margin bg-surface/80 backdrop-blur-md border-b border-outline-variant/20">
+<div class="flex items-center gap-6">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-2 focus:ring-primary/20" placeholder="Search operations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-white px-5 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:opacity-80 transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    New Shopping Session
+                </button>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-white">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a professional cooperative member with a friendly smile, high-quality studio lighting, clean background, modern professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIMjOFNDBVynLh3HdvXhsBc0xx6Bm_3tVpzOnhVoi8zWQZA5F-G6q8QFB8EoNTVoRqSor5EB7B8e-YBdI6GPt_MPAqdnO54z2km593WIMTFD2jgAwHTV8m3kdp89ojd_B3fD-Asx8iOAB9OXXH1NRP-Cx7NrbmOyj3BoJD940Yg7lkYvSkoURDMRFouHPVF_N7qHwhQ9AhFPhkK9FMLfJqLS9LhhD6XC4ygnP9vld2cuorEZHDDhBDLNpwyYJ8663gDMHTC0dxKvg"/>
+</div>
+</div>
+</header>
+<!-- Content Area (Scrollable) -->
+<div class="flex-1 overflow-y-auto px-grid-margin py-8 flex gap-grid-gutter">
+<!-- Left Workspace (Conversational) -->
+<div class="flex-1 flex flex-col space-y-8 max-w-4xl">
+<!-- Hero & Search -->
+<div class="text-center space-y-4 pt-4">
+<h1 class="font-display-sm text-display-sm text-on-surface">AI Commerce Assistant 🛒</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tell AI what you need and we'll source it from trusted cooperatives.</p>
+<div class="max-w-2xl mx-auto mt-8 relative">
+<div class="glass-input rounded-2xl p-2 shadow-xl flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary/40 transition-all">
+<input class="flex-1 bg-transparent border-none py-4 px-6 text-body-lg focus:ring-0 placeholder:text-outline" placeholder='Example: "I need organic fertilizer for my rice field"' type="text"/>
+<button class="ai-gradient-bg w-14 h-14 rounded-xl flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-[28px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex flex-wrap justify-center gap-2 mt-4">
+<button class="px-4 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container text-label-md text-on-surface-variant transition-colors">Buy Rice</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container text-label-md text-on-surface-variant transition-colors">Find Fertilizer</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container text-label-md text-on-surface-variant transition-colors">Today's Promotions</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container text-label-md text-on-surface-variant transition-colors">Local Tools</button>
+</div>
+</div>
+</div>
+<!-- Chat History Section -->
+<div class="space-y-6">
+<!-- User Message -->
+<div class="flex justify-end">
+<div class="max-w-[80%] bg-primary-container text-white p-5 rounded-2xl rounded-tr-none shadow-md font-body-md">
+                            "I'm looking for high-quality organic rice for my family."
+                        </div>
+</div>
+<!-- AI Response -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full ai-gradient-bg flex items-center justify-center flex-shrink-0 text-white">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<div class="flex-1 space-y-6">
+<div class="font-body-md text-on-surface-variant leading-relaxed">
+                                I've analyzed available stock across 3 nearby cooperatives. Based on your family size and previous health preferences, I recommend the <span class="font-bold text-primary">Premium Mentik Susu</span> from Koperasi Tani Sejahtera.
+                            </div>
+<!-- Product Audit Card (Bento Style) -->
+<div class="bento-card overflow-hidden grid grid-cols-1 md:grid-cols-5 border-l-4 border-primary">
+<div class="md:col-span-2 relative overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A premium close-up shot of high-quality raw Mentik Susu white rice grains, presented in a clean woven basket, cinematic soft lighting, vibrant and fresh natural look, professional product photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKqUnFQTbpl1Naff5rKVHJqk1vJ36qhSRN9XaBYGM6ywiLTvq45r8afpUX_J2seh9A_XQLua7SCX4_efCtzsPKxrKfAyAKrPKSy2OBVgSy5Yw2R-BrsRjjgZmVeG6LdstJPQD1AImumELFfjSAp3VfbpXZMvVnD6dN7TrcDvhwUmgUm0v6kI0-qx4UMyyzH-j3E4V_LvN-_MYmrpqjhx1wRHUEwSGIc20zznq7__D-UuOi4jirNarGjlsnEIFC_Q-Sf7hSyKMVPS0"/>
+<div class="absolute top-4 left-4 bg-tertiary text-white text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        Live Stock Verified
+                                    </div>
+</div>
+<div class="md:col-span-3 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Premium Mentik Susu</h3>
+<div class="bg-secondary-container/10 text-secondary px-3 py-1 rounded-full text-label-sm font-bold">
+                                                98% Match
+                                            </div>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="text-tertiary font-bold text-lg">Rp85.000</span>
+<span class="text-label-sm text-outline">Member Price</span>
+</div>
+<div class="grid grid-cols-2 gap-4 text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">inventory_2</span>
+<span>42 bags in stock</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">near_me</span>
+<span>2km distance</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[18px]">star</span>
+<span>4.9 (124 reviews)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">local_shipping</span>
+<span>Same-day delivery</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-3">
+<button class="flex-1 bg-primary text-white py-3 rounded-xl font-label-md hover:shadow-lg transition-all active:scale-95">Add to Cart</button>
+<button class="p-3 rounded-xl border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">favorite</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Comparison Section -->
+<div class="space-y-4">
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Compare Alternatives</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bento-card p-5 border border-outline-variant/10">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A bowl of high-quality organic brown rice, rich earthy texture, soft natural light, warm atmosphere, focused on the grain detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0e7GW33TkV3B5fyfcW6O2seCuiskHQZm0LO7l9mpmZtj5dGr6u6O1Zx1uFNKaGVHzMHh6jxexnbAlto9TQMQ6pAogbpjGLcVLj6P8E81_mbWuTu4IM-RyT-6xueTIvou0nT7C9wW_BAYtLJn3sEsanCA85q26OULUNfVcA64T97COw2aDZFhhQmH6Of_DvEZKfDv-TDO3C_QAIsrGUmkDM7lC6PwBQEF2T6Nav_rMASf1iD8Wi_BNYcwC_0fBxiXputmTb7tAYAc"/>
+</div>
+<div>
+<div class="font-headline-sm text-[16px]">Organic Brown Rice</div>
+<div class="text-label-sm text-outline">Sejahtera Cooperative</div>
+</div>
+</div>
+<div class="space-y-2 text-body-sm">
+<div class="flex justify-between border-b border-outline-variant/10 pb-1">
+<span class="text-outline">Price</span>
+<span class="font-bold">Rp78.000</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-1">
+<span class="text-outline">Stock</span>
+<span class="text-error font-medium">5 bags left</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Delivery</span>
+<span>Tomorrow</span>
+</div>
+</div>
+</div>
+<div class="bento-card p-5 border border-outline-variant/10 bg-surface-container-low/50">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Eco-friendly packaging of jasmine rice, modern minimalist design, professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArbimQUVSN4O8e9616_82eJXm8uBNsRSA1ntCvy1e2-7oJh9H_axVjDsrWSFhQZW9VpKFwzrd4ZGVn4OCattsRzNdyxfUhT-5ubPtvZBsnOuZlhX_HlY-y5YW8CwisgJjbE_mx_bCVkKpxg4A06JlOI94ei5qdSyUfWqKBtcZ6Bp-EyQ0Qy_JDwdGiO5H9VYJLFc7Zc__V7sm6F8krcYi3mWn_7BhMoJQReHPGFeXyexh1szPzFUNqsfvdMMYvi-CNe-evI4Ea2M8"/>
+</div>
+<div>
+<div class="font-headline-sm text-[16px]">Jasmine Rice</div>
+<div class="text-label-sm text-outline">Bina Tani Co-op</div>
+</div>
+</div>
+<div class="space-y-2 text-body-sm">
+<div class="flex justify-between border-b border-outline-variant/10 pb-1">
+<span class="text-outline">Price</span>
+<span class="font-bold">Rp92.000</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-1">
+<span class="text-outline">Stock</span>
+<span>Over 50 bags</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Delivery</span>
+<span>2 hours</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Context Panel -->
+<aside class="w-80 space-y-6 flex-shrink-0">
+<!-- Member Status -->
+<div class="bento-card p-6 ai-gradient-bg text-white">
+<div class="flex justify-between items-start mb-6">
+<div>
+<div class="text-label-sm opacity-80 mb-1">Member Status</div>
+<div class="font-headline-sm">Gold Member</div>
+</div>
+<div class="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
+<span class="material-symbols-outlined text-white">workspace_premium</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="text-display-sm font-bold">4,250</div>
+<div class="text-label-sm opacity-80">Available Points</div>
+</div>
+<div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-white h-full" style="width: 75%"></div>
+</div>
+<div class="mt-2 text-[10px] text-right opacity-80">750 points to Platinum</div>
+</div>
+<!-- Current Cart Summary -->
+<div class="bento-card p-6">
+<h3 class="font-headline-sm text-[18px] mb-4">Current Cart</h3>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Organic Fertilizer (2L)</span>
+<span class="font-medium">Rp120.000</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Garden Shears</span>
+<span class="font-medium">Rp45.000</span>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span>Rp165.000</span>
+</div>
+<div class="flex justify-between text-body-sm text-tertiary font-medium">
+<span>Member Discount (10%)</span>
+<span>-Rp16.500</span>
+</div>
+<div class="flex justify-between text-headline-sm text-[20px] mt-2">
+<span>Total</span>
+<span class="text-primary">Rp148.500</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-[12px] text-on-surface-variant bg-surface-container-low p-2 rounded-lg">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                        Estimated Arrival: Today, 5:00 PM
+                    </div>
+<button class="w-full mt-4 bg-primary text-white py-3 rounded-xl font-label-md hover:bg-on-primary-fixed-variant transition-colors">Checkout</button>
+</div>
+<!-- Recent Purchases -->
+<div class="bento-card p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-sm text-[16px]">Recent Purchases</h3>
+<a class="text-label-sm text-primary" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">agriculture</span>
+</div>
+<div class="flex-1">
+<div class="text-label-md">Seedling Starter Kit</div>
+<div class="text-[12px] text-outline">Oct 12, 2023</div>
+</div>
+<div class="text-label-sm font-bold">Rp85k</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div class="flex-1">
+<div class="text-label-md">Drip Irrigation Set</div>
+<div class="text-[12px] text-outline">Oct 05, 2023</div>
+</div>
+<div class="text-label-sm font-bold">Rp450k</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<div class="flex-1">
+<div class="text-label-md">NPK Organic Bio</div>
+<div class="text-[12px] text-outline">Sep 28, 2023</div>
+</div>
+<div class="text-label-sm font-bold">Rp210k</div>
+</div>
+</div>
+</div>
+<!-- Background Element: Illustration -->
+<div class="absolute bottom-10 right-10 opacity-10 pointer-events-none select-none">
+<img class="w-64 h-64 grayscale" data-alt="A transparent, futuristic 3D glass shield icon with glowing blue and violet connections, symbolizing secure AI-assisted commerce and verified transactions, high-fidelity digital art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD3JmvQdlrxv2YWMh503MLChniGSqUd6W7uvVpeqdiogP5ebC_yjzgq7OHUBlnFgutbXoIsD6iZeiLtDZUX4SUFVFNxZMpoUyvLkFOn0xOLpxIhavDpTC7SjsQ11X3Ztyx0Zmp7ZYVD9eWpFYjl30SLe_etwGW0SZVvqL3G0gaNYukNgxxbI7Hv6hW_hNsym9-KcrrSSyvkpCPPRZWXeYSXLGM2Y3L5Q5ITPB03F4dxs0wFK2noYAkDNWTraChmjcxi8q1Z1BGw4c"/>
+</div>
+</aside>
+</div>
+</main>
+<!-- Interactive Layer: Notification Toast (JavaScript) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-on-background text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 opacity-0 translate-y-10 transition-all duration-500 z-[100] pointer-events-none" id="toast">
+<span class="material-symbols-outlined text-tertiary-fixed">check_circle</span>
+<span class="text-body-sm font-medium">Item added to cart! AI optimizing delivery route...</span>
+</div>
+<script>
+        // Micro-interaction: Mock add to cart feedback
+        const addToCartBtn = document.querySelector('button.flex-1');
+        const toast = document.getElementById('toast');
+
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', () => {
+                toast.classList.remove('opacity-0', 'translate-y-10');
+                toast.classList.add('opacity-100', 'translate-y-0');
+                
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-10');
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                }, 3000);
+            });
+        }
+    </script>
+</body></html>
