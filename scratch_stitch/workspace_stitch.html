@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KOPERA-PLUS | AI Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eaddff",
+                    "secondary-container": "#8a4cfc",
+                    "tertiary": "#006229",
+                    "surface-tint": "#0053db",
+                    "primary": "#004ac6",
+                    "on-primary-fixed": "#00174b",
+                    "on-surface": "#0b1c30",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#eeefff",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-container": "#c1ffc5",
+                    "on-secondary-fixed": "#25005a",
+                    "tertiary-fixed": "#6bff8f",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "surface-variant": "#d3e4fe",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "inverse-on-surface": "#eaf1ff",
+                    "background": "#f8f9ff",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#002109",
+                    "surface": "#f8f9ff",
+                    "on-secondary-container": "#fffbff",
+                    "surface-container": "#e5eeff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-background": "#0b1c30",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#434655",
+                    "inverse-surface": "#213145",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "outline": "#737686",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#007e37",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "surface-container-high": "#dce9ff",
+                    "surface-dim": "#cbdbf5",
+                    "secondary": "#712ae2",
+                    "primary-container": "#2563eb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "grid-gutter": "24px",
+                    "base-unit": "4px",
+                    "bento-gap": "20px",
+                    "grid-margin": "32px",
+                    "container-max-width": "1440px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "display-sm": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-sm": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .ai-gradient-text {
+        background: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .streaming-dot {
+        animation: blink 1.4s infinite both;
+      }
+      .streaming-dot:nth-child(2) { animation-delay: 0.2s; }
+      .streaming-dot:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes blink {
+        0% { opacity: .2; }
+        20% { opacity: 1; }
+        100% { opacity: .2; }
+      }
+      .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface overflow-hidden h-screen flex">
+<!-- LEFT SIDEBAR -->
+<aside class="w-64 h-screen fixed left-0 top-0 bg-surface-container-lowest shadow-sm flex flex-col p-6 z-50 border-r border-outline-variant/30">
+<div class="mb-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div>
+<h1 class="font-display-sm text-[20px] font-extrabold text-primary leading-none">KOPERA-PLUS</h1>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">AI-First Governance</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-md">AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md">Marketplace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">card_giftcard</span>
+<span class="font-label-md">Rewards</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md">Community</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md">Digital RAT</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-6 border-t border-outline-variant/30">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error/80 hover:bg-error-container transition-colors rounded-xl mt-2" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+<div class="mt-6 p-4 bg-primary-container/10 rounded-2xl">
+<p class="text-label-sm font-bold text-primary mb-2">Pro Plan</p>
+<p class="text-[12px] text-on-surface-variant mb-4 leading-tight">Unlock advanced AI governance tools and deeper SHU insights.</p>
+<button class="w-full py-2 bg-primary text-white font-label-md rounded-lg active:scale-95 transition-transform">Upgrade to Pro</button>
+</div>
+</aside>
+<!-- MAIN AI WORKSPACE (CENTER) -->
+<main class="ml-64 mr-[320px] flex-1 h-screen flex flex-col relative">
+<!-- Top Nav -->
+<header class="h-16 flex items-center justify-between px-8 bg-background/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex items-center gap-4 bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant/20 w-96">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full" placeholder="Search workspace..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full"><span class="material-symbols-outlined">dark_mode</span></button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a professional modern middle eastern man with short dark hair and a neat beard, smiling confidently in a high-tech corporate office environment, soft natural lighting from a nearby window, high-end photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_NeHfrLAsubmHvB2t78RB9uXg8vcFw8hlQhW6CISi-USP5r7BR5uAJv1tUnArYGKN4SjxX8SUmXV1XJQwZjhlF9LhukNYeIRVLQY_-TzbzJQyJfZeIceDU4qFu_2ZuDIyeSxLUKK1sulL4ljmuK21o0XxBlHfS9SUXBqXLBwOqUE4zEKZTvevYMxIoPtYP840qT-rSAtozaiAfQlJPIf-vP5yRzIFO36v-t6Ll1fi22VBd2RqRB3fNF5fKzj8_tdMG9-IBROlyXk"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<section class="flex-1 overflow-y-auto custom-scrollbar p-8 pb-32">
+<!-- Hero / Greeting -->
+<div class="mb-12">
+<h2 class="font-display-sm text-display-sm text-on-surface mb-2">Hello Muhammad 👋</h2>
+<p class="font-headline-sm text-on-surface-variant">How can I help you today?</p>
+</div>
+<!-- Conversation Display -->
+<div class="max-w-4xl mx-auto space-y-8">
+<!-- User Message -->
+<div class="flex flex-col items-end">
+<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-lg shadow-sm">
+<p class="font-body-md">I want to buy rice.</p>
+</div>
+</div>
+<!-- AI Response Message -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="space-y-6 flex-1">
+<div class="p-5 glass-card rounded-3xl rounded-tl-none border-l-4 border-secondary-container">
+<p class="font-body-md text-on-surface mb-4">I found the best match for you at your current cooperative, **Green Life Cooperative**. Here is our top-rated option available for immediate purchase:</p>
+<!-- Product Availability Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 shadow-md group hover:shadow-xl transition-all duration-300">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-48 h-48 relative shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium bag of high-quality organic long-grain white rice, 5kg packaging with elegant minimalist branding in gold and deep green, set against a pristine wooden kitchen counter, soft warm morning lighting, professional product photography style with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHAso7gSAxYgOjquC3G-bOpfr2QfZg3-8EYReKKo7w89v2stwHsuQ4It3GaFD-1W3aNKnPXlOHBluGPdv2idmYF_toIOrpbYIiP1yx2F2DqUu5gyKtZth2xuYDlayLC6NgTTh3bEVDv3ATOSwDl7M2JVavF8XLUeP51NQcZgAaZmHjTsbcBfRsXXC81_oybEiZUOGVya9tyZ76DK11HEfnFka1QgEJ_kVMAG3zw0c-m-zAI_KJwwyP8R7MZ25mQAABlV3wdFKcAKI"/>
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-bold">4.9</span>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-sm text-on-surface">Premium Rice 5kg</h3>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold px-2 py-1 rounded-full uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span> Live Stock Verified
+                                                </span>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<span class="font-display-sm text-[24px] text-primary">Rp75.000</span>
+<span class="text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded-md">24 items left</span>
+</div>
+<p class="text-body-sm text-on-surface-variant line-clamp-2 mb-4">Organic long-grain white rice sourced directly from local cooperative farmers. High fiber and premium aroma.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-primary text-white font-label-md py-2.5 rounded-xl flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span> Deliver to Home
+                                            </button>
+<button class="flex-1 bg-surface-container text-on-surface font-label-md py-2.5 rounded-xl border border-outline-variant/30 hover:bg-surface-container-high transition-colors">
+                                                Pick Up
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Typing/Streaming Indicator -->
+<div class="flex items-center gap-2 text-on-surface-variant bg-surface-container-low px-4 py-2 rounded-full w-fit">
+<span class="text-label-sm">Suggesting complementary items</span>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 bg-secondary rounded-full streaming-dot"></div>
+<div class="w-1.5 h-1.5 bg-secondary rounded-full streaming-dot"></div>
+<div class="w-1.5 h-1.5 bg-secondary rounded-full streaming-dot"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Fixed Bottom Input Area -->
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-background via-background to-transparent pointer-events-none">
+<div class="max-w-4xl mx-auto pointer-events-auto">
+<div class="flex flex-wrap gap-2 mb-4 overflow-x-auto pb-2 custom-scrollbar">
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">SHU</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Products</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Stock</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Events</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Digital RAT</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Rewards</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Training</button>
+<button class="px-4 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full font-label-sm text-on-surface-variant hover:border-primary hover:text-primary transition-all whitespace-nowrap">Nearby Coops</button>
+</div>
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-secondary-container/20 to-primary/20 rounded-[24px] blur opacity-75 group-focus-within:opacity-100 transition duration-1000"></div>
+<div class="relative bg-surface-container-lowest border border-outline-variant shadow-xl rounded-[20px] p-2 flex items-center gap-3">
+<div class="p-3 bg-secondary-container/10 rounded-xl text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-body-lg py-4" placeholder="Ask anything to KOPERA-PLUS AI..." type="text"/>
+<button class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- RIGHT CONTEXT PANEL -->
+<aside class="w-[320px] h-screen fixed right-0 top-0 bg-surface-container-low/50 border-l border-outline-variant/30 p-6 flex flex-col gap-6 z-50 overflow-y-auto custom-scrollbar">
+<h3 class="font-headline-sm text-on-surface mb-2">Member Context</h3>
+<!-- Profile Bento -->
+<div class="bg-surface-container-lowest p-5 rounded-[20px] shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-14 h-14 rounded-full p-1 bg-gradient-to-tr from-yellow-400 to-yellow-600">
+<img class="w-full h-full rounded-full object-cover" data-alt="Profile avatar of a modern professional man, circular frame, clear studio lighting, neutral background, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPFhkd_ENsZpyI8li2qveKX9fOxFBQfZlD_uaY8XCXtdB7g4GBUYWPvth4feq9p5qi3Sv4I97-OaSjaI1RgaKPrW1QBHuNmjNRZZ28wp__4_FULSMVjcmPKN-8gOPzW5sqntUa8pm5F0aYjpHjvwYq5g42lOQpl-WxnhyCtZBGNIfJr1GBK9tPPqqRK6H-oa-SU6efoCyZtpqJxRD001teC0h4Jc-pRApCelZLdKRBB0slwFVy-PGWGmkirB0F1Ff088Y95ko1LpU"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Welcome back,</p>
+<p class="font-headline-sm text-on-surface">Muhammad A.</p>
+</div>
+</div>
+<div class="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-600" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-md text-yellow-700">Gold Member</span>
+</div>
+<span class="material-symbols-outlined text-yellow-600 text-sm">chevron_right</span>
+</div>
+</div>
+<!-- Financial Status Bento -->
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-primary/5 p-5 rounded-[20px] border border-primary/10">
+<div class="flex justify-between items-start mb-2">
+<p class="text-label-sm text-on-surface-variant uppercase">Reward Points</p>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<p class="font-display-sm text-[28px] text-primary">4,250</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Expiring in 24 days</p>
+</div>
+<div class="bg-tertiary/5 p-5 rounded-[20px] border border-tertiary/10">
+<div class="flex justify-between items-start mb-2">
+<p class="text-label-sm text-on-surface-variant uppercase">SHU 2023</p>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<p class="font-display-sm text-[28px] text-tertiary">Rp1.2M</p>
+<div class="mt-2 w-full bg-tertiary/10 h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary w-3/4 h-full"></div>
+</div>
+</div>
+</div>
+<!-- Cooperative Context -->
+<div class="space-y-4">
+<p class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Current Cooperative</p>
+<div class="bg-surface-container-lowest p-4 rounded-[20px] border border-outline-variant/10 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-xl shrink-0">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Green Life Cooperative</p>
+<p class="text-[12px] text-on-surface-variant">Member since 2021</p>
+</div>
+</div>
+</div>
+<!-- Upcoming Events -->
+<div class="space-y-4">
+<p class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Upcoming Events</p>
+<div class="bg-secondary-container/5 p-4 rounded-[20px] border border-secondary-container/20 space-y-3 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-20 h-20 bg-secondary-container/5 rounded-full -mr-10 -mt-10"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-secondary-container text-white flex flex-col items-center justify-center rounded-lg leading-none">
+<span class="text-[10px] font-bold">OCT</span>
+<span class="text-[14px] font-extrabold">24</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Digital RAT</p>
+<p class="text-[12px] text-on-surface-variant">Annual Member Meeting</p>
+</div>
+</div>
+<button class="w-full py-2 bg-secondary text-white font-label-sm rounded-lg active:scale-95 transition-transform">Register Now</button>
+</div>
+</div>
+<!-- System Status -->
+<div class="mt-auto pt-6 border-t border-outline-variant/30">
+<div class="flex items-center justify-between text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-2">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    AI Core Online
+                </span>
+<span>v2.4.0</span>
+</div>
+</div>
+</aside>
+<script>
+      // Lightweight micro-interaction for chips
+      document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.style.position = 'absolute';
+          ripple.style.top = `${e.clientY - rect.top}px`;
+          ripple.style.left = `${e.clientX - rect.left}px`;
+          ripple.style.width = '0';
+          ripple.style.height = '0';
+          ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+          ripple.style.borderRadius = '50%';
+          ripple.style.transform = 'translate(-50%, -50%)';
+          ripple.style.transition = 'all 0.5s ease-out';
+          ripple.style.pointerEvents = 'none';
+          this.style.position = 'relative';
+          this.style.overflow = 'hidden';
+          this.appendChild(ripple);
+          
+          requestAnimationFrame(() => {
+            ripple.style.width = '300px';
+            ripple.style.height = '300px';
+            ripple.style.opacity = '0';
+          });
+          
+          setTimeout(() => ripple.remove(), 500);
+        });
+      });
+    </script>
+</body></html>
