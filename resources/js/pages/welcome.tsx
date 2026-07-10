@@ -4,22 +4,20 @@ import PrototypeHud from '@/components/PrototypeHud';
 
 export default function Welcome() {
     useEffect(() => {
-        // Setup Reveal Animations on Scroll
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.1,
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-        // Navigation scroll behavior
         const nav = document.querySelector('nav');
         const handleScroll = () => {
             if (window.scrollY > 50) {
@@ -36,6 +34,7 @@ export default function Welcome() {
         };
 
         window.addEventListener('scroll', handleScroll);
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -43,28 +42,41 @@ export default function Welcome() {
         <>
             <Head>
                 <title>KOPERA-PLUS | Empowering Cooperative Growth with AI</title>
-                <meta name="description" content="KOPERA-PLUS leverages AI to help people discover, join, and participate in cooperatives transparently." />
+                <meta
+                    name="description"
+                    content="KOPERA-PLUS leverages AI to help people discover, join, and participate in cooperatives transparently."
+                />
             </Head>
 
             <div className="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen">
-                {/* Navigation */}
                 <nav className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm h-20 px-margin-mobile md:px-margin-desktop transition-all duration-300">
                     <div className="flex justify-between items-center h-full max-w-container-max mx-auto">
                         <div className="flex items-center gap-2">
-                            <img alt="KOPERA-PLUS Logo" className="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAghwedj2tFNxqbbxH59PE6WsqXRMnNOvO-1fU9_JYGL_tDKuMfiFAyBrnSX0s-84WuLeYdPFkogH9RbWFU42dUrKL76LCivu8XBv6HzjZZ_56LE5IKKS7meGN4e28A6m_SGP54_TPldxBnQp-jJz5k1RDnwMJrbnvAMUehfJYSqmAa0Q7hsRdVsCbdU19LKKRSX5SrHaP82u2VIOPIFoZQx-LJkTU13JVGGtPpmVIfOF6wVGO80vHTlrufJdLrRAOcemvjBlbEA" />
+                            <img
+                                alt="KOPERA-PLUS Logo"
+                                className="h-10 w-10 object-contain"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAghwedj2tFNxqbbxH59PE6WsqXRMnNOvO-1fU9_JYGL_tDKuMfiFAyBrnSX0s-84WuLeYdPFkogH9RbWFU42dUrKL76LCivu8XBv6HzjZZ_56LE5IKKS7meGN4e28A6m_SGP54_TPldxBnQp-jJz5k1RDnwMJrbnvAMUehfJYSqmAa0Q7hsRdVsCbdU19LKKRSX5SrHaP82u2VIOPIFoZQx-LJkTU13JVGGtPpmVIfOF6wVGO80vHTlrufJdLrRAOcemvjBlbEA"
+                            />
                             <span className="font-headline-sm text-headline-sm font-extrabold tracking-tight text-on-surface">KOPERA-PLUS</span>
                         </div>
                         <div className="hidden lg:flex items-center gap-8">
-                            <a className="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Home</a>
-                            <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#features">Features</a>
-                            <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#solutions">Solutions</a>
-                            <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#journey">Journey</a>
+                            <a className="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">
+                                Home
+                            </a>
+                            <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#features">
+                                Features
+                            </a>
+                            <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#solutions">
+                                Solutions
+                            </a>
+                            <a className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#journey">
+                                Journey
+                            </a>
                         </div>
                         <div className="flex items-center gap-4">
                             <Link href="/login" className="hidden md:block text-on-surface font-label-md text-label-md hover:bg-surface-container-low px-4 py-2 rounded-lg transition-all duration-200">
                                 Login
                             </Link>
-<<<<<<< HEAD
                             <Link href="/onboarding" className="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:shadow-lg active:scale-95 transition-all duration-200">
                                 Get Started
                             </Link>
@@ -72,37 +84,11 @@ export default function Welcome() {
                     </div>
                 </nav>
 
-                {/* Hero Section */}
                 <header className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-margin-mobile md:px-margin-desktop overflow-hidden">
                     <div className="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="animate-fadeInUp">
                             <h1 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6 leading-tight">
                                 Empowering Cooperative Growth with <span className="text-primary">Artificial Intelligence</span>
-=======
-                        ) : (
-                            <>
-                                <Link
-                                    href={login()}
-                                    className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
-                                >
-                                    Log in
-                                </Link>
-                                <Link
-                                    href={register()}
-                                    className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                                >
-                                    Register
-                                </Link>
-                            </>
-                        )}
-                    </nav>
-                </header>
-                <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
-                        <div className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                            <h1 className="mb-1 font-medium">
-                                Let's get started
->>>>>>> origin/main
                             </h1>
                             <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl">
                                 Helping people discover cooperatives, become members, purchase products, earn rewards, and participate transparently through AI.
@@ -120,9 +106,11 @@ export default function Welcome() {
                             <div className="glass-hero p-4 rounded-[32px] relative">
                                 <div className="absolute -top-12 -right-12 w-64 h-64 bg-secondary/10 blur-[100px] rounded-full -z-10"></div>
                                 <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -z-10"></div>
-                                <img className="w-full rounded-[24px] shadow-2xl" alt="AI brain illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLVvwxD8icfCm6zxGJy-NDkvqTSwAP5c0Pxe7FjKC6--IWymB5Ve-Wxd14MFmV0iUGISMcZIyxmrAwFApdyuSDg_TiRfpxoFP81FYAYtkZbRCX5zG2dDBulKZI_ayH2i310LWIQui1CneQ1hcneWmZspuCuR1MWNkMhHHIXDUAeO4SZHuFvVL2KeWtcSYNSQ3zXZYHW9raRKfNiHWVEFrPgndIdkhAfuvb5xwmbltrv8SRRefr072O-cPO2Pcgh790hgnaEcwpSzQ" />
-
-                                {/* Floating Stat Overlay */}
+                                <img
+                                    className="w-full rounded-[24px] shadow-2xl"
+                                    alt="AI brain illustration"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLVvwxD8icfCm6zxGJy-NDkvqTSwAP5c0Pxe7FjKC6--IWymB5Ve-Wxd14MFmV0iUGISMcZIyxmrAwFApdyuSDg_TiRfpxoFP81FYAYtkZbRCX5zG2dDBulKZI_ayH2i310LWIQui1CneQ1hcneWmZspuCuR1MWNkMhHHIXDUAeO4SZHuFvVL2KeWtcSYNSQ3zXZYHW9raRKfNiHWVEFrPgndIdkhAfuvb5xwmbltrv8SRRefr072O-cPO2Pcgh790hgnaEcwpSzQ"
+                                />
                                 <div className="absolute -bottom-6 -right-6 bg-surface-container-highest p-6 rounded-2xl shadow-xl border border-white/50 animate-bounce sm:animate-none" style={{ animationDuration: '3s' }}>
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
@@ -139,7 +127,6 @@ export default function Welcome() {
                     </div>
                 </header>
 
-                {/* Trust Section */}
                 <section className="py-12 border-y border-outline-variant/20 bg-surface-container-low">
                     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
                         <p className="text-label-sm font-label-sm text-outline mb-10 tracking-[0.2em] uppercase">Trusted by</p>
@@ -164,7 +151,6 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Statistics */}
                 <section className="py-section-padding px-margin-mobile md:px-margin-desktop">
                     <div className="max-w-container-max mx-auto grid grid-cols-2 lg:grid-cols-4 gap-gutter">
                         <div className="reveal bg-surface p-8 rounded-3xl shadow-sm border border-outline-variant/30 text-center hover:scale-[1.02] transition-transform duration-300">
@@ -186,7 +172,6 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Problem Section */}
                 <section id="features" className="py-section-padding bg-surface-container-low px-margin-mobile md:px-margin-desktop overflow-hidden">
                     <div className="max-w-container-max mx-auto">
                         <div className="text-center mb-16">
@@ -226,7 +211,6 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Solution Section (Bento Grid) */}
                 <section id="solutions" className="py-section-padding px-margin-mobile md:px-margin-desktop">
                     <div className="max-w-container-max mx-auto">
                         <div className="text-center mb-16">
@@ -234,7 +218,6 @@ export default function Welcome() {
                             <p className="font-body-md text-on-surface-variant max-w-2xl mx-auto">We bridge the gap between traditional cooperation and modern AI technology.</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter h-auto lg:h-[600px]">
-                            {/* Bento Item 1 */}
                             <div className="reveal md:col-span-8 bg-surface border border-outline-variant/30 rounded-[32px] overflow-hidden p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300">
                                 <div className="flex-1 flex flex-col justify-center">
                                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-label-sm font-label-sm mb-4 w-fit">Featured AI</span>
@@ -250,10 +233,13 @@ export default function Welcome() {
                                     </ul>
                                 </div>
                                 <div className="flex-1 h-64 md:h-full relative overflow-hidden rounded-2xl">
-                                    <img className="w-full h-full object-cover" alt="AI Chat Interface Mockup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj87LhVVCQVASCjIvrDwXlg_v0mlWrRi9M4opvc6XhZyxGERKXZM2WlOoEAZy3q2VUfeIl1FIZAWqu4aYKL8bB_Udlaud10W0rGqc4FkaGZbAYcVNEJEteGeLwejYvVf2SR2BT3nSX8C188FIpkXn0Mtc_ImAhyv9IxUDVbGW9hENvN6J8BrHA92uUGa0Z-CjE8aRWkfgwXr307T3PzDRdIrmSG-SanqiGM5ethg7fsAP5HWyYVXySCJB9qyid5Q1Xg820emJoInA" />
+                                    <img
+                                        className="w-full h-full object-cover"
+                                        alt="AI Chat Interface Mockup"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj87LhVVCQVASCjIvrDwXlg_v0mlWrRi9M4opvc6XhZyxGERKXZM2WlOoEAZy3q2VUfeIl1FIZAWqu4aYKL8bB_Udlaud10W0rGqc4FkaGZbAYcVNEJEteGeLwejYvVf2SR2BT3nSX8C188FIpkXn0Mtc_ImAhyv9IxUDVbGW9hENvN6J8BrHA92uUGa0Z-CjE8aRWkfgwXr307T3PzDRdIrmSG-SanqiGM5ethg7fsAP5HWyYVXySCJB9qyid5Q1Xg820emJoInA"
+                                    />
                                 </div>
                             </div>
-                            {/* Bento Item 2 */}
                             <div className="reveal md:col-span-4 bg-secondary-container text-on-secondary-container rounded-[32px] overflow-hidden p-8 flex flex-col hover:shadow-lg transition-all duration-300 delay-100">
                                 <div className="mb-8">
                                     <h3 className="font-headline-sm text-headline-sm mb-4">Gamification & Rewards</h3>
@@ -277,10 +263,13 @@ export default function Welcome() {
                                     </div>
                                 </div>
                             </div>
-                            {/* Bento Item 3 */}
                             <div className="reveal md:col-span-12 bg-surface border border-outline-variant/30 rounded-[32px] overflow-hidden p-8 flex flex-col lg:flex-row items-center gap-12 hover:shadow-lg transition-all duration-300 delay-200">
                                 <div className="lg:w-1/2">
-                                    <img className="w-full rounded-2xl shadow-xl" alt="Governance Dashboard Visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCjxbkZSO_AzD9j-VHEQpbxCWmVft8XvRkA3wG1USHGJuBDXvicYL541_SYTmg2tbKuDTkQY0qudlX5wrl_7dehnv5hadhSymSo0h4UmUaUHdsmpxjXQxIE9Zl37DtUFxflxQxmfATDdpXNN2xG0d9OK-w8JiqHKZSTttB3yV6uuWWCt0nAhMKdwpfxw_KIJGH3FZFvpWSjbA4jfqTBCtoPENUFjdIg01FVbzw4QOVdRtrgZaAXRCthXWmPvUxigWjHbYXm69xaME" />
+                                    <img
+                                        className="w-full rounded-2xl shadow-xl"
+                                        alt="Governance Dashboard Visual"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCjxbkZSO_AzD9j-VHEQpbxCWmVft8XvRkA3wG1USHGJuBDXvicYL541_SYTmg2tbKuDTkQY0qudlX5wrl_7dehnv5hadhSymSo0h4UmUaUHdsmpxjXQxIE9Zl37DtUFxflxQxmfATDdpXNN2xG0d9OK-w8JiqHKZSTttB3yV6uuWWCt0nAhMKdwpfxw_KIJGH3FZFvpWSjbA4jfqTBCtoPENUFjdIg01FVbzw4QOVdRtrgZaAXRCthXWmPvUxigWjHbYXm69xaME"
+                                    />
                                 </div>
                                 <div className="lg:w-1/2">
                                     <h3 className="font-headline-md text-headline-md text-on-surface mb-4">Smart Governance Dashboard</h3>
@@ -301,7 +290,6 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* AI Journey Timeline */}
                 <section id="journey" className="py-section-padding bg-surface px-margin-mobile md:px-margin-desktop overflow-x-hidden">
                     <div className="max-w-container-max mx-auto">
                         <div className="text-center mb-20">
@@ -309,10 +297,8 @@ export default function Welcome() {
                             <p className="font-body-md text-on-surface-variant">The path from discovery to becoming a key cooperative contributor.</p>
                         </div>
                         <div className="relative">
-                            {/* Desktop Line */}
                             <div className="hidden lg:block absolute top-6 left-0 w-full h-[2px] bg-gradient-to-r from-primary via-secondary to-primary/20"></div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-8 relative z-10">
-                                {/* Step 1 */}
                                 <div className="reveal flex flex-col items-center group">
                                     <div className="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">explore</span>
@@ -320,7 +306,6 @@ export default function Welcome() {
                                     <p className="font-label-md text-on-surface mb-1">Discover</p>
                                     <p className="text-[10px] text-on-surface-variant text-center opacity-70">AI-curated matches</p>
                                 </div>
-                                {/* Step 2 */}
                                 <div className="reveal flex flex-col items-center group delay-100">
                                     <div className="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">person_add</span>
@@ -328,7 +313,6 @@ export default function Welcome() {
                                     <p className="font-label-md text-on-surface mb-1">Join</p>
                                     <p className="text-[10px] text-on-surface-variant text-center opacity-70">Digital Onboarding</p>
                                 </div>
-                                {/* Step 3 */}
                                 <div className="reveal flex flex-col items-center group delay-200">
                                     <div className="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">shopping_cart</span>
@@ -336,7 +320,6 @@ export default function Welcome() {
                                     <p className="font-label-md text-on-surface mb-1">Buy</p>
                                     <p className="text-[10px] text-on-surface-variant text-center opacity-70">Support Locals</p>
                                 </div>
-                                {/* Step 4 */}
                                 <div className="reveal flex flex-col items-center group delay-300">
                                     <div className="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">loyalty</span>
@@ -344,7 +327,6 @@ export default function Welcome() {
                                     <p className="font-label-md text-on-surface mb-1">Earn</p>
                                     <p className="text-[10px] text-on-surface-variant text-center opacity-70">Yield & Rewards</p>
                                 </div>
-                                {/* Step 5 */}
                                 <div className="reveal flex flex-col items-center group delay-100 lg:delay-300">
                                     <div className="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">token</span>
@@ -352,7 +334,6 @@ export default function Welcome() {
                                     <p className="font-label-md text-on-surface mb-1">Digital RAT</p>
                                     <p className="text-[10px] text-on-surface-variant text-center opacity-70">Tokenized Equity</p>
                                 </div>
-                                {/* Step 6 */}
                                 <div className="reveal flex flex-col items-center group delay-200 lg:delay-300">
                                     <div className="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">how_to_vote</span>
@@ -360,7 +341,6 @@ export default function Welcome() {
                                     <p className="font-label-md text-on-surface mb-1">Governance</p>
                                     <p className="text-[10px] text-on-surface-variant text-center opacity-70">Active Voice</p>
                                 </div>
-                                {/* Step 7 */}
                                 <div className="reveal flex flex-col items-center group delay-300 lg:delay-300">
                                     <div className="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg relative z-20">
                                         <span className="material-symbols-outlined">grade</span>
@@ -373,7 +353,6 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* CTA */}
                 <section className="py-24 px-margin-mobile md:px-margin-desktop">
                     <div className="max-w-container-max mx-auto">
                         <div className="bg-primary rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden">
@@ -392,21 +371,22 @@ export default function Welcome() {
                     </div>
                 </section>
 
-                {/* Footer */}
                 <footer className="bg-surface dark:bg-surface-container-lowest border-t border-outline-variant/20 w-full py-section-padding">
                     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-gutter mb-16">
-                            {/* Brand */}
                             <div className="col-span-2">
                                 <div className="flex items-center gap-2 mb-6">
-                                    <img alt="KOPERA-PLUS Logo" className="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAghwedj2tFNxqbbxH59PE6WsqXRMnNOvO-1fU9_JYGL_tDKuMfiFAyBrnSX0s-84WuLeYdPFkogH9RbWFU42dUrKL76LCivu8XBv6HzjZZ_56LE5IKKS7meGN4e28A6m_SGP54_TPldxBnQp-jJz5k1RDnwMJrbnvAMUehfJYSqmAa0Q7hsRdVsCbdU19LKKRSX5SrHaP82u2VIOPIFoZQx-LJkTU13JVGGtPpmVIfOF6wVGO80vHTlrufJdLrRAOcemvjBlbEA" />
+                                    <img
+                                        alt="KOPERA-PLUS Logo"
+                                        className="h-8 w-8 object-contain"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAghwedj2tFNxqbbxH59PE6WsqXRMnNOvO-1fU9_JYGL_tDKuMfiFAyBrnSX0s-84WuLeYdPFkogH9RbWFU42dUrKL76LCivu8XBv6HzjZZ_56LE5IKKS7meGN4e28A6m_SGP54_TPldxBnQp-jJz5k1RDnwMJrbnvAMUehfJYSqmAa0Q7hsRdVsCbdU19LKKRSX5SrHaP82u2VIOPIFoZQx-LJkTU13JVGGtPpmVIfOF6wVGO80vHTlrufJdLrRAOcemvjBlbEA"
+                                    />
                                     <span className="font-headline-sm text-headline-sm font-bold text-on-surface">KOPERA-PLUS</span>
                                 </div>
                                 <p className="font-body-sm text-on-surface-variant max-w-xs mb-8">
                                     The world's first AI-powered infrastructure for cooperative growth and transparent community participation.
                                 </p>
                             </div>
-                            {/* Links */}
                             <div>
                                 <h5 className="font-label-md text-on-surface mb-6">Product</h5>
                                 <ul className="space-y-4">
@@ -443,15 +423,18 @@ export default function Welcome() {
                         <div className="pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4">
                             <p className="font-body-sm text-label-sm text-on-surface-variant">© 2024 KOPERA-PLUS. All rights reserved.</p>
                             <div className="flex items-center gap-6">
-                                <a className="text-on-surface-variant hover:text-primary font-semibold font-label-sm text-label-sm" href="#">Privacy Policy</a>
-                                <a className="text-on-surface-variant hover:text-primary font-semibold font-label-sm text-label-sm" href="#">Terms</a>
+                                <a className="text-on-surface-variant hover:text-primary font-semibold font-label-sm text-label-sm" href="#">
+                                    Privacy Policy
+                                </a>
+                                <a className="text-on-surface-variant hover:text-primary font-semibold font-label-sm text-label-sm" href="#">
+                                    Terms
+                                </a>
                             </div>
                         </div>
                     </div>
                 </footer>
             </div>
 
-            {/* Prototype switcher HUD */}
             <PrototypeHud />
         </>
     );
