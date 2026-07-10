@@ -1,8 +1,23 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 export default function Welcome() {
+    const { auth, currentTeam } = usePage().props;
+    const user = auth?.user;
+    const isAuthed = Boolean(user);
+    const teamSlug = (currentTeam as { slug?: string } | null)?.slug;
+
+    // Mirror the server-side role-based landing (RedirectsToCurrentTeam): only
+    // route to a role-guarded dashboard when the user actually holds that role.
+    const dashboardUrl = user?.roles?.includes('administrator')
+        ? '/admin-dashboard'
+        : user?.roles?.includes('explorer')
+          ? '/explorer-dashboard'
+          : user?.roles?.includes('member') && teamSlug
+            ? `/${teamSlug}/dashboard`
+            : '/settings/teams';
+
     const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
@@ -154,26 +169,43 @@ export default function Welcome() {
 
                         {/* CTA Buttons */}
                         <div className="flex items-center gap-3">
-                            <Link
-                                href="/login"
-                                className="hidden rounded-xl px-4 py-2 font-label-md text-label-md text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] transition-all duration-200 outline-none select-none hover:bg-white/10 hover:text-white focus:outline-none md:block"
-                                style={{
-                                    WebkitTapHighlightColor: 'transparent',
-                                }}
-                            >
-                                Masuk
-                            </Link>
-                            <Link
-                                href="/register"
-                                className="glow-button rounded-xl px-5 py-2.5 font-label-md text-label-md font-semibold text-white outline-none select-none focus:outline-none"
-                                style={{
-                                    background:
-                                        'linear-gradient(135deg, #7C3AED, #2563EB)',
-                                    WebkitTapHighlightColor: 'transparent',
-                                }}
-                            >
-                                Mulai Sekarang
-                            </Link>
+                            {isAuthed ? (
+                                <Link
+                                    href={dashboardUrl}
+                                    prefetch
+                                    className="glow-button rounded-xl px-5 py-2.5 font-label-md text-label-md font-semibold text-white outline-none select-none focus:outline-none"
+                                    style={{
+                                        background:
+                                            'linear-gradient(135deg, #7C3AED, #2563EB)',
+                                        WebkitTapHighlightColor: 'transparent',
+                                    }}
+                                >
+                                    Dashboard
+                                </Link>
+                            ) : (
+                                <>
+                                    <Link
+                                        href="/login"
+                                        className="hidden rounded-xl px-4 py-2 font-label-md text-label-md text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] transition-all duration-200 outline-none select-none hover:bg-white/10 hover:text-white focus:outline-none md:block"
+                                        style={{
+                                            WebkitTapHighlightColor: 'transparent',
+                                        }}
+                                    >
+                                        Masuk
+                                    </Link>
+                                    <Link
+                                        href="/register"
+                                        className="glow-button rounded-xl px-5 py-2.5 font-label-md text-label-md font-semibold text-white outline-none select-none focus:outline-none"
+                                        style={{
+                                            background:
+                                                'linear-gradient(135deg, #7C3AED, #2563EB)',
+                                            WebkitTapHighlightColor: 'transparent',
+                                        }}
+                                    >
+                                        Mulai Sekarang
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </nav>
@@ -181,7 +213,7 @@ export default function Welcome() {
                 {/* ── HERO ────────────────────────────────────────────── */}
                 <header
                     id="home"
-                    className="relative flex min-h-[80vh] items-start overflow-hidden px-margin-mobile pt-24 pb-12 md:px-margin-desktop md:pt-28 md:pb-16"
+                    className="relative flex h-[100dvh] min-h-[100svh] items-start overflow-hidden px-margin-mobile pt-24 pb-12 md:px-margin-desktop md:pt-28 md:pb-16"
                 >
                     <video
                         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
@@ -233,7 +265,7 @@ export default function Welcome() {
                                 <span className="material-symbols-outlined text-[18px]">
                                     rocket_launch
                                 </span>
-                                Mulai Sekarang
+                                {isAuthed ? 'Dashboard' : 'Mulai Sekarang'}
                             </Link>
                             <button className="flex items-center justify-center gap-2 rounded-xl border border-white/50 px-8 py-4 font-label-md text-label-md text-white backdrop-blur-sm transition-all hover:bg-white/10 active:scale-95">
                                 <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20">
@@ -833,21 +865,24 @@ export default function Welcome() {
                                 </p>
                                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
                                     <Link
-                                        href="/register"
+                                        href={isAuthed ? dashboardUrl : '/register'}
+                                        prefetch={isAuthed}
                                         className="flex items-center justify-center gap-2 rounded-2xl bg-white px-10 py-4 font-headline-sm font-bold shadow-2xl transition-all hover:scale-[1.02] hover:shadow-white/30 active:scale-95"
                                         style={{ color: '#7C3AED' }}
                                     >
                                         <span className="material-symbols-outlined text-[20px]">
                                             rocket_launch
                                         </span>
-                                        Mulai Sekarang — Gratis
+                                        {isAuthed ? 'Dashboard' : 'Mulai Sekarang — Gratis'}
                                     </Link>
-                                    <Link
-                                        href="/login"
-                                        className="flex items-center justify-center gap-2 rounded-2xl border-2 border-white/40 px-10 py-4 font-label-md text-white transition-all hover:bg-white/10"
-                                    >
-                                        Sudah punya akun? Masuk
-                                    </Link>
+                                    {!isAuthed && (
+                                        <Link
+                                            href="/login"
+                                            className="flex items-center justify-center gap-2 rounded-2xl border-2 border-white/40 px-10 py-4 font-label-md text-white transition-all hover:bg-white/10"
+                                        >
+                                            Sudah punya akun? Masuk
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>

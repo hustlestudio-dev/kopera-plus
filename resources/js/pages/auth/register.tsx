@@ -1,5 +1,5 @@
 import { Form, Head, Link } from '@inertiajs/react';
-import React from 'react';
+import { useState } from 'react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import PrototypeHud from '@/components/PrototypeHud';
