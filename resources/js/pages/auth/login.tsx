@@ -10,7 +10,11 @@ import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
+<<<<<<< HEAD
 import PrototypeHud from '@/components/PrototypeHud';
+=======
+import type { TeamInvitationContext } from '@/types';
+>>>>>>> origin/main
 
 type Props = {
     status?: string;
@@ -22,6 +26,7 @@ export default function Login({ status, canResetPassword }: Props) {
         <>
             <Head title="Member Login | KOPERA-PLUS" />
 
+<<<<<<< HEAD
             <main className="min-h-screen flex flex-col md:flex-row font-sans bg-background text-on-surface">
                 {/* Left Side: Branding Panel (45%) */}
                 <section className="w-full md:w-[45%] bg-gradient-to-br from-[#F8FAFC] to-[#EFF6FF] p-8 md:p-16 flex flex-col justify-between items-start relative overflow-hidden min-h-[400px] md:min-h-screen">
@@ -30,6 +35,37 @@ export default function Login({ status, canResetPassword }: Props) {
                         <Link href="/" className="flex items-center gap-2 mb-12 group">
                             <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
                                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>hub</span>
+=======
+            {teamInvitation && (
+                <TeamInvitationAlert
+                    invitation={teamInvitation}
+                    action="Log in"
+                />
+            )}
+
+
+            <Form
+                {...store.form()}
+                resetOnSuccess={['password']}
+                className="flex flex-col gap-6"
+            >
+                {({ processing, errors }) => (
+                    <>
+                        <div className="grid gap-6">
+                            <div className="grid gap-2">
+                                <Label htmlFor="email">Email address</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="email"
+                                    placeholder="email@example.com"
+                                />
+                                <InputError message={errors.email} />
+>>>>>>> origin/main
                             </div>
                             <span className="font-headline-lg text-headline-sm font-black tracking-tight text-primary">KOPERA-PLUS</span>
                         </Link>
@@ -199,6 +235,7 @@ export default function Login({ status, canResetPassword }: Props) {
                             </div>
                         </div>
 
+<<<<<<< HEAD
                         {/* Footer Links */}
                         <div className="mt-8 flex justify-center gap-6 animate-entrance delay-200">
                             <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
@@ -208,6 +245,25 @@ export default function Login({ status, canResetPassword }: Props) {
                     </div>
                 </section>
             </main>
+=======
+                        <div className="text-center text-sm text-muted-foreground">
+                            Don't have an account?{' '}
+                            <TextLink
+                                href={register({
+                                    query: {
+                                        invitation: teamInvitation?.code,
+                                    },
+                                })}
+                                data-test="register-link"
+                                tabIndex={5}
+                            >
+                                Sign up
+                            </TextLink>
+                        </div>
+                    </>
+                )}
+            </Form>
+>>>>>>> origin/main
 
             <PrototypeHud />
         </>

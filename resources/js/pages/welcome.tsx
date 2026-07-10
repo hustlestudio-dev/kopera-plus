@@ -64,6 +64,7 @@ export default function Welcome() {
                             <Link href="/login" className="hidden md:block text-on-surface font-label-md text-label-md hover:bg-surface-container-low px-4 py-2 rounded-lg transition-all duration-200">
                                 Login
                             </Link>
+<<<<<<< HEAD
                             <Link href="/onboarding" className="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:shadow-lg active:scale-95 transition-all duration-200">
                                 Get Started
                             </Link>
@@ -77,6 +78,31 @@ export default function Welcome() {
                         <div className="animate-fadeInUp">
                             <h1 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6 leading-tight">
                                 Empowering Cooperative Growth with <span className="text-primary">Artificial Intelligence</span>
+=======
+                        ) : (
+                            <>
+                                <Link
+                                    href={login()}
+                                    className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+                                >
+                                    Log in
+                                </Link>
+                                <Link
+                                    href={register()}
+                                    className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                                >
+                                    Register
+                                </Link>
+                            </>
+                        )}
+                    </nav>
+                </header>
+                <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
+                    <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
+                        <div className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                            <h1 className="mb-1 font-medium">
+                                Let's get started
+>>>>>>> origin/main
                             </h1>
                             <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl">
                                 Helping people discover cooperatives, become members, purchase products, earn rewards, and participate transparently through AI.
@@ -95,7 +121,7 @@ export default function Welcome() {
                                 <div className="absolute -top-12 -right-12 w-64 h-64 bg-secondary/10 blur-[100px] rounded-full -z-10"></div>
                                 <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -z-10"></div>
                                 <img className="w-full rounded-[24px] shadow-2xl" alt="AI brain illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLVvwxD8icfCm6zxGJy-NDkvqTSwAP5c0Pxe7FjKC6--IWymB5Ve-Wxd14MFmV0iUGISMcZIyxmrAwFApdyuSDg_TiRfpxoFP81FYAYtkZbRCX5zG2dDBulKZI_ayH2i310LWIQui1CneQ1hcneWmZspuCuR1MWNkMhHHIXDUAeO4SZHuFvVL2KeWtcSYNSQ3zXZYHW9raRKfNiHWVEFrPgndIdkhAfuvb5xwmbltrv8SRRefr072O-cPO2Pcgh790hgnaEcwpSzQ" />
-                                
+
                                 {/* Floating Stat Overlay */}
                                 <div className="absolute -bottom-6 -right-6 bg-surface-container-highest p-6 rounded-2xl shadow-xl border border-white/50 animate-bounce sm:animate-none" style={{ animationDuration: '3s' }}>
                                     <div className="flex items-center gap-3">
