@@ -92,7 +92,7 @@ return;
                         <div>
                             <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-3">Percakapan Terbaru</p>
                             <nav className="space-y-1">
-                                <button className="w-full flex items-center gap-3 px-4 py-3 bg-[#004ac6]/10 text-[#004ac6] rounded-xl text-xs font-bold text-left border-r-4 border-[#004ac6]">
+                                <button className="w-full flex items-center gap-3 px-4 py-3 bg-[#004ac6]/10 text-[#004ac6] rounded-xl text-xs font-bold text-left">
                                     <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
                                     <span>Membeli Produk</span>
                                 </button>
@@ -156,7 +156,7 @@ return;
                                     </div>
                                 ) : (
                                     <div className="flex gap-3 w-full">
-                                        <div className="w-9 h-9 rounded-full bg-purple-500 text-white flex items-center justify-center font-extrabold text-xs shadow-sm shrink-0">
+                                        <div className="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center font-extrabold text-xs shadow-sm shrink-0">
                                             AI
                                         </div>
                                         <div className="space-y-4 flex-1 max-w-[85%]">
@@ -207,13 +207,13 @@ return;
 
                         {isTyping && (
                             <div className="flex gap-3">
-                                <div className="w-9 h-9 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">AI</div>
+                                <div className="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">AI</div>
                                 <div className="flex items-center gap-2 text-zinc-400 bg-white border border-zinc-200/50 px-4 py-3 rounded-2xl rounded-tl-none text-xs font-semibold shadow-sm">
                                     <span>AI sedang mengetik</span>
                                     <div className="flex gap-1">
-                                        <div className="w-1 h-1 bg-purple-500 rounded-full animate-bounce"></div>
-                                        <div className="w-1 h-1 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                                        <div className="w-1 h-1 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                                        <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse"></div>
+                                        <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                                        <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +275,7 @@ return;
                             <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
                         </div>
                         <h4 className="font-extrabold text-sm text-zinc-950 mb-1">Muhammad</h4>
-                        <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-3 py-1 rounded-full">Gold Member</span>
+                        <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-3 py-1 rounded-full">Gold Member</span>
                     </div>
 
                     {/* Stats */}
@@ -305,13 +305,13 @@ return;
                         </div>
 
                         <div className="flex items-start gap-3 text-xs">
-                            <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                                 <span className="material-symbols-outlined text-[18px]">calendar_today</span>
                             </div>
                             <div>
                                 <p className="text-[10px] text-zinc-400 font-semibold">Acara Mendatang</p>
                                 <p className="font-bold text-zinc-800 mt-0.5">Digital RAT</p>
-                                <p className="text-[10px] text-indigo-600 font-bold mt-0.5">24 Okt, 09:00</p>
+                                <p className="text-[10px] text-blue-600 font-bold mt-0.5">24 Okt, 09:00</p>
                             </div>
                         </div>
 
@@ -321,14 +321,14 @@ return;
                     </div>
 
                     {/* AI Insight Card */}
-                    <div className="bento-card p-5 border border-zinc-200/50 shadow-sm relative overflow-hidden bg-gradient-to-br from-indigo-50 to-blue-50">
+                    <div className="bento-card p-5 border border-zinc-200/50 shadow-sm relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-50">
                         <div className="relative z-10">
-                            <div className="flex items-center gap-2 mb-3 text-[#7C3AED] font-bold text-xs">
+                            <div className="flex items-center gap-2 mb-3 text-[#004ac6] font-bold text-xs">
                                 <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
                                 <span>Wawasan AI</span>
                             </div>
                             <p className="text-xs text-zinc-700 leading-relaxed font-semibold">
-                                Anda tinggal <strong className="text-primary font-bold">750 poin</strong> lagi menuju <strong className="text-[#7C3AED] font-bold">Tingkat Platinum</strong>. Membeli 2 karung lagi Beras Premium akan membuka diskon eksklusif.
+                                Anda tinggal <strong className="text-primary font-bold">750 poin</strong> lagi menuju <strong className="text-[#004ac6] font-bold">Tingkat Platinum</strong>. Membeli 2 karung lagi Beras Premium akan membuka diskon eksklusif.
                             </p>
                         </div>
                     </div>

@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+#
+# Pre-commit gate: refuse the commit if `impeccable detect` finds UI
+# anti-patterns in shipped source (resources/).
+#
+# `impeccable detect` exits 0 when clean and non-zero when findings exist.
+# Bypass in a genuine emergency with:  git commit --no-verify
+#
+set -e
+
+echo "→ Running impeccable detect on resources/ ..."
+
+if bunx impeccable detect resources/ --quiet; then
+    echo "✓ impeccable: no UI anti-patterns detected."
+    exit 0
+else
+    echo ""
+    echo "✗ impeccable detected UI anti-patterns — commit blocked."
+    echo "  Fix the findings above, or inspect them with:"
+    echo "      bunx impeccable detect resources/"
+    echo "  (Emergency bypass: git commit --no-verify)"
+    exit 1
+fi

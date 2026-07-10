@@ -114,7 +114,7 @@ return;
                     </div>
                     
                     <nav className="flex-1 space-y-1">
-                        <Link className="flex items-center gap-3 px-4 py-3 bg-primary/5 text-primary rounded-xl mx-2 font-bold text-sm border-r-4 border-primary" href="/explorer-dashboard">
+                        <Link className="flex items-center gap-3 px-4 py-3 bg-primary/5 text-primary rounded-xl mx-2 font-bold text-sm" href="/explorer-dashboard">
                             <LayoutDashboard className="h-4 w-4 text-primary" />
                             <span>Dashboard</span>
                         </Link>
@@ -174,9 +174,9 @@ return;
                                 <p className="text-sm opacity-90 mb-10">Discover modern cooperatives powered by Artificial Intelligence.</p>
                                 <div className="flex flex-col md:flex-row gap-3 mb-8">
                                     <div className="flex-1 relative">
-                                        <Brain className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 h-5 w-5 animate-pulse" />
+                                        <Brain className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-400 h-5 w-5 animate-pulse" />
                                         <input 
-                                            className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/30 text-white placeholder:text-zinc-400 bg-white/10" 
+                                            className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 text-white placeholder:text-zinc-400 bg-white/10" 
                                             placeholder="Ask AI: 'Find agriculture coops near me'" 
                                             type="text"
                                             value={input}
@@ -184,7 +184,7 @@ return;
                                             onKeyDown={e => e.key === 'Enter' && handleAISearch()}
                                         />
                                     </div>
-                                    <button onClick={handleAISearch} className="px-8 py-4 bg-purple-600 text-white font-label-md rounded-2xl shadow-lg hover:bg-opacity-95 transition-all flex items-center justify-center gap-2 font-semibold">
+                                    <button onClick={handleAISearch} className="px-8 py-4 bg-blue-600 text-white font-label-md rounded-2xl shadow-lg hover:bg-opacity-95 transition-all flex items-center justify-center gap-2 font-semibold">
                                         <span>Search AI</span>
                                     </button>
                                 </div>
@@ -208,10 +208,10 @@ return;
                             <div className="lg:col-span-1 bento-card border border-zinc-200/50 p-6 flex flex-col justify-between shadow-sm relative">
                                 <div>
                                     <div className="flex items-center gap-2 mb-4">
-                                        <Brain className="h-5 w-5 text-purple-600 animate-pulse" />
+                                        <Brain className="h-5 w-5 text-blue-600 animate-pulse" />
                                         <h3 className="font-headline-sm text-base font-bold">AI Recommended</h3>
                                     </div>
-                                    <div className="bg-purple-50 border border-purple-100 rounded-xl p-4 mb-4 text-xs font-semibold text-purple-900 leading-relaxed">
+                                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-4 text-xs font-semibold text-blue-900 leading-relaxed">
                                         🤖 Based on your interests, we recommend Koperasi Tani Sejahtera.
                                     </div>
                                     <div className="space-y-3 mb-6 text-xs text-zinc-500">
@@ -229,7 +229,7 @@ return;
                                         </div>
                                     </div>
                                 </div>
-                                <button className="w-full py-3 bg-purple-600 text-white font-label-md text-xs font-bold rounded-xl hover:bg-opacity-95 transition-colors shadow-md shadow-purple-500/10" onClick={() => showToast("Opening details for Koperasi Tani Sejahtera...")}>
+                                <button className="w-full py-3 bg-blue-600 text-white font-label-md text-xs font-bold rounded-xl hover:bg-opacity-95 transition-colors shadow-md shadow-blue-500/10" onClick={() => showToast("Opening details for Koperasi Tani Sejahtera...")}>
                                     View Details
                                 </button>
                             </div>
@@ -305,7 +305,7 @@ return;
                                                     </button>
                                                     <Link 
                                                         href="/assistant"
-                                                        className="p-1.5 border border-purple-500/30 text-purple-600 rounded-lg hover:bg-purple-50/50 transition-colors"
+                                                        className="p-1.5 border border-blue-500/30 text-blue-600 rounded-lg hover:bg-blue-50/50 transition-colors"
                                                         title="Ask AI about this product"
                                                     >
                                                         <Brain className="h-3.5 w-3.5" />
@@ -339,7 +339,7 @@ return;
                                     <span className="text-primary text-xs font-bold flex items-center gap-1.5 mt-auto">Read Module <ArrowRight className="h-3 w-3" /></span>
                                 </div>
                                 <div className="bento-card p-6 flex flex-col justify-between border border-zinc-200/50 shadow-sm hover:scale-[1.02] transition-transform duration-300 cursor-pointer" onClick={() => showToast("Opening Module: Financial Literacy?")}>
-                                    <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-6 shrink-0">
+                                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shrink-0">
                                         <span className="material-symbols-outlined">payments</span>
                                     </div>
                                     <h4 className="font-headline-sm text-sm font-bold text-zinc-950 mb-2">Financial Literacy</h4>
@@ -356,7 +356,7 @@ return;
                                     <img className="w-full h-full object-cover" alt="Success Story Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmE-XfeJT1t8t6F2yHgQ-oiBvygSaDeI7a-976JkYaKJrJ7T7_i3w9zyTiO_9phNjgYlg3U_wt_wQv-kZMSL2pnIfYwIT29YtwGAIxkSbXkcdl0yOyECXQa8LTp7eNvVZ2FVubRfmJ1rxc96eZZzGLD8lPFb8t7aWkIUG7CW7dacJWqDJdM_JQ-go0i0GMwzpqSea1uf8_5-1sMs_OTJZAriwyEwJZf-lQYUTm59zr2aZiEJnP5GingDcX4Hw8HfhEQivmF020cS0" />
                                 </div>
                                 <div className="p-8 lg:p-12 flex flex-col justify-center">
-                                    <div className="flex items-center gap-2 text-purple-600 mb-4 font-bold text-xs uppercase tracking-widest">
+                                    <div className="flex items-center gap-2 text-blue-600 mb-4 font-bold text-xs uppercase tracking-widest">
                                         <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
                                         <span>Member Spotlight</span>
                                     </div>

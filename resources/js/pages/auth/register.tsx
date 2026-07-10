@@ -83,7 +83,7 @@ export default function Register({ passwordRules }: Props) {
                             {/* Register Form Container */}
                             <div id="register-container">
                                 <div className="mb-8">
-                                    <h2 className="font-headline-md text-headline-md text-on-surface mb-2">Buat Akun</h2>
+                                    <h2 className="font-headline-md text-white mb-2">Buat Akun</h2>
                                     <p className="font-body-sm text-body-sm text-on-surface-variant">Bergabunglah dengan komunitas KOPERA-PLUS hari ini.</p>
                                 </div>
 

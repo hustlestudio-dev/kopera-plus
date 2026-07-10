@@ -1,0 +1,11 @@
+{
+    "detector": {
+        "ignoreFiles": [
+            "vendor/**",
+            "scratch_stitch/**",
+            "node_modules/**",
+            "public/build/**",
+            "bootstrap/ssr/**"
+        ]
+    }
+}

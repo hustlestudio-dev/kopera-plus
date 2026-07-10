@@ -112,7 +112,7 @@ return;
                                 onClick={() => setCurrentTab('dashboard')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'dashboard'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -123,7 +123,7 @@ return;
                                 onClick={() => setCurrentTab('assistant')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'assistant'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -134,7 +134,7 @@ return;
                                 onClick={() => setCurrentTab('rewards')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'rewards'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -145,7 +145,7 @@ return;
                                 onClick={() => setCurrentTab('governance')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'governance'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -156,7 +156,7 @@ return;
                                 onClick={() => setCurrentTab('rat')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'rat'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -167,7 +167,7 @@ return;
                                 onClick={() => setCurrentTab('community')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'community'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -183,7 +183,7 @@ return;
                                 onClick={() => setCurrentTab('profile')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'profile'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -194,7 +194,7 @@ return;
                                 onClick={() => setCurrentTab('settings')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all ${
                                     currentTab === 'settings'
-                                        ? 'bg-primary/10 text-primary border-r-4 border-primary'
+                                        ? 'bg-primary/10 text-primary'
                                         : 'text-zinc-600 hover:bg-slate-50'
                                 }`}
                             >
@@ -285,7 +285,7 @@ return;
                                     {/* AI Assistant Preview Card */}
                                     <div className="bento-card p-6 bg-white border border-zinc-200/50 shadow-md">
                                         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-zinc-100">
-                                            <Brain className="h-6 w-6 text-purple-600 animate-pulse" />
+                                            <Brain className="h-6 w-6 text-blue-600 animate-pulse" />
                                             <div>
                                                 <h3 className="font-headline-sm text-sm font-bold text-zinc-950">AI Member Assistant</h3>
                                                 <p className="text-[10px] text-zinc-400">Ask me anything about your membership or cooperative status.</p>
@@ -293,9 +293,9 @@ return;
                                         </div>
                                         <div className="space-y-4 mb-6">
                                             <div className="flex gap-4">
-                                                <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0">AI</div>
+                                                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0">AI</div>
                                                 <div className="bg-slate-50 rounded-2xl rounded-tl-none p-4 max-w-2xl border border-zinc-200/30 text-xs leading-relaxed text-zinc-700">
-                                                    Welcome back, <strong className="text-zinc-900 font-bold">Muhammad</strong>! I've analyzed your latest transactions. You've earned <strong className="text-purple-700 font-bold">250 extra coins</strong> this week from the community challenge. Would you like to see how to redeem them?
+                                                    Welcome back, <strong className="text-zinc-900 font-bold">Muhammad</strong>! I've analyzed your latest transactions. You've earned <strong className="text-blue-700 font-bold">250 extra coins</strong> this week from the community challenge. Would you like to see how to redeem them?
                                                 </div>
                                             </div>
                                         </div>
@@ -313,7 +313,7 @@ return;
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <div className="bento-card p-6 border border-zinc-200/50 shadow-md">
                                             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-zinc-100">
-                                                <Calendar className="h-5 w-5 text-indigo-600" />
+                                                <Calendar className="h-5 w-5 text-blue-600" />
                                                 <h4 className="font-bold text-sm">Digital RAT Countdown</h4>
                                             </div>
                                             <div className="space-y-3 text-xs mb-6">
@@ -323,7 +323,7 @@ return;
                                                 </div>
                                                 <div className="flex justify-between">
                                                     <span className="text-zinc-400">Countdown:</span>
-                                                    <strong className="text-indigo-600 font-bold">2d 14h 32m</strong>
+                                                    <strong className="text-blue-600 font-bold">2d 14h 32m</strong>
                                                 </div>
                                             </div>
                                             <button onClick={() => setCurrentTab('rat')} className="w-full py-3 bg-primary text-white text-xs font-bold rounded-xl hover:opacity-95 active:scale-95 transition-all">
@@ -359,16 +359,16 @@ return;
                                     <div className="bento-card p-5 border border-zinc-200/50 shadow-sm">
                                         <div className="flex justify-between items-center mb-4">
                                             <h4 className="text-xs font-bold text-zinc-800">Rewards Progress</h4>
-                                            <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Level 12</span>
+                                            <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Level 12</span>
                                         </div>
                                         <div className="flex justify-between text-xs font-semibold mb-2">
                                             <span className="text-zinc-500">4,250 / 5,000 XP</span>
-                                            <span className="text-purple-700">85%</span>
+                                            <span className="text-blue-700">85%</span>
                                         </div>
                                         <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-4">
-                                            <div className="bg-purple-600 h-full rounded-full" style={{ width: '85%' }}></div>
+                                            <div className="bg-blue-600 h-full rounded-full" style={{ width: '85%' }}></div>
                                         </div>
-                                        <div className="bg-purple-50 p-3.5 rounded-xl border border-purple-100/50 text-[10px] text-purple-900 leading-relaxed font-semibold">
+                                        <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-100/50 text-[10px] text-blue-900 leading-relaxed font-semibold">
                                             🎯 <strong>Today's Mission</strong>: Vote on 2 governance proposals (+50 XP)
                                         </div>
                                     </div>
@@ -401,7 +401,7 @@ return;
                                     <div className="border-b border-zinc-100 pb-4 mb-4 flex items-center justify-between">
                                         <div>
                                             <h3 className="font-bold text-sm text-zinc-950 flex items-center gap-2">
-                                                AI Member Assistant <Brain className="h-4.5 w-4.5 text-purple-600" />
+                                                AI Member Assistant <Brain className="h-4.5 w-4.5 text-blue-600" />
                                             </h3>
                                             <p className="text-[10px] text-zinc-400">Interact with KOPERA intelligence core directly.</p>
                                         </div>
@@ -417,7 +417,7 @@ return;
                                                 <div className={`p-4 rounded-2xl max-w-md text-xs leading-relaxed ${
                                                     msg.sender === 'user' 
                                                         ? 'bg-primary text-white rounded-tr-none' 
-                                                        : 'bg-slate-100 text-zinc-800 rounded-tl-none border-l-4 border-purple-500'
+                                                        : 'bg-slate-100 text-zinc-800 rounded-tl-none'
                                                 }`}>
                                                     {msg.text}
                                                     {msg.showCard && (
@@ -461,9 +461,9 @@ return;
                                     <p className="text-xs text-zinc-400 mb-8">Redeem earned cooperative points for real rewards or dividend options.</p>
 
                                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                                        <div className="bg-purple-50 p-6 rounded-2xl border border-purple-100 text-center">
-                                            <p className="text-[10px] font-bold text-purple-700 uppercase">Redeemable Points</p>
-                                            <p className="text-3xl font-black text-purple-900 mt-2">4,250</p>
+                                        <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-center">
+                                            <p className="text-[10px] font-bold text-blue-700 uppercase">Redeemable Points</p>
+                                            <p className="text-3xl font-black text-blue-900 mt-2">4,250</p>
                                         </div>
                                         <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 text-center">
                                             <p className="text-[10px] font-bold text-emerald-700 uppercase">Lifetime Earned</p>
@@ -475,7 +475,7 @@ return;
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         <div className="border border-zinc-200 rounded-2xl p-5 hover:border-primary transition-colors flex flex-col justify-between">
                                             <div>
-                                                <span className="bg-purple-100 text-purple-700 text-[9px] font-bold px-2 py-0.5 rounded">500 PTS</span>
+                                                <span className="bg-blue-100 text-blue-700 text-[9px] font-bold px-2 py-0.5 rounded">500 PTS</span>
                                                 <h5 className="font-bold text-xs mt-3">Free Premium Rice Bag (5kg)</h5>
                                                 <p className="text-[10px] text-zinc-400 mt-1">Claim one free bag of long grain organic white rice.</p>
                                             </div>
@@ -483,7 +483,7 @@ return;
                                         </div>
                                         <div className="border border-zinc-200 rounded-2xl p-5 hover:border-primary transition-colors flex flex-col justify-between">
                                             <div>
-                                                <span className="bg-purple-100 text-purple-700 text-[9px] font-bold px-2 py-0.5 rounded">300 PTS</span>
+                                                <span className="bg-blue-100 text-blue-700 text-[9px] font-bold px-2 py-0.5 rounded">300 PTS</span>
                                                 <h5 className="font-bold text-xs mt-3">Organic Fertilizer 1L</h5>
                                                 <p className="text-[10px] text-zinc-400 mt-1">Redeem for one bottle of verified organic liquid compost.</p>
                                             </div>
@@ -508,7 +508,7 @@ return;
                                                     <span className="bg-red-100 text-red-700 text-[9px] font-bold px-2 py-0.5 rounded">Prop #04 - Critical</span>
                                                     <h4 className="font-bold text-sm mt-2 text-zinc-950">Youth Segment Digital Skills Workshop</h4>
                                                 </div>
-                                                <span className="text-xs text-purple-700 font-bold">94% AI Confidence</span>
+                                                <span className="text-xs text-blue-700 font-bold">94% AI Confidence</span>
                                             </div>
                                             <p className="text-xs text-zinc-500 mb-6">Launch a micro-training digital business course to boost active transactions among Gen-Z members.</p>
                                             
@@ -530,7 +530,7 @@ return;
                                                     <span className="bg-blue-100 text-blue-700 text-[9px] font-bold px-2 py-0.5 rounded">Prop #03 - Inventory</span>
                                                     <h4 className="font-bold text-sm mt-2 text-zinc-950">Secure +30% Wholesale Fertilizer Stock</h4>
                                                 </div>
-                                                <span className="text-xs text-purple-700 font-bold">88% AI Confidence</span>
+                                                <span className="text-xs text-blue-700 font-bold">88% AI Confidence</span>
                                             </div>
                                             <p className="text-xs text-zinc-500 mb-6">Lock in lower prices to prepare for predicted upcoming supply shortages.</p>
                                             
@@ -558,7 +558,7 @@ return;
                                     <p className="text-xs text-zinc-400 mb-8">Access annual cooperative meetings, review allocations, and check historical documentations.</p>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                                        <div className="bg-gradient-to-br from-indigo-900 to-zinc-950 text-white p-8 rounded-2xl flex flex-col justify-between min-h-[220px]">
+                                        <div className="bg-gradient-to-br from-blue-900 to-zinc-950 text-white p-8 rounded-2xl flex flex-col justify-between min-h-[220px]">
                                             <div>
                                                 <h4 className="font-bold text-base">Annual Financial Meeting RAT</h4>
                                                 <p className="text-xs opacity-75 mt-2">Next live broadcast starts in 2 days.</p>
@@ -671,7 +671,7 @@ return;
                                             <h4 className="font-bold text-sm">Account Status</h4>
                                             <div className="space-y-2 text-xs text-zinc-500">
                                                 <p>• Identity: <strong className="text-emerald-600 font-bold">VERIFIED</strong></p>
-                                                <p>• Tier Level: <strong className="text-purple-600 font-bold">DIAMOND MEMBER</strong></p>
+                                                <p>• Tier Level: <strong className="text-blue-600 font-bold">DIAMOND MEMBER</strong></p>
                                                 <p>• Join Date: <strong className="text-zinc-700">June 12, 2021</strong></p>
                                             </div>
                                         </div>

@@ -107,7 +107,7 @@ return;
                             <span className="material-symbols-outlined">smart_toy</span>
                             Asisten AI
                         </Link>
-                        <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-primary font-bold bg-primary/10 border-r-4 border-primary" href="/assistant">
+                        <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-primary font-bold bg-primary/10" href="/assistant">
                             <span className="material-symbols-outlined active-pill" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_cart</span>
                             Komersial AI
                         </Link>
@@ -187,7 +187,7 @@ return;
                                             <div className={`p-5 rounded-2xl ${
                                                 msg.sender === 'user' 
                                                     ? 'bg-primary text-white rounded-tr-none ml-auto w-fit' 
-                                                    : 'bg-slate-100 text-on-surface rounded-tl-none border-l-4 border-primary'
+                                                    : 'bg-slate-100 text-on-surface rounded-tl-none'
                                             } shadow-sm text-sm font-medium`}>
                                                 {msg.text}
                                             </div>
@@ -206,7 +206,7 @@ return;
                                                         <div>
                                                             <div className="flex justify-between items-start mb-2">
                                                                 <h3 className="font-headline-sm text-lg font-bold text-on-surface">Premium Mentik Susu (5kg)</h3>
-                                                                <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                                                <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
                                                                     Kecocokan 98%
                                                                 </span>
                                                             </div>
@@ -292,7 +292,7 @@ return;
                         {/* Right Summary Column */}
                         <aside className="w-80 space-y-6 flex-shrink-0">
                             {/* Member Status card */}
-                            <div className="bento-card p-6 bg-gradient-to-br from-purple-600 to-indigo-700 text-white shadow-xl">
+                            <div className="bento-card p-6 bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl">
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
                                         <div className="text-xs opacity-80 mb-1 uppercase tracking-wider font-semibold">Level Anggota</div>

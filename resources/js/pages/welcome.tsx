@@ -53,7 +53,7 @@ nav.style.height = '80px';
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link
-                    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+                    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
                     rel="stylesheet"
                 />
                 <link
@@ -125,7 +125,7 @@ nav.style.height = '80px';
                             <Link
                                 href="/onboarding"
                                 className="glow-button font-label-md text-label-md px-5 py-2.5 rounded-xl text-white font-semibold outline-none focus:outline-none select-none"
-                                style={{ background: 'linear-gradient(135deg, #7C3AED, #2563EB)', WebkitTapHighlightColor: 'transparent' }}
+                                style={{ background: 'linear-gradient(135deg, #004ac6, #2563EB)', WebkitTapHighlightColor: 'transparent' }}
                             >
                                 Mulai Sekarang
                             </Link>
@@ -163,7 +163,7 @@ nav.style.height = '80px';
                             <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-primary/20 bg-primary/5">
                                 <span
                                     className="w-2 h-2 rounded-full animate-pulse"
-                                    style={{ background: '#7C3AED' }}
+                                    style={{ background: '#004ac6' }}
                                 />
                                 <span className="text-label-sm font-label-sm text-primary font-semibold tracking-wide">
                                     Platform Koperasi Berbasis AI
@@ -184,7 +184,7 @@ nav.style.height = '80px';
                                 <Link
                                     href="/onboarding"
                                     className="glow-button font-label-md text-label-md px-8 py-4 rounded-xl text-white font-semibold flex items-center justify-center gap-2"
-                                    style={{ background: 'linear-gradient(135deg, #7C3AED, #2563EB)' }}
+                                    style={{ background: 'linear-gradient(135deg, #004ac6, #2563EB)' }}
                                 >
                                     <span className="material-symbols-outlined text-[18px]">rocket_launch</span>
                                     Mulai — Gratis
@@ -202,7 +202,7 @@ nav.style.height = '80px';
                             {/* Social proof */}
                             <div className="mt-10 flex items-center gap-4">
                                 <div className="flex -space-x-2">
-                                    {['#7C3AED', '#2563EB', '#059669', '#d97706'].map((color, i) => (
+                                    {['#004ac6', '#2563EB', '#059669', '#d97706'].map((color, i) => (
                                         <div
                                             key={i}
                                             className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-bold"
@@ -241,7 +241,7 @@ nav.style.height = '80px';
                                     <div className="flex items-center gap-3">
                                         <div
                                             className="w-9 h-9 rounded-full flex items-center justify-center"
-                                            style={{ background: 'linear-gradient(135deg, #7C3AED22, #2563EB22)' }}
+                                            style={{ background: 'linear-gradient(135deg, #004ac622, #2563EB22)' }}
                                         >
                                             <span className="material-symbols-outlined text-[18px] text-primary">
                                                 auto_awesome
@@ -304,10 +304,10 @@ nav.style.height = '80px';
                 <section className="py-section-padding px-margin-mobile md:px-margin-desktop">
                     <div className="max-w-container-max mx-auto grid grid-cols-2 lg:grid-cols-4 gap-gutter">
                         {[
-                            { value: '12K+', label: 'Anggota Aktif', color: 'linear-gradient(135deg, #7C3AED, #2563EB)' },
-                            { value: '250+', label: 'Koperasi', color: 'linear-gradient(135deg, #2563EB, #0ea5e9)' },
+                            { value: '12K+', label: 'Anggota Aktif', color: 'linear-gradient(135deg, #004ac6, #2563EB)' },
+                            { value: '250+', label: 'Koperasi', color: 'linear-gradient(135deg, #2563EB, #3b82f6)' },
                             { value: '95%', label: 'Kepuasan', color: 'linear-gradient(135deg, #059669, #2563EB)' },
-                            { value: '85%', label: 'Partisipasi Aktif', color: 'linear-gradient(135deg, #7C3AED, #d946ef)' },
+                            { value: '85%', label: 'Partisipasi Aktif', color: 'linear-gradient(135deg, #004ac6, #2563EB)' },
                         ].map((stat, i) => (
                             <div
                                 key={stat.label}
@@ -375,9 +375,9 @@ nav.style.height = '80px';
                                     icon: 'account_tree',
                                     title: 'Complex Services',
                                     desc: 'Navigating bureaucratic systems and legacy processes is frustrating for new users.',
-                                    color: '#7C3AED',
+                                    color: '#004ac6',
                                     bg: 'rgba(124,58,237,0.08)',
-                                    border: '#7C3AED',
+                                    border: '#004ac6',
                                 },
                                 {
                                     icon: 'smartphone',
@@ -448,7 +448,7 @@ nav.style.height = '80px';
                                         className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-semibold mb-4 w-fit"
                                         style={{
                                             background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(37,99,235,0.12))',
-                                            color: '#4338ca',
+                                            color: '#003a9e',
                                         }}
                                     >
                                         <span className="material-symbols-outlined text-[14px]">auto_awesome</span>
@@ -487,7 +487,7 @@ nav.style.height = '80px';
                             <div
                                 className="reveal md:col-span-4 rounded-[32px] overflow-hidden p-8 flex flex-col hover:shadow-xl transition-all duration-300 delay-100 relative"
                                 style={{
-                                    background: 'linear-gradient(145deg, #7C3AED, #4338ca)',
+                                    background: 'linear-gradient(145deg, #004ac6, #003a9e)',
                                     boxShadow: '0 8px 40px rgba(124,58,237,0.3)',
                                 }}
                             >
@@ -517,7 +517,7 @@ nav.style.height = '80px';
                                         ].map((b, i) => (
                                             <div
                                                 key={i}
-                                                className="w-12 h-12 rounded-full border-[3px] border-purple-600 bg-white/10 flex items-center justify-center"
+                                                className="w-12 h-12 rounded-full border-[3px] border-blue-600 bg-white/10 flex items-center justify-center"
                                             >
                                                 <span className="material-symbols-outlined text-[18px]" style={{ color: b.color }}>
                                                     {b.icon}
@@ -601,7 +601,7 @@ nav.style.height = '80px';
                         <div className="relative">
                             {/* Timeline line */}
                             <div className="hidden lg:block absolute top-6 left-0 w-full h-[2px]"
-                                style={{ background: 'linear-gradient(90deg, #7C3AED, #2563EB, #0ea5e9, #7C3AED30)' }} />
+                                style={{ background: 'linear-gradient(90deg, #004ac6, #2563EB, #3b82f6, #004ac630)' }} />
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-8 relative z-10">
                                 {[
@@ -614,8 +614,8 @@ nav.style.height = '80px';
                                     { icon: 'grade', label: 'Active Member', sub: 'Community Leader', phase: 'accent' },
                                 ].map((step, i) => {
                                     const gradients: Record<string, string> = {
-                                        primary: 'linear-gradient(135deg, #7C3AED, #2563EB)',
-                                        secondary: 'linear-gradient(135deg, #2563EB, #0ea5e9)',
+                                        primary: 'linear-gradient(135deg, #004ac6, #2563EB)',
+                                        secondary: 'linear-gradient(135deg, #2563EB, #3b82f6)',
                                         accent: 'linear-gradient(135deg, #059669, #2563EB)',
                                     };
 
@@ -694,7 +694,7 @@ nav.style.height = '80px';
                                     <Link
                                         href="/onboarding"
                                         className="bg-white font-headline-sm px-10 py-4 rounded-2xl transition-all shadow-2xl active:scale-95 flex items-center justify-center font-bold gap-2 hover:shadow-white/30 hover:scale-[1.02]"
-                                        style={{ color: '#7C3AED' }}
+                                        style={{ color: '#004ac6' }}
                                     >
                                         <span className="material-symbols-outlined text-[20px]">rocket_launch</span>
                                         Get Started — It's Free

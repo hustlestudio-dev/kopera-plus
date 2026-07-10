@@ -75,7 +75,7 @@ export default function AdminDashboard() {
                             </div>
                             
                             <nav className="px-4 space-y-1">
-                                <Link className="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary border-r-4 border-primary font-bold text-sm" href="/admin-dashboard">
+                                <Link className="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 text-primary font-bold text-sm" href="/admin-dashboard">
                                     <span className="material-symbols-outlined">dashboard</span>
                                     <span>Dashboard</span>
                                 </Link>
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
                                     <span className="material-symbols-outlined">assessment</span>
                                     <span>Laporan</span>
                                 </Link>
-                                <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#7C3AED] bg-purple-50/50 font-bold text-sm" href="/workspace">
+                                <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#004ac6] bg-blue-50/50 font-bold text-sm" href="/workspace">
                                     <span className="material-symbols-outlined">psychology</span>
                                     <span>AI Insight</span>
                                 </Link>
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
                                 </div>
                             </div>
                             <div className="grid grid-rows-2 gap-4">
-                                <div className="bento-card p-6 flex items-start gap-4 border-l-4 border-red-500 shadow-sm border border-zinc-100">
+                                <div className="bento-card p-6 flex items-start gap-4 shadow-sm border border-zinc-100">
                                     <div className="bg-red-50 p-3 rounded-xl text-red-500 shrink-0">
                                         <AlertCircle className="h-5 w-5" />
                                     </div>
@@ -197,8 +197,8 @@ export default function AdminDashboard() {
                                         <p className="text-xs text-zinc-500 mt-1">Disarankan restock dalam 48 jam.</p>
                                     </div>
                                 </div>
-                                <div className="bento-card p-6 flex items-start gap-4 border-l-4 border-indigo-500 shadow-sm border border-zinc-100">
-                                    <div className="bg-indigo-50 p-3 rounded-xl text-indigo-500 shrink-0">
+                                <div className="bento-card p-6 flex items-start gap-4 shadow-sm border border-zinc-100">
+                                    <div className="bg-blue-50 p-3 rounded-xl text-blue-500 shrink-0">
                                         <Activity className="h-5 w-5" />
                                     </div>
                                     <div>
@@ -246,7 +246,7 @@ export default function AdminDashboard() {
                             <div className="lg:col-span-8 bento-card p-8 border border-zinc-100 shadow-sm">
                                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-100">
                                     <div className="flex items-center gap-3">
-                                        <div className="p-3 bg-purple-50 text-[#7C3AED] rounded-xl shrink-0">
+                                        <div className="p-3 bg-blue-50 text-[#004ac6] rounded-xl shrink-0">
                                             <Brain className="h-5 w-5" />
                                         </div>
                                         <h3 className="font-headline-md text-lg font-bold">Rekomendasi Strategis AI</h3>
@@ -256,23 +256,23 @@ export default function AdminDashboard() {
 
                                 <div className="space-y-6">
                                     {recommendations.map((rec, rIdx) => (
-                                        <div key={rIdx} className="p-6 rounded-2xl bg-slate-50 border border-zinc-200/50 hover:border-purple-300 transition-colors cursor-pointer group">
+                                        <div key={rIdx} className="p-6 rounded-2xl bg-slate-50 border border-zinc-200/50 hover:border-blue-300 transition-colors cursor-pointer group">
                                             <div className="flex items-start justify-between">
                                                 <div className="flex-grow">
                                                     <div className="flex items-center gap-2 mb-2">
                                                         <span className={`px-2 py-0.5 rounded text-[9px] font-extrabold uppercase ${
                                                             rec.type === 'Critical' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
                                                         }`}>{rec.type}</span>
-                                                        <span className="text-xs text-purple-700 font-bold">{rec.confidence}</span>
+                                                        <span className="text-xs text-blue-700 font-bold">{rec.confidence}</span>
                                                     </div>
                                                     <h4 className="font-headline-sm text-sm font-bold text-zinc-950 mb-2">{rec.title}</h4>
                                                     <p className="text-xs text-zinc-500 leading-relaxed">{rec.desc}</p>
-                                                    <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-purple-700 bg-purple-50 p-2.5 rounded-lg border border-purple-100/50">
+                                                    <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-blue-700 bg-blue-50 p-2.5 rounded-lg border border-blue-100/50">
                                                         <span className="material-symbols-outlined text-[16px]">lightbulb</span>
                                                         <p>{rec.recommendation}</p>
                                                     </div>
                                                 </div>
-                                                <ChevronRight className="h-5 w-5 text-zinc-400 group-hover:text-purple-600 transition-colors" />
+                                                <ChevronRight className="h-5 w-5 text-zinc-400 group-hover:text-blue-600 transition-colors" />
                                             </div>
                                         </div>
                                     ))}
@@ -362,7 +362,7 @@ export default function AdminDashboard() {
                                         <div className="relative w-32 h-32 flex items-center justify-center shrink-0">
                                             <svg className="w-full h-full transform -rotate-90">
                                                 <circle className="text-white/10" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" strokeWidth="8"></circle>
-                                                <circle className="text-purple-400" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" strokeDasharray="364.4" strokeDashoffset="36.4" strokeWidth="10" strokeLinecap="round"></circle>
+                                                <circle className="text-blue-400" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" strokeDasharray="364.4" strokeDashoffset="36.4" strokeWidth="10" strokeLinecap="round"></circle>
                                             </svg>
                                             <span className="absolute text-2xl font-black">90%</span>
                                         </div>
