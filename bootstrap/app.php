@@ -9,7 +9,6 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
-use Illuminate\Session\TokenMismatchException;
 use Inertia\Inertia;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
@@ -48,6 +47,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // Render calm, friendly error pages for Inertia visits instead of the
         // bare Laravel/Symfony error screens. JSON & non-Inertia requests are
         // left untouched so the API contract and Blade fallbacks stay intact.
+        // (CSRF/session mismatches become 409 and follow Inertia's built-in
+        // reload behavior for XHR visits.)
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
             if ($request->is('api/*') || $request->expectsJson()) {
                 return $response;
@@ -57,15 +58,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return $response;
             }
 
-            // CSRF / session issues. Symfony coerces the non-standard 419 code
-            // to 409, so we detect the exception directly and surface a calm
-            // "session expired" page with the friendly 419 label.
-            if ($exception instanceof TokenMismatchException) {
-                $status = 419;
-            } else {
-                $status = $response->getStatusCode();
-            }
-
+            $status = $response->getStatusCode();
             $isHttpError = $exception instanceof HttpException
                 && ($response->isClientError() || $response->isServerError());
 

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
+use App\Enums\UserRole;
 use App\Http\Responses\LoginResponse;
 use App\Http\Responses\RegisterResponse;
 use App\Http\Responses\VerifyEmailResponse;
@@ -79,11 +80,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::registerView(fn (Request $request) => Inertia::render('auth/register', [
             'teamInvitation' => $this->teamInvitation($request),
             'passwordRules' => Password::defaults()->toPasswordRulesString(),
-            'roles' => [
-                ['value' => 'explorer', 'label' => 'Explorer Koperasi'],
-                ['value' => 'member', 'label' => 'Anggota Koperasi'],
-                ['value' => 'administrator', 'label' => 'Administrator'],
-            ],
+            'roles' => UserRole::assignable(),
         ]));
 
     }
