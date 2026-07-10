@@ -5,7 +5,6 @@ namespace App\Http\Responses\Concerns;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\URL;
 
 trait RedirectsToCurrentTeam
 {
@@ -13,23 +12,32 @@ trait RedirectsToCurrentTeam
     {
         $user = $request->user();
 
-        abort_if(! $user, 403);
+        // Guests can never reach a post-authentication response; don't 403.
+        if (! $user) {
+            return '/';
+        }
 
-        return match (true) {
-            $user->hasRole('administrator') => '/admin-dashboard',
-            $user->hasRole('explorer') => '/explorer-dashboard',
-            default => $this->memberDashboardPath($user),
-        };
-    }
+        if ($user->hasRole('administrator')) {
+            return '/admin-dashboard';
+        }
 
-    protected function memberDashboardPath($user): string
-    {
-        $team = $user->personalTeam() ?? $user->currentTeam;
+        if ($user->hasRole('explorer')) {
+            return '/explorer-dashboard';
+        }
 
-        abort_if(! $team, 403);
+        // Members land on their team dashboard. Anyone without a platform role
+        // yet (or without a team) is sent to the teams screen instead of a hard
+        // 403 — they can create or join a team from there.
+        if ($user->hasRole('member')) {
+            $team = $user->personalTeam() ?? $user->currentTeam;
 
-        URL::defaults(['current_team' => $team->slug]);
+            if ($team) {
+                URL::defaults(['current_team' => $team->slug]);
 
-        return '/'.$team->slug.'/dashboard';
+                return '/'.$team->slug.'/dashboard';
+            }
+        }
+
+        return '/settings/teams';
     }
 }

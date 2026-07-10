@@ -37,11 +37,23 @@ class HandleInertiaRequests extends Middleware
     {
         $user = $request->user();
 
+        $roles = [];
+        $permissions = [];
+
+        if ($user !== null && method_exists($user, 'getRoleNames')) {
+            $roles = $user->getRoleNames()->toArray();
+            $permissions = method_exists($user, 'getPermissionNames')
+                ? $user->getPermissionNames()->toArray()
+                : [];
+        }
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
                 'user' => $user,
+                'roles' => $roles,
+                'permissions' => $permissions,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'currentTeam' => fn () => $user?->currentTeam ? $user->toUserTeam($user->currentTeam) : null,

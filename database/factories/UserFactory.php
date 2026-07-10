@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 /**
  * @extends Factory<User>
@@ -45,7 +46,7 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function ($user) {
             $team = Team::factory()->personal()->create([
-                'name' => $user->name . "'s Team",
+                'name' => $user->name."'s Team",
             ]);
 
             $team->members()->attach($user, [
@@ -53,6 +54,8 @@ class UserFactory extends Factory
             ]);
 
             $user->switchTeam($team);
+
+            $user->assignRole(Role::findOrCreate('member', 'web'));
 
             $user->assignRole('member');
         });

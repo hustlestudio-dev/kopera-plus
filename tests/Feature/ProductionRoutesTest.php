@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class ProductionRoutesTest extends TestCase
@@ -24,6 +25,7 @@ class ProductionRoutesTest extends TestCase
             '/assistant',
             '/admin-dashboard',
             '/explorer-dashboard',
+            '/'.$this->slug().'/dashboard',
         ];
 
         foreach ($protectedPages as $path) {
@@ -31,21 +33,51 @@ class ProductionRoutesTest extends TestCase
         }
     }
 
-    public function test_authenticated_verified_users_can_access_app_pages(): void
+    public function test_member_can_access_member_areas_but_not_role_specific_dashboards(): void
     {
         $user = User::factory()->create();
 
         $this->actingAs($user);
 
-        $protectedPages = [
-            '/workspace',
-            '/assistant',
-            '/admin-dashboard',
-            '/explorer-dashboard',
-        ];
+        $this->get('/workspace')->assertOk();
+        $this->get('/assistant')->assertOk();
+        $this->get('/'.$user->personalTeam()->slug.'/dashboard')->assertOk();
 
-        foreach ($protectedPages as $path) {
-            $this->get($path)->assertOk();
-        }
+        $this->get('/admin-dashboard')->assertForbidden();
+        $this->get('/explorer-dashboard')->assertForbidden();
+    }
+
+    public function test_explorer_can_access_explorer_dashboard_only(): void
+    {
+        $user = User::factory()->create();
+        $user->syncRoles(Role::findOrCreate('explorer', 'web'));
+
+        $this->actingAs($user);
+
+        $this->get('/explorer-dashboard')->assertOk();
+
+        $this->get('/admin-dashboard')->assertForbidden();
+        $this->get('/workspace')->assertForbidden();
+        $this->get('/assistant')->assertForbidden();
+        $this->get('/'.$user->personalTeam()->slug.'/dashboard')->assertForbidden();
+    }
+
+    public function test_administrator_can_access_everything(): void
+    {
+        $user = User::factory()->create();
+        $user->syncRoles(Role::findOrCreate('administrator', 'web'));
+
+        $this->actingAs($user);
+
+        $this->get('/admin-dashboard')->assertOk();
+        $this->get('/explorer-dashboard')->assertOk();
+        $this->get('/workspace')->assertOk();
+        $this->get('/assistant')->assertOk();
+        $this->get('/'.$user->personalTeam()->slug.'/dashboard')->assertOk();
+    }
+
+    private function slug(): string
+    {
+        return User::factory()->create()->personalTeam()->slug;
     }
 }
