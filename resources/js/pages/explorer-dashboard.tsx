@@ -12,6 +12,7 @@ import {
     ArrowRight,
     CheckCircle2,
     ShieldCheck,
+    LogOut,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
@@ -173,10 +174,13 @@ export default function ExplorerDashboard() {
 
                     <div className="mt-auto px-4 pb-4">
                         <Link
-                            href="/login"
-                            className="block w-full rounded-xl bg-primary py-3 text-center font-label-md text-sm font-semibold text-white shadow-lg transition-all hover:brightness-110"
+                            href="/logout"
+                            method="post"
+                            as="button"
+                            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
                         >
-                            Upgrade to Member
+                            <LogOut className="h-4 w-4 text-zinc-400" />
+                            <span>Keluar</span>
                         </Link>
                     </div>
                 </aside>
