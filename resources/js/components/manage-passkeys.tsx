@@ -33,7 +33,7 @@ export default function ManagePasskeys(props: Props) {
             preserveScroll: true,
             onError,
         });
-    };
+    };  
 
     const handleRegisterSuccess = () => {
         router.reload();

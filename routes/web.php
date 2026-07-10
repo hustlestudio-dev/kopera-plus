@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\AiDemoController;
+use App\Http\Controllers\AssistantChatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
+Route::get('/ai-demo', AiDemoController::class)->name('ai-demo');
+Route::post('/assistant/chat', AssistantChatController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('assistant.chat');
 
 Route::inertia('/onboarding', 'onboarding')->name('onboarding');
 
