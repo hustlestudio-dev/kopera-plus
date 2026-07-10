@@ -1,14 +1,14 @@
-import React from 'react';
 import { Form, Head, Link } from '@inertiajs/react';
+import React from 'react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
+import PrototypeHud from '@/components/PrototypeHud';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { login } from '@/routes';
 import { store } from '@/routes/register';
-import PrototypeHud from '@/components/PrototypeHud';
 
 type Props = {
     passwordRules: string;
@@ -17,7 +17,7 @@ type Props = {
 export default function Register({ passwordRules }: Props) {
     return (
         <>
-            <Head title="Create Account | KOPERA-PLUS" />
+            <Head title="Buat Akun | KOPERA-PLUS" />
 
             <main className="min-h-screen flex flex-col md:flex-row font-sans bg-background text-on-surface">
                 {/* Left Side: Branding Panel (45%) */}
@@ -31,10 +31,10 @@ export default function Register({ passwordRules }: Props) {
                             <span className="font-headline-lg text-headline-sm font-black tracking-tight text-primary">KOPERA-PLUS</span>
                         </Link>
                         <h1 className="font-headline-lg text-display-sm text-on-surface mb-4 leading-tight">
-                            Welcome to <span className="ai-gradient-text">KOPERA AI</span>
+                            Selamat datang di <span className="ai-gradient-text">KOPERA AI</span>
                         </h1>
                         <p className="font-body-lg text-body-lg text-on-surface-variant max-w-md">
-                            Empowering communities through intelligent cooperative experiences.
+                            Memberdayakan komunitas melalui pengalaman koperasi yang cerdas.
                         </p>
                     </div>
 
@@ -51,13 +51,13 @@ export default function Register({ passwordRules }: Props) {
                             <div className="w-8 h-8 rounded-full bg-tertiary-container/10 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-tertiary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
                             </div>
-                            <span className="font-label-md text-label-md text-on-surface">Secure Authentication</span>
+                            <span className="font-label-md text-label-md text-on-surface">Autentikasi Aman</span>
                         </div>
                         <div className="flex items-center gap-3 bg-surface/50 backdrop-blur-sm p-4 rounded-xl border border-outline-variant/30">
                             <div className="w-8 h-8 rounded-full bg-secondary-container/10 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-secondary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>psychology</span>
                             </div>
-                            <span className="font-label-md text-label-md text-on-surface">AI Personalized Experience</span>
+                            <span className="font-label-md text-label-md text-on-surface">Pengalaman AI Personal</span>
                         </div>
                     </div>
 
@@ -76,15 +76,15 @@ export default function Register({ passwordRules }: Props) {
                             <div className="flex items-center justify-between mb-8 pb-6 border-b border-outline-variant/20">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
-                                    <span className="font-label-sm text-label-sm text-on-surface-variant">You're signing up as <strong className="text-on-surface">Cooperative Member</strong></span>
+                                    <span className="font-label-sm text-label-sm text-on-surface-variant">Anda mendaftar sebagai <strong className="text-on-surface">Anggota Koperasi</strong></span>
                                 </div>
                             </div>
 
                             {/* Register Form Container */}
                             <div id="register-container">
                                 <div className="mb-8">
-                                    <h2 className="font-headline-md text-headline-md text-on-surface mb-2">Create Account</h2>
-                                    <p className="font-body-sm text-body-sm text-on-surface-variant">Join the KOPERA-PLUS community today.</p>
+                                    <h2 className="font-headline-md text-headline-md text-on-surface mb-2">Buat Akun</h2>
+                                    <p className="font-body-sm text-body-sm text-on-surface-variant">Bergabunglah dengan komunitas KOPERA-PLUS hari ini.</p>
                                 </div>
 
                                 <Form
@@ -95,12 +95,12 @@ export default function Register({ passwordRules }: Props) {
                                     {({ processing, errors }) => (
                                         <>
                                             <div className="space-y-1.5">
-                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="name">Full Name</Label>
+                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="name">Nama Lengkap</Label>
                                                 <Input
                                                     className="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface bg-white"
                                                     id="name"
                                                     name="name"
-                                                    placeholder="John Doe"
+                                                    placeholder="Nama Lengkap Anda"
                                                     type="text"
                                                     required
                                                     autoFocus
@@ -109,7 +109,7 @@ export default function Register({ passwordRules }: Props) {
                                             </div>
 
                                             <div className="space-y-1.5">
-                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="email">Email Address</Label>
+                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="email">Alamat Email</Label>
                                                 <Input
                                                     className="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface bg-white"
                                                     id="email"
@@ -122,7 +122,7 @@ export default function Register({ passwordRules }: Props) {
                                             </div>
 
                                             <div className="space-y-1.5">
-                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="password">Password</Label>
+                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="password">Kata Sandi</Label>
                                                 <PasswordInput
                                                     id="password"
                                                     name="password"
@@ -135,7 +135,7 @@ export default function Register({ passwordRules }: Props) {
                                             </div>
 
                                             <div className="space-y-1.5">
-                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="password_confirmation">Confirm Password</Label>
+                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="password_confirmation">Konfirmasi Kata Sandi</Label>
                                                 <PasswordInput
                                                     id="password_confirmation"
                                                     name="password_confirmation"
@@ -153,7 +153,7 @@ export default function Register({ passwordRules }: Props) {
                                                 className="w-full mt-4 py-4 bg-primary text-white font-headline-sm text-headline-sm rounded-xl glow-button flex items-center justify-center gap-2 hover:bg-primary/95 transition-all"
                                             >
                                                 {processing && <Spinner className="text-white" />}
-                                                Create Account
+                                                Buat Akun
                                                 <span className="material-symbols-outlined text-[20px]">person_add</span>
                                             </Button>
                                         </>
@@ -164,9 +164,9 @@ export default function Register({ passwordRules }: Props) {
                             {/* Toggle Text */}
                             <div className="mt-8 text-center">
                                 <p className="font-body-sm text-body-sm text-on-surface-variant">
-                                    Already have an account?
+                                    Sudah punya akun?
                                     <Link className="text-primary font-label-md text-label-md hover:underline ml-1" href={login()}>
-                                        Login
+                                        Masuk
                                     </Link>
                                 </p>
                             </div>
@@ -174,9 +174,9 @@ export default function Register({ passwordRules }: Props) {
 
                         {/* Footer Links */}
                         <div className="mt-8 flex justify-center gap-6 animate-entrance delay-200">
-                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
-                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
-                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Kebijakan Privasi</a>
+                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Syarat Layanan</a>
+                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Pusat Bantuan</a>
                         </div>
                     </div>
                 </section>

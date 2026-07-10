@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { Search, Bell, Settings, Award, Cpu, ShieldCheck, Compass, Info, MessageSquare, Send, Paperclip, Mic, HelpCircle, LayoutDashboard, Brain, Store, ArrowRight, Star, Settings2, Plus, Calendar, Moon, Sparkles, TrendingUp, Vote, User, Trash2, Heart, CheckCircle2, ChevronRight, Share2, LogOut, BookOpen } from 'lucide-react';
+import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 interface Message {
@@ -46,7 +46,9 @@ export default function Dashboard() {
     };
 
     const handleSendChat = (textToSend = chatInput) => {
-        if (!textToSend.trim()) return;
+        if (!textToSend.trim()) {
+return;
+}
 
         setMessages(prev => [...prev, { sender: 'user', text: textToSend }]);
         setChatInput('');
@@ -63,7 +65,10 @@ export default function Dashboard() {
     };
 
     const handleCreatePost = () => {
-        if (!newPostContent.trim()) return;
+        if (!newPostContent.trim()) {
+return;
+}
+
         const newPost = {
             id: Date.now(),
             author: 'Muhammad Rizky',

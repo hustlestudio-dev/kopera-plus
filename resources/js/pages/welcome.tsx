@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { Head, Link } from '@inertiajs/react';
+import React, { useEffect } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 export default function Welcome() {
@@ -22,13 +22,20 @@ export default function Welcome() {
         const handleScroll = () => {
             if (window.scrollY > 60) {
                 nav?.classList.add('shadow-lg');
-                if (nav) nav.style.height = '68px';
+
+                if (nav) {
+nav.style.height = '68px';
+}
             } else {
                 nav?.classList.remove('shadow-lg');
-                if (nav) nav.style.height = '80px';
+
+                if (nav) {
+nav.style.height = '80px';
+}
             }
         };
         window.addEventListener('scroll', handleScroll);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             observer.disconnect();
@@ -159,18 +166,18 @@ export default function Welcome() {
                                     style={{ background: '#7C3AED' }}
                                 />
                                 <span className="text-label-sm font-label-sm text-primary font-semibold tracking-wide">
-                                    AI-Powered Cooperative Platform
+                                    Platform Koperasi Berbasis AI
                                 </span>
                             </div>
 
                             <h1 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6 leading-[1.08]">
-                                Empowering Cooperative Growth with{' '}
-                                <span className="gradient-text-primary">Artificial Intelligence</span>
+                                Memberdayakan Pertumbuhan Koperasi dengan{' '}
+                                <span className="gradient-text-primary">Kecerdasan Buatan</span>
                             </h1>
 
                             <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl leading-relaxed">
-                                Helping people discover cooperatives, become members, purchase products,
-                                earn rewards, and participate transparently through AI.
+                                Membantu orang menemukan koperasi, menjadi anggota, membeli produk,
+                                meraih hadiah, dan berpartisipasi secara transparan melalui AI.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4">
@@ -180,7 +187,7 @@ export default function Welcome() {
                                     style={{ background: 'linear-gradient(135deg, #7C3AED, #2563EB)' }}
                                 >
                                     <span className="material-symbols-outlined text-[18px]">rocket_launch</span>
-                                    Get Started — Free
+                                    Mulai — Gratis
                                 </Link>
                                 <button className="flex items-center justify-center gap-2 border border-outline/40 text-on-surface font-label-md text-label-md px-8 py-4 rounded-xl hover:bg-surface-container transition-all active:scale-95 hover:border-primary/30 hover:shadow-md">
                                     <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
@@ -188,7 +195,7 @@ export default function Welcome() {
                                             play_arrow
                                         </span>
                                     </div>
-                                    Watch Demo
+                                    Lihat Demo
                                 </button>
                             </div>
 
@@ -206,7 +213,7 @@ export default function Welcome() {
                                     ))}
                                 </div>
                                 <p className="text-label-sm text-on-surface-variant">
-                                    <span className="font-bold text-on-surface">12,000+</span> members already joined
+                                    <span className="font-bold text-on-surface">12.000+</span> anggota sudah bergabung
                                 </p>
                             </div>
                         </div>
@@ -268,7 +275,7 @@ export default function Welcome() {
                 <section className="py-12 border-y border-outline-variant/15 mesh-bg">
                     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
                         <p className="text-label-sm font-label-sm text-outline mb-10 tracking-[0.2em] uppercase">
-                            Trusted by
+                            Dipercaya oleh
                         </p>
                         <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
                             {[
@@ -297,10 +304,10 @@ export default function Welcome() {
                 <section className="py-section-padding px-margin-mobile md:px-margin-desktop">
                     <div className="max-w-container-max mx-auto grid grid-cols-2 lg:grid-cols-4 gap-gutter">
                         {[
-                            { value: '12K+', label: 'Active Members', color: 'linear-gradient(135deg, #7C3AED, #2563EB)' },
-                            { value: '250+', label: 'Cooperatives', color: 'linear-gradient(135deg, #2563EB, #0ea5e9)' },
-                            { value: '95%', label: 'Satisfaction', color: 'linear-gradient(135deg, #059669, #2563EB)' },
-                            { value: '85%', label: 'Active Participation', color: 'linear-gradient(135deg, #7C3AED, #d946ef)' },
+                            { value: '12K+', label: 'Anggota Aktif', color: 'linear-gradient(135deg, #7C3AED, #2563EB)' },
+                            { value: '250+', label: 'Koperasi', color: 'linear-gradient(135deg, #2563EB, #0ea5e9)' },
+                            { value: '95%', label: 'Kepuasan', color: 'linear-gradient(135deg, #059669, #2563EB)' },
+                            { value: '85%', label: 'Partisipasi Aktif', color: 'linear-gradient(135deg, #7C3AED, #d946ef)' },
                         ].map((stat, i) => (
                             <div
                                 key={stat.label}
@@ -335,14 +342,14 @@ export default function Welcome() {
                     <div className="max-w-container-max mx-auto">
                         <div className="reveal text-center mb-16">
                             <span className="inline-block px-4 py-1.5 rounded-full bg-error/10 text-error text-label-sm font-semibold mb-4">
-                                The Problem
+                                Masalah Utama
                             </span>
                             <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">
-                                Why are people losing interest in cooperatives?
+                                Mengapa orang mulai kehilangan minat pada koperasi?
                             </h2>
                             <p className="font-body-md text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-                                Traditional cooperative models face digital barriers that prevent meaningful
-                                engagement in the modern era.
+                                Model koperasi tradisional menghadapi hambatan digital yang menghalangi
+                                                                keterlibatan bermakna di era modern.
                             </p>
                         </div>
 
@@ -611,6 +618,7 @@ export default function Welcome() {
                                         secondary: 'linear-gradient(135deg, #2563EB, #0ea5e9)',
                                         accent: 'linear-gradient(135deg, #059669, #2563EB)',
                                     };
+
                                     return (
                                         <div
                                             key={step.label}

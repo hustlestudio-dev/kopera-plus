@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { Search, Star, Bell, Compass, LayoutDashboard, Store, BookOpen, Brain, Calendar, HelpCircle, ArrowRight, CheckCircle2, ShieldCheck, Heart, User } from 'lucide-react';
+import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 interface CoopItem {
@@ -87,7 +87,10 @@ export default function ExplorerDashboard() {
     ];
 
     const handleAISearch = () => {
-        if (!input.trim()) return;
+        if (!input.trim()) {
+return;
+}
+
         showToast(`AI Explorer running query for "${input}"`);
         setInput('');
     };

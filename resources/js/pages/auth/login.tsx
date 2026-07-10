@@ -1,8 +1,8 @@
-import React from 'react';
 import { Form, Head, Link } from '@inertiajs/react';
-import PrototypeHud from '@/components/PrototypeHud';
+import React from 'react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
+import PrototypeHud from '@/components/PrototypeHud';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -20,7 +20,7 @@ type Props = {
 export default function Login({ status, canResetPassword }: Props) {
     return (
         <>
-            <Head title="Member Login | KOPERA-PLUS" />
+            <Head title="Masuk Anggota | KOPERA-PLUS" />
 
             <main className="min-h-screen flex flex-col md:flex-row font-sans bg-background text-on-surface">
                 <section className="w-full md:w-[45%] bg-gradient-to-br from-[#F8FAFC] to-[#EFF6FF] p-8 md:p-16 flex flex-col justify-between items-start relative overflow-hidden min-h-[400px] md:min-h-screen">
@@ -32,10 +32,10 @@ export default function Login({ status, canResetPassword }: Props) {
                             <span className="font-headline-lg text-headline-sm font-black tracking-tight text-primary">KOPERA-PLUS</span>
                         </Link>
                         <h1 className="font-headline-lg text-display-sm text-on-surface mb-4 leading-tight">
-                            Welcome to <span className="ai-gradient-text">KOPERA AI</span>
+                            Selamat datang di <span className="ai-gradient-text">KOPERA AI</span>
                         </h1>
                         <p className="font-body-lg text-body-lg text-on-surface-variant max-w-md">
-                            Empowering communities through intelligent cooperative experiences.
+                            Memberdayakan komunitas melalui pengalaman koperasi yang cerdas.
                         </p>
                     </div>
 
@@ -54,13 +54,13 @@ export default function Login({ status, canResetPassword }: Props) {
                             <div className="w-8 h-8 rounded-full bg-tertiary-container/10 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-tertiary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
                             </div>
-                            <span className="font-label-md text-label-md text-on-surface">Secure Authentication</span>
+                            <span className="font-label-md text-label-md text-on-surface">Autentikasi Aman</span>
                         </div>
                         <div className="flex items-center gap-3 bg-surface/50 backdrop-blur-sm p-4 rounded-xl border border-outline-variant/30">
                             <div className="w-8 h-8 rounded-full bg-secondary-container/10 flex items-center justify-center">
                                 <span className="material-symbols-outlined text-secondary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>psychology</span>
                             </div>
-                            <span className="font-label-md text-label-md text-on-surface">AI Personalized Experience</span>
+                            <span className="font-label-md text-label-md text-on-surface">Pengalaman AI Personal</span>
                         </div>
                     </div>
 
@@ -80,14 +80,14 @@ export default function Login({ status, canResetPassword }: Props) {
                             <div className="flex items-center justify-between mb-8 pb-6 border-b border-outline-variant/20">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
-                                    <span className="font-label-sm text-label-sm text-on-surface-variant">You're signing in as <strong className="text-on-surface">Cooperative Member</strong></span>
+                                    <span className="font-label-sm text-label-sm text-on-surface-variant">Anda masuk sebagai <strong className="text-on-surface">Anggota Koperasi</strong></span>
                                 </div>
                             </div>
 
                             <div id="login-container">
                                 <div className="mb-8">
-                                    <h2 className="font-headline-md text-headline-md text-on-surface mb-2">Member Login</h2>
-                                    <p className="font-body-sm text-body-sm text-on-surface-variant">Enter your credentials to access your dashboard.</p>
+                                    <h2 className="font-headline-md text-headline-md text-on-surface mb-2">Masuk Anggota</h2>
+                                    <p className="font-body-sm text-body-sm text-on-surface-variant">Masukkan kredensial Anda untuk mengakses dashboard.</p>
                                 </div>
 
                                 <Form
@@ -98,7 +98,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     {({ processing, errors }) => (
                                         <>
                                             <div className="space-y-1.5">
-                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="email">Email Address</Label>
+                                                <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="email">Alamat Email</Label>
                                                 <Input
                                                     className="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-on-surface bg-white"
                                                     id="email"
@@ -113,10 +113,10 @@ export default function Login({ status, canResetPassword }: Props) {
 
                                             <div className="space-y-1.5">
                                                 <div className="flex justify-between items-center">
-                                                    <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="password">Password</Label>
+                                                    <Label className="font-label-md text-label-md text-on-surface-variant" htmlFor="password">Kata Sandi</Label>
                                                     {canResetPassword && (
                                                         <Link className="font-label-sm text-label-sm text-primary hover:underline" href={request()}>
-                                                            Forgot Password?
+                                                            Lupa Kata Sandi?
                                                         </Link>
                                                     )}
                                                 </div>
@@ -132,7 +132,7 @@ export default function Login({ status, canResetPassword }: Props) {
 
                                             <div className="flex items-center gap-2">
                                                 <Checkbox id="remember" name="remember" />
-                                                <Label className="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" htmlFor="remember">Remember me for 30 days</Label>
+                                                <Label className="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" htmlFor="remember">Ingat saya selama 30 hari</Label>
                                             </div>
 
                                             <Button
@@ -141,7 +141,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                                 className="w-full py-4 bg-primary text-white font-headline-sm text-headline-sm rounded-xl glow-button flex items-center justify-center gap-2 hover:bg-primary/95 transition-all"
                                             >
                                                 {processing && <Spinner className="text-white" />}
-                                                <span className="text-white">Login</span>
+                                                <span className="text-white">Masuk</span>
                                                 <span className="material-symbols-outlined text-[20px] text-white">arrow_forward</span>
                                             </Button>
                                         </>
@@ -153,7 +153,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                         <div className="w-full border-t border-outline-variant/30"></div>
                                     </div>
                                     <div className="relative flex justify-center text-label-sm">
-                                        <span className="bg-white px-4 text-outline font-label-sm uppercase tracking-widest">or continue with</span>
+                                        <span className="bg-white px-4 text-outline font-label-sm uppercase tracking-widest">atau lanjut dengan</span>
                                     </div>
                                 </div>
 
@@ -182,18 +182,18 @@ export default function Login({ status, canResetPassword }: Props) {
 
                             <div className="mt-8 text-center">
                                 <p className="font-body-sm text-body-sm text-on-surface-variant">
-                                    Don't have an account?
+                                    Belum punya akun?
                                     <Link className="text-primary font-label-md text-label-md hover:underline ml-1" href={register()}>
-                                        Create Account
+                                        Buat Akun
                                     </Link>
                                 </p>
                             </div>
                         </div>
 
                         <div className="mt-8 flex justify-center gap-6 animate-entrance delay-200">
-                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
-                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
-                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Kebijakan Privasi</a>
+                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Syarat Layanan</a>
+                            <a className="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" href="#">Pusat Bantuan</a>
                         </div>
                     </div>
                 </section>

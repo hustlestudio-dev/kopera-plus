@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { Search, Bell, Settings, Award, Cpu, ShieldCheck, Compass, Info, MessageSquare, Send, Paperclip, Mic, HelpCircle, LayoutDashboard, Brain, Store, ArrowRight, Star, Settings2, Plus, Calendar, Moon } from 'lucide-react';
+import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 interface Message {
@@ -11,10 +11,10 @@ interface Message {
 
 export default function Workspace() {
     const [messages, setMessages] = useState<Message[]>([
-        { sender: 'user', text: "I want to buy Premium Rice." },
+        { sender: 'user', text: 'Saya ingin membeli Beras Premium.' },
         { 
             sender: 'ai', 
-            text: "I've found a matching product from Green Life Cooperative inventory. Here are the details:",
+            text: 'Saya menemukan produk yang sesuai dari inventaris Koperasi Green Life. Berikut detailnya:',
             showCard: true
         }
     ]);
@@ -30,7 +30,9 @@ export default function Workspace() {
     };
 
     const handleSend = (textToSend = input) => {
-        if (!textToSend.trim()) return;
+        if (!textToSend.trim()) {
+return;
+}
 
         setMessages(prev => [...prev, { sender: 'user', text: textToSend }]);
         setInput('');
@@ -40,15 +42,15 @@ export default function Workspace() {
             setIsTyping(false);
             setMessages(prev => [...prev, {
                 sender: 'ai',
-                text: `I've analyzed your query "${textToSend}". I will fetch live inventories and check the cooperative benefits database.`
+                text: `Saya telah menganalisis pertanyaan Anda "${textToSend}". Saya akan mengambil inventaris terkini dan memeriksa basis data manfaat koperasi.`
             }]);
-            showToast("AI analyzed message");
+            showToast('AI menganalisis pesan');
         }, 1500);
     };
 
     return (
         <>
-            <Head title="AI Member Assistant | KOPERA-PLUS" />
+            <Head title="Asisten AI Anggota | KOPERA-PLUS" />
 
             <div className="bg-[#f4f7fc] text-[#0b1c30] font-sans antialiased overflow-hidden h-screen flex">
                 
@@ -68,10 +70,12 @@ export default function Workspace() {
 
                         {/* New Chat Button */}
                         <button 
-                            onClick={() => { setMessages([{ sender: 'ai', text: "New chat started. What are you looking to buy today?" }]); showToast("New session started."); }}
+                            onClick={() => {
+ setMessages([{ sender: 'ai', text: 'Obrolan baru dimulai. Apa yang ingin Anda beli hari ini?' }]); showToast('Sesi baru dimulai.'); 
+}}
                             className="w-full py-3 bg-[#004ac6] text-white rounded-xl text-xs font-bold shadow-md hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-2 mb-6"
                         >
-                            <Plus className="h-4 w-4" /> New Chat
+                            <Plus className="h-4 w-4" /> Obrolan Baru
                         </button>
 
                         {/* Search Input */}
@@ -79,30 +83,30 @@ export default function Workspace() {
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-3.5 w-3.5" />
                             <input 
                                 className="w-full bg-slate-50 border border-zinc-200/50 rounded-xl py-2.5 pl-9 pr-3 text-xs outline-none focus:ring-1 focus:ring-primary/20 text-zinc-700" 
-                                placeholder="Search history..." 
+                                placeholder="Cari riwayat..."
                                 type="text"
                             />
                         </div>
 
                         {/* Recent Conversations */}
                         <div>
-                            <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-3">Recent Conversations</p>
+                            <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-3">Percakapan Terbaru</p>
                             <nav className="space-y-1">
                                 <button className="w-full flex items-center gap-3 px-4 py-3 bg-[#004ac6]/10 text-[#004ac6] rounded-xl text-xs font-bold text-left border-r-4 border-[#004ac6]">
                                     <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
-                                    <span>Buying Products</span>
+                                    <span>Membeli Produk</span>
                                 </button>
-                                <button className="w-full flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-slate-50 rounded-xl text-xs font-semibold text-left transition-colors" onClick={() => showToast("Switched conversation thread.")}>
+                                <button className="w-full flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-slate-50 rounded-xl text-xs font-semibold text-left transition-colors" onClick={() => showToast('Beralih ke percakapan lain.')}>
                                     <span className="material-symbols-outlined text-[18px] text-zinc-400">gavel</span>
-                                    <span>Digital RAT</span>
+                                    <span>RAT Digital</span>
                                 </button>
-                                <button className="w-full flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-slate-50 rounded-xl text-xs font-semibold text-left transition-colors" onClick={() => showToast("Switched conversation thread.")}>
+                                <button className="w-full flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-slate-50 rounded-xl text-xs font-semibold text-left transition-colors" onClick={() => showToast('Beralih ke percakapan lain.')}>
                                     <span className="material-symbols-outlined text-[18px] text-zinc-400">help_outline</span>
-                                    <span>SHU Questions</span>
+                                    <span>Pertanyaan SHU</span>
                                 </button>
-                                <button className="w-full flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-slate-50 rounded-xl text-xs font-semibold text-left transition-colors" onClick={() => showToast("Switched conversation thread.")}>
+                                <button className="w-full flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-slate-50 rounded-xl text-xs font-semibold text-left transition-colors" onClick={() => showToast('Beralih ke percakapan lain.')}>
                                     <span className="material-symbols-outlined text-[18px] text-zinc-400">person_outline</span>
-                                    <span>Membership</span>
+                                    <span>Keanggotaan</span>
                                 </button>
                             </nav>
                         </div>
@@ -115,11 +119,11 @@ export default function Workspace() {
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 text-zinc-600 hover:bg-slate-50 rounded-xl font-semibold" href="/workspace">
                             <span className="material-symbols-outlined text-zinc-400">settings</span>
-                            <span>Settings</span>
+                            <span>Pengaturan</span>
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl font-semibold" href="/">
                             <span className="material-symbols-outlined">logout</span>
-                            <span>Logout</span>
+                            <span>Keluar</span>
                         </Link>
                     </div>
                 </aside>
@@ -130,8 +134,8 @@ export default function Workspace() {
                     {/* Header */}
                     <header className="h-16 flex justify-between items-center px-8 bg-white border-b border-zinc-200/50 sticky top-0 z-45 shrink-0">
                         <div className="flex items-center gap-3">
-                            <span className="text-sm font-bold text-zinc-950">AI Member Assistant</span>
-                            <span className="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Active</span>
+                            <span className="text-sm font-bold text-zinc-950">Asisten AI Anggota</span>
+                            <span className="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Aktif</span>
                         </div>
                         <div className="flex items-center gap-3">
                             <button className="p-2 text-zinc-600 hover:bg-slate-50 rounded-full transition-colors"><Bell className="h-4.5 w-4.5" /></button>
@@ -166,7 +170,7 @@ export default function Workspace() {
                                                     <div className="h-44 w-full relative">
                                                         <img className="w-full h-full object-cover" alt="Premium Rice" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHAso7gSAxYgOjquC3G-bOpfr2QfZg3-8EYReKKo7w89v2stwHsuQ4It3GaFD-1W3aNKnPXlOHBluGPdv2idmYF_toIOrpbYIiP1yx2F2DqUu5gyKtZth2xuYDlayLC6NgTTh3bEVDv3ATOSwDl7M2JVavF8XLUeP51NQcZgAaZmHjTsbcBfRsXXC81_oybEiZUOGVya9tyZ76DK11HEfnFka1QgEJ_kVMAG3zw0c-m-zAI_KJwwyP8R7MZ25mQAABlV3wdFKcAKI" />
                                                         <span className="absolute top-3 left-3 bg-[#004ac6] text-white text-[9px] font-extrabold px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
-                                                            Best Seller
+                                                            Terlaris
                                                         </span>
                                                     </div>
                                                     <div className="p-5">
@@ -175,7 +179,7 @@ export default function Workspace() {
                                                         <div className="flex justify-between items-center mb-5">
                                                             <span className="text-[#004ac6] font-bold text-sm">Rp75.000</span>
                                                             <span className="text-red-500 text-[10px] font-bold flex items-center gap-1.5 bg-red-50 px-2.5 py-1 rounded-md">
-                                                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span> 24 items left
+                                                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Tersisa 24 item
                                                             </span>
                                                         </div>
                                                         <div className="flex gap-2">
@@ -183,13 +187,13 @@ export default function Workspace() {
                                                                 onClick={() => showToast("Added to deliver home list")}
                                                                 className="flex-1 py-2.5 bg-[#004ac6] text-white rounded-xl text-[10px] font-bold hover:brightness-105 transition-all active:scale-95"
                                                             >
-                                                                Deliver to Home
+                                                                Antar ke Rumah
                                                             </button>
                                                             <button 
                                                                 onClick={() => showToast("Selected pick up point")}
                                                                 className="flex-1 py-2.5 bg-white border border-zinc-200 text-zinc-700 rounded-xl text-[10px] font-bold hover:bg-slate-50 transition-colors active:scale-95"
                                                             >
-                                                                Pick Up
+                                                                Ambil Sendiri
                                                             </button>
                                                         </div>
                                                     </div>
@@ -205,7 +209,7 @@ export default function Workspace() {
                             <div className="flex gap-3">
                                 <div className="w-9 h-9 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">AI</div>
                                 <div className="flex items-center gap-2 text-zinc-400 bg-white border border-zinc-200/50 px-4 py-3 rounded-2xl rounded-tl-none text-xs font-semibold shadow-sm">
-                                    <span>AI is writing</span>
+                                    <span>AI sedang mengetik</span>
                                     <div className="flex gap-1">
                                         <div className="w-1 h-1 bg-purple-500 rounded-full animate-bounce"></div>
                                         <div className="w-1 h-1 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
@@ -221,7 +225,7 @@ export default function Workspace() {
                         <div className="max-w-3xl mx-auto">
                             {/* Option Chips */}
                             <div className="flex gap-2 overflow-x-auto pb-2 mb-3 scrollbar-none select-none">
-                                {['Buy Product', 'Check SHU', 'Rewards', 'Training'].map((chip, cIdx) => (
+                                {['Beli Produk', 'Cek SHU', 'Hadiah', 'Pelatihan'].map((chip, cIdx) => (
                                     <button 
                                         key={cIdx} 
                                         onClick={() => handleSend(chip)}
@@ -234,18 +238,18 @@ export default function Workspace() {
 
                             {/* Text Input Box */}
                             <div className="bg-white border border-zinc-200/60 shadow-lg rounded-2xl p-2 flex items-center gap-3">
-                                <button className="p-3 hover:bg-slate-50 rounded-xl text-zinc-400" onClick={() => showToast("Attachment explorer opened.")}>
+                                <button className="p-3 hover:bg-slate-50 rounded-xl text-zinc-400" onClick={() => showToast('Penjelajah lampiran dibuka.')}>
                                     <Paperclip className="h-4.5 w-4.5" />
                                 </button>
                                 <input 
                                     className="flex-grow bg-transparent border-none text-xs py-3.5 focus:ring-0 outline-none text-zinc-850 placeholder:text-zinc-450 font-medium" 
-                                    placeholder="Ask anything about your cooperative..." 
+                                    placeholder="Tanyakan apa pun tentang koperasi Anda..."
                                     type="text"
                                     value={input}
                                     onChange={e => setInput(e.target.value)}
                                     onKeyDown={e => e.key === 'Enter' && handleSend()}
                                 />
-                                <button className="p-3 hover:bg-slate-50 rounded-xl text-zinc-400" onClick={() => showToast("Microphone listening...")}>
+                                <button className="p-3 hover:bg-slate-50 rounded-xl text-zinc-400" onClick={() => showToast('Mikrofon sedang mendengarkan...')}>
                                     <Mic className="h-4.5 w-4.5" />
                                 </button>
                                 <button 
@@ -288,15 +292,15 @@ export default function Workspace() {
 
                     {/* Member Details */}
                     <div className="bento-card p-5 border border-zinc-200/50 shadow-sm space-y-4">
-                        <h4 className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Member Details</h4>
+                        <h4 className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Detail Anggota</h4>
                         
                         <div className="flex items-start gap-3 text-xs border-b border-zinc-50 pb-3">
                             <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#004ac6] flex items-center justify-center shrink-0">
                                 <span className="material-symbols-outlined text-[18px]">corporate_fare</span>
                             </div>
                             <div>
-                                <p className="text-[10px] text-zinc-400 font-semibold">Current Cooperative</p>
-                                <p className="font-bold text-zinc-800 mt-0.5">Green Life Cooperative</p>
+                                <p className="text-[10px] text-zinc-400 font-semibold">Koperasi Saat Ini</p>
+                                <p className="font-bold text-zinc-800 mt-0.5">Koperasi Green Life</p>
                             </div>
                         </div>
 
@@ -305,14 +309,14 @@ export default function Workspace() {
                                 <span className="material-symbols-outlined text-[18px]">calendar_today</span>
                             </div>
                             <div>
-                                <p className="text-[10px] text-zinc-400 font-semibold">Upcoming Event</p>
+                                <p className="text-[10px] text-zinc-400 font-semibold">Acara Mendatang</p>
                                 <p className="font-bold text-zinc-800 mt-0.5">Digital RAT</p>
-                                <p className="text-[10px] text-indigo-600 font-bold mt-0.5">Oct 24, 09:00 AM</p>
+                                <p className="text-[10px] text-indigo-600 font-bold mt-0.5">24 Okt, 09:00</p>
                             </div>
                         </div>
 
-                        <button className="w-full mt-2 py-3 bg-[#e5eeff]/80 text-[#004ac6] text-xs font-bold rounded-xl hover:bg-[#e5eeff] transition-all" onClick={() => showToast("Full profile modal opened.")}>
-                            View Full Profile
+                        <button className="w-full mt-2 py-3 bg-[#e5eeff]/80 text-[#004ac6] text-xs font-bold rounded-xl hover:bg-[#e5eeff] transition-all" onClick={() => showToast('Modal profil lengkap dibuka.')}>
+                            Lihat Profil Lengkap
                         </button>
                     </div>
 
@@ -321,10 +325,10 @@ export default function Workspace() {
                         <div className="relative z-10">
                             <div className="flex items-center gap-2 mb-3 text-[#7C3AED] font-bold text-xs">
                                 <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
-                                <span>AI Insight</span>
+                                <span>Wawasan AI</span>
                             </div>
                             <p className="text-xs text-zinc-700 leading-relaxed font-semibold">
-                                You are <strong className="text-primary font-bold">750 points</strong> away from <strong className="text-[#7C3AED] font-bold">Platinum Tier</strong>. Buying 2 more sacks of Premium Rice will unlock exclusive discounts.
+                                Anda tinggal <strong className="text-primary font-bold">750 poin</strong> lagi menuju <strong className="text-[#7C3AED] font-bold">Tingkat Platinum</strong>. Membeli 2 karung lagi Beras Premium akan membuka diskon eksklusif.
                             </p>
                         </div>
                     </div>

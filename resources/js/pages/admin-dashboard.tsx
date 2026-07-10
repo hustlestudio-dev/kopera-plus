@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { Search, Brain, Users, BarChart3, TrendingUp, RefreshCw, AlertCircle, ShoppingCart, Activity, ShieldCheck, Settings, HelpCircle, Layers, Bell, MessageSquare, ChevronRight, Play } from 'lucide-react';
+import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 interface KPIItem {
@@ -12,7 +12,7 @@ interface KPIItem {
 }
 
 interface RecItem {
-    type: 'Critical' | 'Inventory';
+    type: 'Kritis' | 'Inventaris';
     confidence: string;
     title: string;
     desc: string;
@@ -30,32 +30,32 @@ export default function AdminDashboard() {
     };
 
     const kpis: KPIItem[] = [
-        { label: 'Active Members', value: '4,821', change: '+12%', positive: true, data: [2, 4, 3, 6] },
-        { label: 'New This Month', value: '142', change: '+5%', positive: true, data: [3, 2, 5, 4] },
-        { label: 'Transactions', value: '12.4k', change: '-2%', positive: false, data: [6, 5, 4, 2] },
-        { label: 'Revenue', value: 'Rp24.8M', change: '+8%', positive: true, data: [2, 3, 5, 7] },
+        { label: 'Anggota Aktif', value: '4,821', change: '+12%', positive: true, data: [2, 4, 3, 6] },
+        { label: 'Baru Bulan Ini', value: '142', change: '+5%', positive: true, data: [3, 2, 5, 4] },
+        { label: 'Transaksi', value: '12.4k', change: '-2%', positive: false, data: [6, 5, 4, 2] },
+        { label: 'Pendapatan', value: 'Rp24.8M', change: '+8%', positive: true, data: [2, 3, 5, 7] },
     ];
 
     const recommendations: RecItem[] = [
         {
-            type: 'Critical',
-            confidence: '94% Confidence',
-            title: 'Member 18-25 engagement dropping',
-            desc: 'Data shows a 15% decrease in transaction volume for the Gen-Z segment over the last 3 months. Engagement with digital services is stagnant.',
-            recommendation: 'Launch a Digital Skills Workshop for young entrepreneurs next week.'
+            type: 'Kritis',
+            confidence: 'Kepercayaan 94%',
+            title: 'Keterlibatan anggota usia 18-25 menurun',
+            desc: 'Data menunjukkan penurunan 15% volume transaksi untuk segmen Gen-Z selama 3 bulan terakhir. Keterlibatan terhadap layanan digital stagnan.',
+            recommendation: 'Luncurkan workshop keterampilan digital untuk wirausaha muda minggu depan.',
         },
         {
-            type: 'Inventory',
-            confidence: '88% Confidence',
-            title: 'Fertilizer Supply Shortage Predicted',
-            desc: 'Regional demand is surging. Existing stock will be exhausted in 12 days based on predictive buying patterns of member farmers.',
-            recommendation: 'Restock +30% immediate order to lock in current wholesale prices.'
-        }
+            type: 'Inventaris',
+            confidence: 'Kepercayaan 88%',
+            title: 'Diprediksi Kekurangan Pasokan Pupuk',
+            desc: 'Permintaan regional meningkat tajam. Stok saat ini akan habis dalam 12 hari berdasarkan pola pembelian prediktif anggota petani.',
+            recommendation: 'Lakukan restock +30% dengan pesanan segera untuk mengunci harga grosir saat ini.',
+        },
     ];
 
     return (
         <>
-            <Head title="AI Business Copilot | KOPERA-PLUS" />
+            <Head title="Kopilot Bisnis AI | KOPERA-PLUS" />
 
             <div className="flex bg-[#f8f9ff] font-sans antialiased text-[#0b1c30] min-h-screen">
                 {/* SideNavBar */}
@@ -81,27 +81,27 @@ export default function AdminDashboard() {
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">group</span>
-                                    <span>Members</span>
+                                    <span>Anggota</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/assistant">
                                     <span className="material-symbols-outlined">inventory_2</span>
-                                    <span>Products</span>
+                                    <span>Produk</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">widgets</span>
-                                    <span>Inventory</span>
+                                    <span>Inventaris</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">receipt_long</span>
-                                    <span>Transactions</span>
+                                    <span>Transaksi</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">military_tech</span>
-                                    <span>Rewards</span>
+                                    <span>Hadiah</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">forum</span>
-                                    <span>Community</span>
+                                    <span>Komunitas</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">analytics</span>
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm font-semibold transition-colors" href="/workspace">
                                     <span className="material-symbols-outlined">assessment</span>
-                                    <span>Reports</span>
+                                    <span>Laporan</span>
                                 </Link>
                                 <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#7C3AED] bg-purple-50/50 font-bold text-sm" href="/workspace">
                                     <span className="material-symbols-outlined">psychology</span>
@@ -121,11 +121,11 @@ export default function AdminDashboard() {
                         <div className="px-4 space-y-1">
                             <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm" href="/workspace">
                                 <span className="material-symbols-outlined">settings</span>
-                                <span>Settings</span>
+                                <span>Pengaturan</span>
                             </Link>
                             <Link className="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-600 hover:bg-slate-50 text-sm" href="/workspace">
                                 <HelpCircle className="h-4 w-4 text-zinc-400" />
-                                <span>Help Center</span>
+                                <span>Pusat Bantuan</span>
                             </Link>
                         </div>
                     </div>
@@ -138,13 +138,13 @@ export default function AdminDashboard() {
                         <div className="flex items-center gap-6 flex-1">
                             <div className="relative w-full max-w-md">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-4 w-4" />
-                                <input className="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Search insights, members, or products..." type="text"/>
+                                <input className="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Cari insight, anggota, atau produk..." type="text"/>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
                             <button className="ai-gradient-bg text-white px-6 py-2.5 rounded-full font-label-md text-sm flex items-center gap-2 shadow-md hover:opacity-95 active:scale-95 transition-all font-semibold" onClick={() => showToast("AI Insight analysis re-triggered.")}>
                                 <Brain className="h-4 w-4" />
-                                AI Insights
+                                Insight AI
                             </button>
                             <div className="flex items-center gap-2 border-l border-zinc-200 pl-4 ml-2">
                                 <button className="p-2 rounded-full text-zinc-600 hover:bg-slate-100 transition-colors relative">
@@ -172,17 +172,17 @@ export default function AdminDashboard() {
                             <div className="lg:col-span-2 bento-card p-8 bg-zinc-950 text-white relative overflow-hidden flex flex-col justify-between min-h-[240px] shadow-xl">
                                 <div className="absolute -right-20 -top-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
                                 <div className="relative z-10">
-                                    <h2 className="font-display-sm text-2xl font-bold mb-2">Good Morning, Admin 👋</h2>
+                                    <h2 className="font-display-sm text-2xl font-bold mb-2">Selamat Pagi, Admin 👋</h2>
                                     <p className="text-sm opacity-80 max-w-lg">
-                                        Here are today's AI-generated insights for your cooperative. We've detected 3 high-priority areas that need your attention.
+                                        Berikut insight koperasi Anda yang dihasilkan AI hari ini. Kami mendeteksi 3 area prioritas tinggi yang membutuhkan perhatian Anda.
                                     </p>
                                 </div>
                                 <div className="relative z-10 flex gap-4 mt-6">
                                     <button className="bg-primary text-white px-8 py-3 rounded-xl font-label-md text-xs font-bold hover:bg-opacity-95 transition-all" onClick={() => showToast("Showing priority recommendations...")}>
-                                        View Recommendations
+                                        Lihat Rekomendasi
                                     </button>
                                     <button className="bg-white/10 border border-white/20 px-8 py-3 rounded-xl font-label-md text-xs font-bold hover:bg-white/20 transition-all text-white" onClick={() => showToast("Report compiled and downloaded.")}>
-                                        Download Report
+                                        Unduh Laporan
                                     </button>
                                 </div>
                             </div>
@@ -192,9 +192,9 @@ export default function AdminDashboard() {
                                         <AlertCircle className="h-5 w-5" />
                                     </div>
                                     <div>
-                                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1">Inventory Alert</p>
-                                        <p className="font-headline-sm text-sm font-bold">Inventory low: 12 SKUs</p>
-                                        <p className="text-xs text-zinc-500 mt-1">Recommended restock within 48h.</p>
+                                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1">Peringatan Inventaris</p>
+                                        <p className="font-headline-sm text-sm font-bold">Inventaris menipis: 12 SKU</p>
+                                        <p className="text-xs text-zinc-500 mt-1">Disarankan restock dalam 48 jam.</p>
                                     </div>
                                 </div>
                                 <div className="bento-card p-6 flex items-start gap-4 border-l-4 border-indigo-500 shadow-sm border border-zinc-100">
@@ -202,9 +202,9 @@ export default function AdminDashboard() {
                                         <Activity className="h-5 w-5" />
                                     </div>
                                     <div>
-                                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1">Retention Alert</p>
-                                        <p className="font-headline-sm text-sm font-bold">Participation down 8%</p>
-                                        <p className="text-xs text-zinc-500 mt-1">Youth segment showing inactivity.</p>
+                                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1">Peringatan Retensi</p>
+                                        <p className="font-headline-sm text-sm font-bold">Partisipasi turun 8%</p>
+                                        <p className="text-xs text-zinc-500 mt-1">Segmen anak muda menunjukkan inaktivitas.</p>
                                     </div>
                                 </div>
                             </div>
@@ -249,9 +249,9 @@ export default function AdminDashboard() {
                                         <div className="p-3 bg-purple-50 text-[#7C3AED] rounded-xl shrink-0">
                                             <Brain className="h-5 w-5" />
                                         </div>
-                                        <h3 className="font-headline-md text-lg font-bold">Strategic AI Recommendations</h3>
+                                        <h3 className="font-headline-md text-lg font-bold">Rekomendasi Strategis AI</h3>
                                     </div>
-                                    <span className="text-xs text-zinc-400 italic">Generated 14 mins ago</span>
+                                    <span className="text-xs text-zinc-400 italic">Dibuat 14 menit lalu</span>
                                 </div>
 
                                 <div className="space-y-6">
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
                             <div className="lg:col-span-4 space-y-6">
                                 <div className="bento-card p-6 flex flex-col border border-zinc-100 shadow-sm h-full justify-between">
                                     <div>
-                                        <h3 className="font-headline-sm text-sm font-bold mb-6">Inventory Status</h3>
+                                        <h3 className="font-headline-sm text-sm font-bold mb-6">Status Inventaris</h3>
                                         <div className="space-y-4">
                                             <div className="flex items-center gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors text-xs border border-zinc-100 bg-white">
                                                 <div className="w-10 h-10 bg-slate-100 flex items-center justify-center rounded-lg overflow-hidden shrink-0">
@@ -318,7 +318,7 @@ export default function AdminDashboard() {
                                         </div>
                                     </div>
                                     <button className="w-full mt-6 py-3 border border-zinc-200 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors text-zinc-700" onClick={() => showToast("Redirecting to full inventory view...")}>
-                                        View All Inventory
+                                        Lihat Semua Inventaris
                                     </button>
                                 </div>
                             </div>
@@ -328,12 +328,13 @@ export default function AdminDashboard() {
                         <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-2 bento-card p-8 border border-zinc-100 shadow-sm">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h3 className="font-headline-md text-base font-bold">Revenue & Participation Trends</h3>
+                                    <h3 className="font-headline-md text-base font-bold">Tren Pendapatan & Partisipasi</h3>
                                 </div>
                                 <div className="h-64 flex items-end gap-4 px-4 pt-4 border-b border-zinc-100 pb-2">
                                     {/* Simulated Chart */}
                                     {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, dIdx) => {
                                         const heights = [40, 65, 55, 85, 45, 30, 20];
+
                                         return (
                                             <div key={dIdx} className="flex-1 flex flex-col items-center gap-2 group">
                                                 <div 
@@ -354,8 +355,8 @@ export default function AdminDashboard() {
                                 <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-400 via-transparent to-transparent"></div>
                                 <div className="relative z-10 h-full flex flex-col justify-between">
                                     <div>
-                                        <h3 className="font-headline-md text-base font-bold mb-2">Member Growth Target</h3>
-                                        <p className="text-xs opacity-75">On track to hit quarterly goal of 5,000 members.</p>
+                                        <h3 className="font-headline-md text-base font-bold mb-2">Target Pertumbuhan Anggota</h3>
+                                        <p className="text-xs opacity-75">Di jalur yang tepat untuk mencapai target kuartalan 5.000 anggota.</p>
                                     </div>
                                     <div className="flex-grow flex items-center justify-center py-6">
                                         <div className="relative w-32 h-32 flex items-center justify-center shrink-0">
@@ -367,7 +368,7 @@ export default function AdminDashboard() {
                                         </div>
                                     </div>
                                     <button className="w-full py-3 bg-white text-zinc-950 rounded-xl text-xs font-bold hover:bg-opacity-95 transition-all active:scale-95" onClick={() => showToast("Recalculating strategic marketing allocations...")}>
-                                        Optimize Strategy
+                                        Optimalkan Strategi
                                     </button>
                                 </div>
                             </div>
@@ -384,7 +385,7 @@ export default function AdminDashboard() {
                 >
                     <span className="material-symbols-outlined text-[32px] text-white">psychology</span>
                     <div className="absolute right-full mr-4 bg-zinc-900 text-white px-4 py-2 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap text-xs font-bold">
-                        Ask AI Assistant
+                        Tanya Asisten AI
                     </div>
                 </button>
             </div>
