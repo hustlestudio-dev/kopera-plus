@@ -7,7 +7,6 @@ use App\Models\Team;
 use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Inertia\Testing\AssertableInertia as Assert;
 use Laravel\Fortify\Features;
@@ -58,7 +57,6 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard'));
     }
-
 
     public function test_users_with_two_factor_enabled_are_redirected_to_two_factor_challenge()
     {

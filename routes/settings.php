@@ -44,4 +44,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('settings/teams/{team}/invitations/{invitation}', [TeamInvitationController::class, 'destroy'])->name('teams.invitations.destroy');
     });
 });
-
