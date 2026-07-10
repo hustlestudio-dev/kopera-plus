@@ -79,7 +79,6 @@ class FortifyServiceProvider extends ServiceProvider
             'teamInvitation' => $this->teamInvitation($request),
         ]));
 
-
     }
 
     /**
