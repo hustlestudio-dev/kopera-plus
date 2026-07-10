@@ -129,15 +129,6 @@ export default function Assistant() {
                             href="/workspace"
                         >
                             <span className="material-symbols-outlined">
-                                dashboard
-                            </span>
-                            Dashboard
-                        </Link>
-                        <Link
-                            className="flex items-center gap-3 rounded-xl px-4 py-3 font-label-md text-label-md text-on-surface-variant transition-colors hover:bg-slate-100"
-                            href="/workspace"
-                        >
-                            <span className="material-symbols-outlined">
                                 smart_toy
                             </span>
                             Asisten AI
@@ -191,16 +182,7 @@ export default function Assistant() {
                             Digital RAT
                         </Link>
                     </nav>
-                    <div className="mt-auto px-4">
-                        <button
-                            className="ai-gradient-bg w-full rounded-xl py-3 font-label-md text-label-md text-white shadow-lg shadow-primary/20 transition-transform active:scale-95"
-                            onClick={() =>
-                                showToast('Upgrade to Pro feature unlocked!')
-                            }
-                        >
-                            Upgrade ke Pro
-                        </button>
-                    </div>
+                    
                 </aside>
 
                 {/* Main Content Area */}

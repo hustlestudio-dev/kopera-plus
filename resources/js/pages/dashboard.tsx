@@ -206,19 +206,6 @@ export default function Dashboard() {
                                 }`}
                             >
                                 <span className="material-symbols-outlined">
-                                    gavel
-                                </span>
-                                <span>Smart Governance</span>
-                            </button>
-                            <button
-                                onClick={() => setCurrentTab('rat')}
-                                className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-xs font-bold transition-all ${
-                                    currentTab === 'rat'
-                                        ? 'bg-primary/10 text-primary'
-                                        : 'text-zinc-600 hover:bg-slate-50'
-                                }`}
-                            >
-                                <span className="material-symbols-outlined">
                                     monitoring
                                 </span>
                                 <span>Digital RAT</span>
@@ -278,24 +265,6 @@ export default function Dashboard() {
                             </Link>
                         </div>
 
-                        {/* Upgrade Pro Widget */}
-                        <div className="relative overflow-hidden rounded-2xl bg-primary p-4 text-white shadow-lg">
-                            <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-white/10 blur-xl"></div>
-                            <p className="mb-1 text-xs font-bold">
-                                Elevate experience
-                            </p>
-                            <p className="mb-3 text-[10px] text-white/80">
-                                Unlock deeper SHU insights.
-                            </p>
-                            <button
-                                className="hover:bg-opacity-95 w-full rounded-lg bg-white py-2 text-xs font-bold text-primary transition-all active:scale-95"
-                                onClick={() =>
-                                    showToast('Upgrade option unlocked!')
-                                }
-                            >
-                                Upgrade to Pro
-                            </button>
-                        </div>
                     </div>
                 </aside>
 
