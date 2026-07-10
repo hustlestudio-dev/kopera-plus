@@ -47,13 +47,15 @@ export default function CancelInvitationModal({
                     <DialogTitle>Batalkan undangan</DialogTitle>
                     <DialogDescription>
                         Apakah Anda yakin ingin membatalkan undangan untuk
-                                                <strong>{invitation?.email}</strong>?
+                        <strong>{invitation?.email}</strong>?
                     </DialogDescription>
                 </DialogHeader>
 
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>
-                        <Button variant="secondary">Pertahankan undangan</Button>
+                        <Button variant="secondary">
+                            Pertahankan undangan
+                        </Button>
                     </DialogClose>
 
                     <Button

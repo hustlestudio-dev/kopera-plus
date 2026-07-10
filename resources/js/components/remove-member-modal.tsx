@@ -47,7 +47,7 @@ export default function RemoveMemberModal({
                     <DialogTitle>Hapus anggota tim</DialogTitle>
                     <DialogDescription>
                         Apakah Anda yakin ingin menghapus
-                                                <strong>{member?.name}</strong> dari tim ini?
+                        <strong>{member?.name}</strong> dari tim ini?
                     </DialogDescription>
                 </DialogHeader>
 

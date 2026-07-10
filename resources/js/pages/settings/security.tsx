@@ -10,7 +10,7 @@ import { edit } from '@/routes/security';
 
 type Props = {
     passwordRules: string;
-} ;
+};
 
 export default function Security(props: Props) {
     const passwordInput = useRef<HTMLInputElement>(null);
@@ -71,7 +71,9 @@ export default function Security(props: Props) {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password">Kata sandi baru</Label>
+                                <Label htmlFor="password">
+                                    Kata sandi baru
+                                </Label>
 
                                 <PasswordInput
                                     id="password"
@@ -117,8 +119,6 @@ export default function Security(props: Props) {
                     )}
                 </Form>
             </div>
-
-
         </>
     );
 }

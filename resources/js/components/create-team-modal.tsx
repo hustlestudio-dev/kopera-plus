@@ -35,8 +35,8 @@ export default function CreateTeamModal({ children }: PropsWithChildren) {
                             <DialogHeader>
                                 <DialogTitle>Buat tim baru</DialogTitle>
                                 <DialogDescription>
-                                    Buat tim baru untuk berkolaborasi
-                                                                        dengan anggota lain.
+                                    Buat tim baru untuk berkolaborasi dengan
+                                    anggota lain.
                                 </DialogDescription>
                             </DialogHeader>
 

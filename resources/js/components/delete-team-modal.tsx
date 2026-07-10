@@ -49,17 +49,18 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                             <DialogHeader>
                                 <DialogTitle>Apakah Anda yakin?</DialogTitle>
                                 <DialogDescription>
-                                    Tindakan ini tidak dapat dibatalkan. Ini akan
-                                                                        menghapus tim <strong>"{team.name}"</strong>
-                                                                        secara permanen.
+                                    Tindakan ini tidak dapat dibatalkan. Ini
+                                    akan menghapus tim{' '}
+                                    <strong>"{team.name}"</strong>
+                                    secara permanen.
                                 </DialogDescription>
                             </DialogHeader>
 
                             <div className="space-y-4 py-4">
                                 <div className="grid gap-2">
                                     <Label htmlFor="confirmation-name">
-                                        Ketik <strong>"{team.name}"</strong> untuk
-                                                                                konfirmasi
+                                        Ketik <strong>"{team.name}"</strong>{' '}
+                                        untuk konfirmasi
                                     </Label>
                                     <Input
                                         id="confirmation-name"

@@ -11,8 +11,8 @@ use App\Models\TeamInvitation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
@@ -77,6 +77,12 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::registerView(fn (Request $request) => Inertia::render('auth/register', [
             'teamInvitation' => $this->teamInvitation($request),
+            'passwordRules' => Password::defaults()->toPasswordRulesString(),
+            'roles' => [
+                ['value' => 'explorer', 'label' => 'Explorer Koperasi'],
+                ['value' => 'member', 'label' => 'Anggota Koperasi'],
+                ['value' => 'administrator', 'label' => 'Administrator'],
+            ],
         ]));
 
     }

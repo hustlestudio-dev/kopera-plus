@@ -45,7 +45,7 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function ($user) {
             $team = Team::factory()->personal()->create([
-                'name' => $user->name."'s Team",
+                'name' => $user->name . "'s Team",
             ]);
 
             $team->members()->attach($user, [
@@ -53,6 +53,8 @@ class UserFactory extends Factory
             ]);
 
             $user->switchTeam($team);
+
+            $user->assignRole('member');
         });
     }
 

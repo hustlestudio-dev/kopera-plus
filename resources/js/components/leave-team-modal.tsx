@@ -41,7 +41,7 @@ export default function LeaveTeamModal({ team, open, onOpenChange }: Props) {
                     <DialogTitle>Keluar dari tim</DialogTitle>
                     <DialogDescription>
                         Apakah Anda yakin ingin keluar dari tim
-                                                <strong>{team?.name}</strong>?
+                        <strong>{team?.name}</strong>?
                     </DialogDescription>
                 </DialogHeader>
 
