@@ -1,5 +1,5 @@
-import { Link, router } from '@inertiajs/react';
-import { LogOut, Settings } from 'lucide-react';
+import { Link, router, usePage } from '@inertiajs/react';
+import { Check, LogOut, Settings } from 'lucide-react';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,
@@ -16,12 +16,33 @@ type Props = {
     user: User;
 };
 
+type SharedProps = {
+    locale?: 'id' | 'en';
+};
+
 export function UserMenuContent({ user }: Props) {
     const cleanup = useMobileNavigation();
+    const { locale = 'id' } = usePage<SharedProps>().props;
 
     const handleLogout = () => {
         cleanup();
         router.flushAll();
+    };
+
+    const switchLocale = (nextLocale: 'id' | 'en') => {
+        cleanup();
+
+        if (locale === nextLocale || typeof window === 'undefined') {
+            return;
+        }
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', nextLocale);
+
+        router.visit(`${url.pathname}${url.search}${url.hash}`, {
+            replace: true,
+            preserveScroll: true,
+        });
     };
 
     return (
@@ -41,8 +62,33 @@ export function UserMenuContent({ user }: Props) {
                         onClick={cleanup}
                     >
                         <Settings className="mr-2" />
-                        Settings
+                        Pengaturan
                     </Link>
+                </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+                <DropdownMenuItem
+                    onSelect={(event) => {
+                        event.preventDefault();
+                        switchLocale('id');
+                    }}
+                >
+                    <span className="flex w-full items-center justify-between">
+                        <span>Bahasa Indonesia</span>
+                        {locale === 'id' ? <Check className="h-4 w-4" /> : null}
+                    </span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                    onSelect={(event) => {
+                        event.preventDefault();
+                        switchLocale('en');
+                    }}
+                >
+                    <span className="flex w-full items-center justify-between">
+                        <span>English</span>
+                        {locale === 'en' ? <Check className="h-4 w-4" /> : null}
+                    </span>
                 </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -55,7 +101,7 @@ export function UserMenuContent({ user }: Props) {
                     data-test="logout-button"
                 >
                     <LogOut className="mr-2" />
-                    Log out
+                    Keluar
                 </Link>
             </DropdownMenuItem>
         </>

@@ -1,11 +1,11 @@
-import React from 'react';
 import { Head, Link } from '@inertiajs/react';
+import React from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 export default function Onboarding() {
     return (
         <>
-            <Head title="Welcome to KOPERA-PLUS | Onboarding" />
+            <Head title="Selamat Datang di KOPERA-PLUS | Onboarding" />
 
             <div className="bg-background text-on-surface font-body-md min-h-screen flex flex-col justify-between antialiased">
                 {/* Top AppBar */}
@@ -16,10 +16,10 @@ export default function Onboarding() {
                         </Link>
                         <div className="flex gap-4">
                             <Link href="/login" className="px-5 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-all rounded-full">
-                                Login
+                                Masuk
                             </Link>
                             <button className="px-5 py-2 font-label-md text-label-md bg-primary text-on-primary hover:opacity-90 transition-all rounded-full">
-                                Contact Sales
+                                Hubungi Tim Sales
                             </button>
                         </div>
                     </div>
@@ -32,9 +32,9 @@ export default function Onboarding() {
                             <img alt="Advanced AI collaboration illustration" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxCbFB1zKuStylc_HZ90f4ndPfbjSXD7ESAmVkvS_8n_lxan3Fl-GEJ0CyoM-3oZ8xmpHkmXC3CdqTXO4LlSGqoE-FmDF5eoMVdJs6osyHDmQG5RVHh8sfiTDjqf22n1AOwz5N9dT77DBvSJaZjl8Z-VTNBCMfpyf5i-7rLVyu6wqROu05G_c7APA-WkXJuthr6RDZzp0k-_7nOoMnLUX4W7su0gX3fr2NQ8xn2PkX1Gym_aX953A65qZ925_oAgMdMNlCTZarguc" />
                             <div className="absolute inset-0 bg-gradient-to-t from-primary/25 to-transparent"></div>
                         </div>
-                        <h1 className="font-display-sm text-display-sm md:font-display-lg md:text-display-lg text-primary mb-4">Welcome to KOPERA AI 👋</h1>
+                        <h1 className="font-display-sm text-display-sm md:font-display-lg md:text-display-lg text-primary mb-4">Selamat Datang di KOPERA AI 👋</h1>
                         <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-                            Choose how you would like to start your journey. We will personalize your experience based on your selection.
+                            Pilih cara Anda memulai perjalanan. Kami akan mempersonalisasi pengalaman berdasarkan pilihan Anda.
                         </p>
                     </section>
 
@@ -45,7 +45,7 @@ export default function Onboarding() {
                             <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-primary">
                                 <span className="material-symbols-outlined text-3xl">potted_plant</span>
                             </div>
-                            <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Explore Cooperatives</h3>
+                            <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Jelajahi Koperasi</h3>
                             <p className="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
                                 Perfect for people who want to learn about cooperatives, discover local products, and browse active member catalogs.
                             </p>
@@ -64,8 +64,8 @@ export default function Onboarding() {
                                 </div>
                             </div>
                             <Link href="/explorer-dashboard" className="w-full py-4 bg-primary text-on-primary rounded-xl font-label-md text-label-md text-center hover:bg-primary/95 transition-colors block">
-                                Continue
-                            </Link>
+                                                            Lanjut
+                                                        </Link>
                         </div>
 
                         {/* Option 2: Member */}
@@ -154,9 +154,9 @@ export default function Onboarding() {
                             <div className="font-body-sm text-body-sm text-on-surface-variant">© 2024 KOPERA-PLUS. AI-Powered Cooperation.</div>
                         </div>
                         <div className="flex gap-8">
-                            <a className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity" href="#">Privacy Policy</a>
-                            <a className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity" href="#">Terms of Service</a>
-                            <a className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity" href="#">Security</a>
+                            <a className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity" href="#">Kebijakan Privasi</a>
+                            <a className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity" href="#">Syarat Layanan</a>
+                            <a className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-opacity" href="#">Keamanan</a>
                         </div>
                     </div>
                 </footer>

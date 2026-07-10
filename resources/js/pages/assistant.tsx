@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
-import { Search, ShoppingCart, Trash2, CheckCircle, Heart, Bell, Settings, Plus, Send, RefreshCw } from 'lucide-react';
+import { Search, ShoppingCart, Trash2, CheckCircle, Bell, Settings, Plus, Send } from 'lucide-react';
+import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 interface Message {
@@ -18,10 +18,10 @@ interface CartItem {
 
 export default function Assistant() {
     const [messages, setMessages] = useState<Message[]>([
-        { sender: 'user', text: "I'm looking for high-quality organic rice for my family." },
+        { sender: 'user', text: 'Saya mencari beras organik berkualitas tinggi untuk keluarga saya.' },
         { 
             sender: 'ai', 
-            text: "I've analyzed available stock across 3 nearby cooperatives. Based on your family size and previous health preferences, I recommend the Premium Mentik Susu from Koperasi Tani Sejahtera.",
+            text: 'Saya telah menganalisis stok yang tersedia di 3 koperasi terdekat. Berdasarkan ukuran keluarga dan preferensi kesehatan Anda sebelumnya, saya merekomendasikan Premium Mentik Susu dari Koperasi Tani Sejahtera.',
             showCard: true
         }
     ]);
@@ -44,7 +44,9 @@ export default function Assistant() {
     };
 
     const handleSend = (textToSend = input) => {
-        if (!textToSend.trim()) return;
+        if (!textToSend.trim()) {
+return;
+}
 
         // Add user message
         const newMsg: Message = { sender: 'user', text: textToSend };
@@ -60,23 +62,25 @@ export default function Assistant() {
                 text: `I've registered your request for "${textToSend}". I will query the catalog databases of local cooperatives for optimal pricing, eco-ratings, and shipping routes.`
             };
             setMessages(prev => [...prev, aiMsg]);
-            showToast("AI updated search findings!");
+            showToast('AI memperbarui hasil pencarian!');
         }, 1500);
     };
 
     const addToCart = (item: { name: string; price: number }) => {
         const existing = cart.find(c => c.name === item.name);
+
         if (existing) {
             setCart(prev => prev.map(c => c.name === item.name ? { ...c, qty: c.qty + 1 } : c));
         } else {
             setCart(prev => [...prev, { id: Date.now(), name: item.name, price: item.price, qty: 1 }]);
         }
-        showToast("Item added to cart! AI optimizing delivery route...");
+
+        showToast('Item ditambahkan ke keranjang! AI mengoptimalkan rute pengiriman...');
     };
 
     const removeFromCart = (id: number) => {
         setCart(prev => prev.filter(c => c.id !== id));
-        showToast("Item removed from cart.");
+        showToast('Item dihapus dari keranjang.');
     };
 
     const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
@@ -85,14 +89,14 @@ export default function Assistant() {
 
     return (
         <>
-            <Head title="AI Commerce Assistant | KOPERA-PLUS" />
+            <Head title="Asisten Komersial AI | KOPERA-PLUS" />
 
             <div className="flex bg-slate-50 font-sans antialiased text-[#0b1c30] h-screen overflow-hidden">
                 {/* Left Sidebar */}
                 <aside className="h-screen w-64 fixed left-0 top-0 flex flex-col bg-white border-r border-zinc-200/80 py-8 z-50">
                     <div className="px-6 mb-10 flex flex-col">
                         <span className="font-headline-md text-headline-md font-extrabold text-primary leading-none">KOPERA-PLUS</span>
-                        <span className="font-label-sm text-on-surface-variant opacity-70 text-xs mt-1">Premium AI Assistant</span>
+                        <span className="font-label-sm text-on-surface-variant opacity-70 text-xs mt-1">Asisten AI Premium</span>
                     </div>
                     <nav className="flex-1 px-3 space-y-1">
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-slate-100 transition-colors" href="/workspace">
@@ -101,23 +105,23 @@ export default function Assistant() {
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-slate-100 transition-colors" href="/workspace">
                             <span className="material-symbols-outlined">smart_toy</span>
-                            AI Assistant
+                            Asisten AI
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-primary font-bold bg-primary/10 border-r-4 border-primary" href="/assistant">
                             <span className="material-symbols-outlined active-pill" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_cart</span>
-                            AI Commerce
+                            Komersial AI
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-slate-100 transition-colors" href="/explorer-dashboard">
                             <span className="material-symbols-outlined">storefront</span>
-                            Marketplace
+                            Pasar
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-slate-100 transition-colors" href="/workspace">
                             <span className="material-symbols-outlined">redeem</span>
-                            Rewards
+                            Hadiah
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-slate-100 transition-colors" href="/workspace">
                             <span className="material-symbols-outlined">groups</span>
-                            Community
+                            Komunitas
                         </Link>
                         <Link className="flex items-center gap-3 px-4 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-slate-100 transition-colors" href="/workspace">
                             <span className="material-symbols-outlined">monitoring</span>
@@ -126,7 +130,7 @@ export default function Assistant() {
                     </nav>
                     <div className="px-4 mt-auto">
                         <button className="w-full ai-gradient-bg text-white font-label-md text-label-md py-3 rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform" onClick={() => showToast("Upgrade to Pro feature unlocked!")}>
-                            Upgrade to Pro
+                            Upgrade ke Pro
                         </button>
                     </div>
                 </aside>
@@ -138,13 +142,15 @@ export default function Assistant() {
                         <div className="flex items-center gap-6">
                             <div className="relative w-80">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 h-4 w-4" />
-                                <input className="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Search operations..." type="text"/>
+                                <input className="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Cari operasi..." type="text"/>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <button className="bg-primary text-white px-5 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all text-sm font-semibold" onClick={() => { setMessages([{ sender: 'ai', text: "New Shopping Session started. What are you looking to source?" }]); showToast("New session started."); }}>
+                            <button className="bg-primary text-white px-5 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all text-sm font-semibold" onClick={() => {
+ setMessages([{ sender: 'ai', text: 'Sesi belanja baru dimulai. Produk apa yang ingin Anda cari?' }]); showToast('Sesi baru dimulai.'); 
+}}>
                                 <Plus className="h-4 w-4" />
-                                New Session
+                                Sesi Baru
                             </button>
                             <div className="flex items-center gap-2">
                                 <button className="p-2 rounded-full hover:bg-slate-100 transition-colors"><Bell className="h-5 w-5 text-zinc-600" /></button>
@@ -163,9 +169,9 @@ export default function Assistant() {
                             {/* Chat Header */}
                             <div className="text-center space-y-2 border-b border-zinc-100 pb-4">
                                 <h1 className="font-display-sm text-2xl font-bold text-on-surface flex items-center justify-center gap-2">
-                                    AI Commerce Assistant <ShoppingCart className="h-6 w-6 text-primary" />
+                                    Asisten Komersial AI <ShoppingCart className="h-6 w-6 text-primary" />
                                 </h1>
-                                <p className="font-body-lg text-sm text-zinc-500">Tell AI what you need and we'll source it from trusted cooperatives.</p>
+                                <p className="font-body-lg text-sm text-zinc-500">Ceritakan kebutuhan Anda ke AI dan kami akan mencarikannya dari koperasi tepercaya.</p>
                             </div>
 
                             {/* Chat History */}
@@ -193,7 +199,7 @@ export default function Assistant() {
                                                         <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Mentik Susu grains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKqUnFQTbpl1Naff5rKVHJqk1vJ36qhSRN9XaBYGM6ywiLTvq45r8afpUX_J2seh9A_XQLua7SCX4_efCtzsPKxrKfAyAKrPKSy2OBVgSy5Yw2R-BrsRjjgZmVeG6LdstJPQD1AImumELFfjSAp3VfbpXZMvVnD6dN7TrcDvhwUmgUm0v6kI0-qx4UMyyzH-j3E4V_LvN-_MYmrpqjhx1wRHUEwSGIc20zznq7__D-UuOi4jirNarGjlsnEIFC_Q-Sf7hSyKMVPS0" />
                                                         <div className="absolute top-3 left-3 bg-[#006229] text-white text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider flex items-center gap-1">
                                                             <span className="material-symbols-outlined text-[12px]">verified</span>
-                                                            Verified Stock
+                                                            Stok Terverifikasi
                                                         </div>
                                                     </div>
                                                     <div className="md:col-span-3 p-6 flex flex-col justify-between">
@@ -201,21 +207,21 @@ export default function Assistant() {
                                                             <div className="flex justify-between items-start mb-2">
                                                                 <h3 className="font-headline-sm text-lg font-bold text-on-surface">Premium Mentik Susu (5kg)</h3>
                                                                 <span className="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                                                                    98% Match
+                                                                    Kecocokan 98%
                                                                 </span>
                                                             </div>
                                                             <div className="flex items-center gap-2 mb-4">
                                                                 <span className="text-[#006229] font-bold text-lg">Rp85.000</span>
-                                                                <span className="text-xs text-zinc-400">Cooperative Member Price</span>
+                                                                <span className="text-xs text-zinc-400">Harga Anggota Koperasi</span>
                                                             </div>
                                                             <div className="grid grid-cols-2 gap-2 text-xs text-zinc-500">
                                                                 <div className="flex items-center gap-1.5">
                                                                     <span className="material-symbols-outlined text-[16px]">inventory_2</span>
-                                                                    <span>42 bags left</span>
+                                                                    <span>Tersisa 42 karung</span>
                                                                 </div>
                                                                 <div className="flex items-center gap-1.5">
                                                                     <span className="material-symbols-outlined text-[16px]">near_me</span>
-                                                                    <span>2km distance</span>
+                                                                    <span>Jarak 2 km</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -224,7 +230,7 @@ export default function Assistant() {
                                                                 onClick={() => addToCart({ name: 'Premium Mentik Susu (5kg)', price: 85000 })}
                                                                 className="flex-1 bg-primary text-white py-2.5 rounded-xl font-label-md text-sm hover:shadow-lg transition-all active:scale-95 font-semibold"
                                                             >
-                                                                Add to Cart
+                                                                Tambah ke Keranjang
                                                             </button>
                                                         </div>
                                                     </div>
@@ -240,7 +246,7 @@ export default function Assistant() {
                                             AI
                                         </div>
                                         <div className="flex items-center gap-2 text-zinc-400 bg-slate-100 px-4 py-3.5 rounded-full rounded-tl-none w-fit">
-                                            <span className="text-xs">Optimizing cooperative stock database</span>
+                                            <span className="text-xs">Mengoptimalkan basis data stok koperasi</span>
                                             <div className="flex gap-1">
                                                 <div className="w-1.5 h-1.5 bg-primary rounded-full streaming-dot"></div>
                                                 <div className="w-1.5 h-1.5 bg-primary rounded-full streaming-dot"></div>
@@ -254,7 +260,7 @@ export default function Assistant() {
                             {/* Chat Input Field */}
                             <div className="space-y-4 border-t border-zinc-100 pt-4">
                                 <div className="flex items-center gap-2 overflow-x-auto pb-1 select-none">
-                                    {['Buy Organic Rice', 'Request Fertilizer', 'Best Deals Today', 'Local Farm Tools'].map((pill, pIdx) => (
+                                    {['Beli Beras Organik', 'Minta Pupuk', 'Promo Terbaik Hari Ini', 'Alat Tani Lokal'].map((pill, pIdx) => (
                                         <button 
                                             key={pIdx} 
                                             onClick={() => handleSend(pill)}
@@ -267,7 +273,7 @@ export default function Assistant() {
                                 <div className="glass-input rounded-2xl p-1.5 shadow-lg border border-zinc-200/60 flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white">
                                     <input 
                                         className="flex-grow bg-transparent border-none py-3 px-4 text-sm focus:ring-0 outline-none text-zinc-800" 
-                                        placeholder='Ask anything: "I need rice and organic fertilizers"' 
+                                        placeholder='Tanyakan apa pun: "Saya butuh beras dan pupuk organik"'
                                         type="text"
                                         value={input}
                                         onChange={e => setInput(e.target.value)}
@@ -289,8 +295,8 @@ export default function Assistant() {
                             <div className="bento-card p-6 bg-gradient-to-br from-purple-600 to-indigo-700 text-white shadow-xl">
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
-                                        <div className="text-xs opacity-80 mb-1 uppercase tracking-wider font-semibold">Member Level</div>
-                                        <div className="font-headline-sm font-bold text-lg">Gold Member</div>
+                                        <div className="text-xs opacity-80 mb-1 uppercase tracking-wider font-semibold">Level Anggota</div>
+                                        <div className="font-headline-sm text-lg font-bold">Anggota Gold</div>
                                     </div>
                                     <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
                                         <span className="material-symbols-outlined text-white">workspace_premium</span>
@@ -298,7 +304,7 @@ export default function Assistant() {
                                 </div>
                                 <div className="mb-4">
                                     <div className="text-3xl font-black">4,250</div>
-                                    <div className="text-xs opacity-80 mt-1">Available Points</div>
+                                    <div className="text-xs opacity-80 mt-1">Poin Tersedia</div>
                                 </div>
                                 <div className="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
                                     <div className="bg-white h-full" style={{ width: '75%' }}></div>
@@ -308,12 +314,12 @@ export default function Assistant() {
                             {/* Shopping Cart Summary */}
                             <div className="bento-card p-6 border border-zinc-100 shadow-sm">
                                 <h3 className="font-headline-sm text-base font-bold mb-4 flex items-center gap-2">
-                                    Current Cart <ShoppingCart className="h-4 w-4 text-zinc-500" />
+                                    Keranjang Saat Ini <ShoppingCart className="h-4 w-4 text-zinc-500" />
                                 </h3>
 
                                 {cart.length === 0 ? (
                                     <div className="py-8 text-center text-zinc-400 text-xs">
-                                        Your cart is empty. Add verified co-op items to start.
+                                        Keranjang Anda kosong. Tambahkan item koperasi terverifikasi untuk memulai.
                                     </div>
                                 ) : (
                                     <>
@@ -322,7 +328,7 @@ export default function Assistant() {
                                                 <div key={c.id} className="flex justify-between items-start text-xs border-b border-zinc-50 pb-2">
                                                     <div>
                                                         <span className="font-semibold text-zinc-800">{c.name}</span>
-                                                        <div className="text-[10px] text-zinc-400 mt-0.5">Qty: {c.qty} × Rp{(c.price).toLocaleString()}</div>
+                                                        <div className="text-[10px] text-zinc-400 mt-0.5">Jumlah: {c.qty} × Rp{(c.price).toLocaleString()}</div>
                                                     </div>
                                                     <div className="flex items-center gap-3">
                                                         <span className="font-bold text-zinc-700">Rp{(c.price * c.qty).toLocaleString()}</span>
@@ -339,7 +345,7 @@ export default function Assistant() {
                                                 <span>Rp{subtotal.toLocaleString()}</span>
                                             </div>
                                             <div className="flex justify-between text-[#006229] font-medium">
-                                                <span>Member Discount (10%)</span>
+                                                <span>Diskon Anggota (10%)</span>
                                                 <span>-Rp{discount.toLocaleString()}</span>
                                             </div>
                                             <div className="flex justify-between font-bold text-base mt-2 border-t border-dashed border-zinc-100 pt-2 text-zinc-900">
@@ -348,10 +354,12 @@ export default function Assistant() {
                                             </div>
                                         </div>
                                         <button 
-                                            onClick={() => { setCart([]); showToast("Checkout completed! AI dispatched same-day delivery."); }}
+                                            onClick={() => {
+ setCart([]); showToast('Checkout selesai! AI mengirimkan pengiriman di hari yang sama.'); 
+}}
                                             className="w-full mt-4 bg-primary text-white py-3 rounded-xl font-label-md text-sm font-semibold hover:bg-opacity-95 active:scale-95 transition-all text-center"
                                         >
-                                            Checkout
+                                            Bayar
                                         </button>
                                     </>
                                 )}
@@ -359,7 +367,7 @@ export default function Assistant() {
 
                             {/* Recent Purchases */}
                             <div className="bento-card p-6 border border-zinc-100 shadow-sm">
-                                <h3 className="font-headline-sm text-sm font-bold mb-4">Recent Cooperative Orders</h3>
+                                <h3 className="font-headline-sm text-sm font-bold mb-4">Pesanan Koperasi Terbaru</h3>
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-3 text-xs">
                                         <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-[#006229]">
