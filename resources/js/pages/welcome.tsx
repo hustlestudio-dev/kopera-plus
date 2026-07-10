@@ -188,7 +188,8 @@ export default function Welcome() {
                                         href="/login"
                                         className="hidden rounded-xl px-4 py-2 font-label-md text-label-md text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] transition-all duration-200 outline-none select-none hover:bg-white/10 hover:text-white focus:outline-none md:block"
                                         style={{
-                                            WebkitTapHighlightColor: 'transparent',
+                                            WebkitTapHighlightColor:
+                                                'transparent',
                                         }}
                                     >
                                         Masuk
@@ -199,7 +200,8 @@ export default function Welcome() {
                                         style={{
                                             background:
                                                 'linear-gradient(135deg, #7C3AED, #2563EB)',
-                                            WebkitTapHighlightColor: 'transparent',
+                                            WebkitTapHighlightColor:
+                                                'transparent',
                                         }}
                                     >
                                         Mulai Sekarang
@@ -865,7 +867,11 @@ export default function Welcome() {
                                 </p>
                                 <div className="flex flex-col justify-center gap-4 sm:flex-row">
                                     <Link
-                                        href={isAuthed ? dashboardUrl : '/register'}
+                                        href={
+                                            isAuthed
+                                                ? dashboardUrl
+                                                : '/register'
+                                        }
                                         prefetch={isAuthed}
                                         className="flex items-center justify-center gap-2 rounded-2xl bg-white px-10 py-4 font-headline-sm font-bold shadow-2xl transition-all hover:scale-[1.02] hover:shadow-white/30 active:scale-95"
                                         style={{ color: '#7C3AED' }}
@@ -873,7 +879,9 @@ export default function Welcome() {
                                         <span className="material-symbols-outlined text-[20px]">
                                             rocket_launch
                                         </span>
-                                        {isAuthed ? 'Dashboard' : 'Mulai Sekarang — Gratis'}
+                                        {isAuthed
+                                            ? 'Dashboard'
+                                            : 'Mulai Sekarang — Gratis'}
                                     </Link>
                                     {!isAuthed && (
                                         <Link
