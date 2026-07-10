@@ -26,4 +26,12 @@ yarn-error.log
 /.idea
 /.nova
 /.vscode
-/.zed
+.zed
+
+# Agent swarm coordination (multi-agent / sub-agent isolation)
+/.locks
+/.agent-board
+/.worktrees
+
+# Per-agent scratch artifacts (generated working files, not source)
+scratch_stitch/
