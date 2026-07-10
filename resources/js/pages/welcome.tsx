@@ -1,9 +1,60 @@
 import { Head, Link } from '@inertiajs/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 export default function Welcome() {
     const [activeSection, setActiveSection] = useState('home');
+    const [selectedDocImage, setSelectedDocImage] = useState<{
+        src: string;
+        alt: string;
+    } | null>(null);
+    const [statCarouselStart, setStatCarouselStart] = useState(0);
+    const [isStatSliding, setIsStatSliding] = useState(false);
+    const [statSlideDistance, setStatSlideDistance] = useState(0);
+    const statTrackRef = useRef<HTMLDivElement | null>(null);
+
+    const statCards = [
+        {
+            value: '80.000+',
+            label: 'Koperasi',
+            color: 'linear-gradient(135deg, #2563EB, #0ea5e9)',
+        },
+        {
+            value: '95%',
+            label: 'Kepuasan',
+            color: 'linear-gradient(135deg, #059669, #2563EB)',
+        },
+        {
+            value: '85%',
+            label: 'Partisipasi Aktif',
+            color: 'linear-gradient(135deg, #7C3AED, #d946ef)',
+        },
+    ];
+
+
+
+    const visibleStatCards = statCards.map((_, index) => {
+        const nextIndex = (statCarouselStart + index) % statCards.length;
+
+        return statCards[nextIndex];
+    });
+    const nextStatCard = statCards[(statCarouselStart + 3) % statCards.length];
+    const statCardsForSlide = [...visibleStatCards, nextStatCard];
+
+    const docActivityImages = [
+        {
+            src: '/rapat.webp',
+            alt: 'Rapat Anggota Tahunan di Balai Koperasi Desa',
+        },
+        {
+            src: '/pelatihan.webp',
+            alt: 'Pelatihan UMKM Anggota Koperasi',
+        },
+        {
+            src: '/transaksi.webp',
+            alt: 'Aktivitas Transaksi Digital Koperasi Merah Putih',
+        },
+    ];
 
     useEffect(() => {
         /* Intersection observer for reveal animations */
@@ -56,6 +107,74 @@ export default function Welcome() {
             window.removeEventListener('hashchange', updateActiveSection);
         };
     }, []);
+
+    useEffect(() => {
+        if (!selectedDocImage) {
+            return;
+        }
+
+        const closeOnEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setSelectedDocImage(null);
+            }
+        };
+
+        window.addEventListener('keydown', closeOnEscape);
+
+        return () => {
+            window.removeEventListener('keydown', closeOnEscape);
+        };
+    }, [selectedDocImage]);
+
+    useEffect(() => {
+        const updateSlideDistance = () => {
+            const trackElement = statTrackRef.current;
+
+            if (!trackElement || !trackElement.firstElementChild) {
+                return;
+            }
+
+            const firstCard = trackElement.firstElementChild as HTMLElement;
+            const trackStyle = window.getComputedStyle(trackElement);
+            const gapValue = Number.parseFloat(trackStyle.columnGap || '0');
+
+            setStatSlideDistance(firstCard.offsetWidth + gapValue);
+        };
+
+        updateSlideDistance();
+        window.addEventListener('resize', updateSlideDistance);
+
+        return () => {
+            window.removeEventListener('resize', updateSlideDistance);
+        };
+    }, []);
+
+    useEffect(() => {
+        const intervalId = window.setInterval(() => {
+            setIsStatSliding(true);
+        }, 2600);
+
+        return () => {
+            window.clearInterval(intervalId);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isStatSliding) {
+            return;
+        }
+
+        const timeoutId = window.setTimeout(() => {
+            setStatCarouselStart((currentIndex) => {
+                return (currentIndex + 1) % statCards.length;
+            });
+            setIsStatSliding(false);
+        }, 520);
+
+        return () => {
+            window.clearTimeout(timeoutId);
+        };
+    }, [isStatSliding, statCards.length]);
 
     return (
         <>
@@ -302,45 +421,82 @@ export default function Welcome() {
                 </section>
 
                 {/* ── STATS ────────────────────────────────────────────── */}
-                <section className="px-margin-mobile py-section-padding md:px-margin-desktop">
-                    <div className="mx-auto grid max-w-container-max grid-cols-1 gap-gutter md:grid-cols-3">
-                        {[
-                            {
-                                value: '80.000+',
-                                label: 'Koperasi',
-                                color: 'linear-gradient(135deg, #2563EB, #0ea5e9)',
-                            },
-                            {
-                                value: '95%',
-                                label: 'Kepuasan',
-                                color: 'linear-gradient(135deg, #059669, #2563EB)',
-                            },
-                            {
-                                value: '85%',
-                                label: 'Partisipasi Aktif',
-                                color: 'linear-gradient(135deg, #7C3AED, #d946ef)',
-                            },
-                        ].map((stat, i) => (
+                <section className="px-margin-mobile pt-4 pb-10 md:px-margin-desktop md:pt-5 md:pb-12">
+                    <div className="mx-auto max-w-container-max">
+                        <div className="w-full overflow-hidden">
                             <div
-                                key={stat.label}
-                                className={`reveal stat-card p-8 text-center delay-${i * 100}`}
+                                ref={statTrackRef}
+                                className="flex items-stretch gap-4"
+                                style={{
+                                    transform:
+                                        isStatSliding && statSlideDistance > 0
+                                            ? `translateX(-${statSlideDistance}px)`
+                                            : 'translateX(0px)',
+                                    transition: isStatSliding
+                                        ? 'transform 520ms ease'
+                                        : 'none',
+                                }}
                             >
-                                <h3
-                                    className="mb-2 font-display-lg text-display-lg"
-                                    style={{
-                                        background: stat.color,
-                                        WebkitBackgroundClip: 'text',
-                                        WebkitTextFillColor: 'transparent',
-                                        backgroundClip: 'text',
-                                    }}
-                                >
-                                    {stat.value}
-                                </h3>
-                                <p className="font-label-md text-on-surface-variant">
-                                    {stat.label}
-                                </p>
+                                {statCardsForSlide.map((stat, index) => (
+                                    <div
+                                        key={`stat-${stat.label}-${statCarouselStart}-${index}`}
+                                        className="stat-card w-[calc((100%-2rem)/3)] shrink-0 p-3 text-center md:p-4"
+                                    >
+                                        <h3
+                                            className="mb-1 font-display-lg text-3xl leading-none md:text-[40px]"
+                                            style={{
+                                                background: stat.color,
+                                                WebkitBackgroundClip: 'text',
+                                                WebkitTextFillColor:
+                                                    'transparent',
+                                                backgroundClip: 'text',
+                                            }}
+                                        >
+                                            {stat.value}
+                                        </h3>
+                                        <p className="font-label-md text-xs text-on-surface-variant md:text-sm">
+                                            {stat.label}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+
+                        <div className="reveal mt-8 md:mt-10">
+                            <div className="stat-card mx-auto w-full max-w-5xl p-5 md:p-7">
+                                <div className="mb-5 text-center">
+                                    <h3 className="font-headline-md text-headline-md text-on-surface">
+                                        Dokumentasi & Aktivitas Koperasi Desa /
+                                        Koperasi Merah Putih
+                                    </h3>
+
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
+                                    {docActivityImages.map((image) => (
+                                        <button
+                                            key={image.alt}
+                                            type="button"
+                                            onClick={() =>
+                                                setSelectedDocImage(image)
+                                            }
+                                            className="group relative w-full overflow-hidden rounded-2xl border border-outline-variant/25 bg-surface-container-lowest text-left"
+                                        >
+                                            <img
+                                                src={image.src}
+                                                alt={image.alt}
+                                                className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110 group-active:scale-105 md:h-56"
+                                            />
+                                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-900/65 via-zinc-900/35 to-transparent px-3 py-2.5">
+                                                <p className="text-xs font-semibold text-white md:text-sm">
+                                                    {image.alt}
+                                                </p>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -984,6 +1140,35 @@ export default function Welcome() {
                     </div>
                 </footer>
             </div>
+
+            {selectedDocImage ? (
+                <div
+                    className="fixed inset-0 z-[120] flex items-center justify-center bg-zinc-950/80 p-4 backdrop-blur-sm"
+                    onClick={() => setSelectedDocImage(null)}
+                >
+                    <button
+                        type="button"
+                        aria-label="Tutup zoom gambar"
+                        className="absolute top-5 right-5 rounded-full bg-white/15 p-2 text-white transition-colors hover:bg-white/30"
+                        onClick={() => setSelectedDocImage(null)}
+                    >
+                        <span className="material-symbols-outlined text-xl">
+                            close
+                        </span>
+                    </button>
+
+                    <div
+                        className="zoom-in-modal relative w-full max-w-5xl"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <img
+                            src={selectedDocImage.src}
+                            alt={selectedDocImage.alt}
+                            className="max-h-[85vh] w-full rounded-3xl object-contain"
+                        />
+                    </div>
+                </div>
+            ) : null}
 
             <PrototypeHud />
         </>
