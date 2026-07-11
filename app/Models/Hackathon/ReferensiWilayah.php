@@ -11,6 +11,8 @@ class ReferensiWilayah extends HackathonModel
 
     protected $primaryKey = 'kode_wilayah';
 
+    protected $keyType = 'string';
+
     protected function casts(): array
     {
         return [

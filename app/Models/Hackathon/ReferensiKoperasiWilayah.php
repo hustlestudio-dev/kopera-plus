@@ -13,6 +13,8 @@ class ReferensiKoperasiWilayah extends HackathonModel
 
     protected $primaryKey = 'koperasi_ref';
 
+    protected $keyType = 'string';
+
     protected function casts(): array
     {
         return [
