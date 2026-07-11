@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { Search, Brain, AlertCircle, Activity, ShieldCheck, HelpCircle, Bell, MessageSquare, ChevronRight } from 'lucide-react';
+import { Search, Brain, AlertCircle, Activity, ShieldCheck, HelpCircle, Bell, MessageSquare, ChevronRight, Sparkles } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
@@ -181,6 +181,10 @@ export default function AdminDashboard() {
                                     <button className="bg-primary text-white px-8 py-3 rounded-xl font-label-md text-xs font-bold hover:bg-opacity-95 transition-all" onClick={() => showToast("Showing priority recommendations...")}>
                                         Lihat Rekomendasi
                                     </button>
+                                    <a href="/assistant?mode=governance" className="bg-white/10 border border-white/20 px-8 py-3 rounded-xl font-label-md text-xs font-bold hover:bg-white/20 transition-all text-white inline-flex items-center gap-2">
+                                        <Sparkles className="h-3.5 w-3.5" />
+                                        AI Governance
+                                    </a>
                                     <button className="bg-white/10 border border-white/20 px-8 py-3 rounded-xl font-label-md text-xs font-bold hover:bg-white/20 transition-all text-white" onClick={() => showToast("Report compiled and downloaded.")}>
                                         Unduh Laporan
                                     </button>
@@ -252,6 +256,16 @@ export default function AdminDashboard() {
                                         <h3 className="font-headline-md text-lg font-bold">Rekomendasi Strategis AI</h3>
                                     </div>
                                     <span className="text-xs text-zinc-400 italic">Dibuat 14 menit lalu</span>
+                                </div>
+                                <div className="mb-6 flex flex-wrap gap-3">
+                                    <a href="/assistant?mode=cross_kopdes" className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:brightness-105 transition-all inline-flex items-center gap-2">
+                                        <Sparkles className="h-3.5 w-3.5" />
+                                        Cross-Kopdes AI
+                                    </a>
+                                    <a href="/assistant?mode=nudge" className="px-4 py-2 bg-white border border-zinc-200 text-zinc-700 text-xs font-bold rounded-xl hover:bg-slate-50 transition-all inline-flex items-center gap-2">
+                                        <Brain className="h-3.5 w-3.5 text-primary" />
+                                        Generate Nudge
+                                    </a>
                                 </div>
 
                                 <div className="space-y-6">

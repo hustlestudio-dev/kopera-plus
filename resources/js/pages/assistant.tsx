@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { Search, ShoppingCart, Trash2, CheckCircle, Bell, Settings, Plus, Send } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
 
 interface Message {
@@ -8,6 +8,17 @@ interface Message {
     text: string;
     showCard?: boolean;
 }
+
+type AssistantMode = 'assistant' | 'onboarding' | 'commerce' | 'rat_summary' | 'governance' | 'cross_kopdes' | 'nudge';
+const modeLabels: Array<{ mode: AssistantMode; label: string }> = [
+    { mode: 'commerce', label: 'Commerce' },
+    { mode: 'assistant', label: 'Member Assistant' },
+    { mode: 'onboarding', label: 'Onboarding' },
+    { mode: 'rat_summary', label: 'e-RAT' },
+    { mode: 'governance', label: 'Governance' },
+    { mode: 'cross_kopdes', label: 'Kopdes' },
+    { mode: 'nudge', label: 'Nudge' },
+];
 
 interface CartItem {
     id: number;
@@ -17,6 +28,15 @@ interface CartItem {
 }
 
 export default function Assistant() {
+    const cooperativeContext = {
+        cooperative_name: 'KOPERA-PLUS',
+        cooperative_location: 'Indonesia',
+        main_commodity: 'produk koperasi',
+        total_members: 4821,
+        total_points: 4250,
+        current_level: 'Gold',
+        user_name: 'Anggota',
+    };
     const [messages, setMessages] = useState<Message[]>([
         { sender: 'user', text: 'Saya mencari beras organik berkualitas tinggi untuk keluarga saya.' },
         { 
@@ -29,6 +49,18 @@ export default function Assistant() {
     const [isTyping, setIsTyping] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
+    const [isSending, setIsSending] = useState(false);
+    const [selectedMode, setSelectedMode] = useState<AssistantMode>('commerce');
+    const [debugInfo, setDebugInfo] = useState<string>('');
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get('mode') as AssistantMode | null;
+
+        if (mode && modeLabels.some(entry => entry.mode === mode)) {
+            setSelectedMode(mode);
+        }
+    }, []);
 
     const [cart, setCart] = useState<CartItem[]>([
         { id: 1, name: 'Organic Fertilizer (2L)', price: 120000, qty: 1 },
@@ -43,27 +75,116 @@ export default function Assistant() {
         }, 3000);
     };
 
-    const handleSend = (textToSend = input) => {
-        if (!textToSend.trim()) {
-return;
-}
+    const handleSend = async (textToSend = input, mode: AssistantMode = selectedMode) => {
+        if (!textToSend.trim() || isSending) {
+            return;
+        }
 
-        // Add user message
         const newMsg: Message = { sender: 'user', text: textToSend };
         setMessages(prev => [...prev, newMsg]);
         setInput('');
         setIsTyping(true);
+        setIsSending(true);
 
-        // Simulated AI response
-        setTimeout(() => {
-            setIsTyping(false);
-            const aiMsg: Message = {
+        try {
+            const response = await fetch('/assistant/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector<HTMLMetaElement>('meta[name="csrf-token"]')?.content ?? '',
+                },
+                body: JSON.stringify({
+                    mode,
+                    message: textToSend,
+                    stream: true,
+                    context: cooperativeContext,
+                }),
+            });
+
+            if (!response.body) {
+                throw new Error('Streaming body unavailable');
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let assistantText = '';
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) {
+                    break;
+                }
+
+                buffer += decoder.decode(value, { stream: true });
+
+                while (buffer.includes('\n\n')) {
+                    const separatorIndex = buffer.indexOf('\n\n');
+                    const block = buffer.slice(0, separatorIndex);
+                    buffer = buffer.slice(separatorIndex + 2);
+
+                    const eventLine = block.split('\n').find(line => line.startsWith('event:'));
+                    const dataLine = block.split('\n').find(line => line.startsWith('data:'));
+
+                    if (!dataLine) {
+                        continue;
+                    }
+
+                    const eventName = eventLine?.replace('event:', '').trim();
+                    const payload = JSON.parse(dataLine.replace('data:', '').trim()) as { chunk?: string; content?: string; provider?: string };
+
+                    if (eventName === 'message') {
+                        assistantText = payload.chunk ?? assistantText;
+                        setMessages(prev => {
+                            const next = [...prev];
+                            const lastIndex = next.length - 1;
+                            const last = next[lastIndex];
+
+                            if (last?.sender === 'ai') {
+                                next[lastIndex] = { sender: 'ai', text: assistantText };
+                            } else {
+                                next.push({ sender: 'ai', text: assistantText });
+                            }
+
+                            return next;
+                        });
+                    }
+
+                    if (eventName === 'done') {
+                        showToast(payload.provider === 'fallback' ? 'Mode fallback aktif.' : 'AI berhasil merespons.');
+                    }
+                }
+            }
+        } catch {
+            setMessages(prev => [...prev, {
                 sender: 'ai',
-                text: `I've registered your request for "${textToSend}". I will query the catalog databases of local cooperatives for optimal pricing, eco-ratings, and shipping routes.`
-            };
-            setMessages(prev => [...prev, aiMsg]);
-            showToast('AI memperbarui hasil pencarian!');
-        }, 1500);
+                text: 'Terjadi gangguan saat memanggil AI. Coba lagi sebentar.',
+            }]);
+            showToast('Gagal memanggil AI.');
+        } finally {
+            setIsTyping(false);
+            setIsSending(false);
+        }
+    };
+
+    const handleDebug = async () => {
+        const response = await fetch(`/assistant/debug?provider=gemini&mode=${selectedMode}`, {
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        });
+
+        const data = await response.json() as {
+            provider: string;
+            state: { configured_key_count: number; key_rotation_enabled: boolean };
+            mode: string;
+        };
+
+        setDebugInfo(`${data.provider} | keys: ${data.state.configured_key_count} | rotation: ${data.state.key_rotation_enabled ? 'on' : 'off'} | mode: ${data.mode}`);
+        showToast('Debug AI dimuat.');
     };
 
     const addToCart = (item: { name: string; price: number }) => {
@@ -146,6 +267,9 @@ return;
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
+                            <button className="bg-white border border-zinc-200 text-zinc-700 px-5 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-slate-50 active:scale-95 transition-all text-sm font-semibold" onClick={handleDebug}>
+                                Debug AI
+                            </button>
                             <button className="bg-primary text-white px-5 py-2 rounded-full font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all text-sm font-semibold" onClick={() => {
  setMessages([{ sender: 'ai', text: 'Sesi belanja baru dimulai. Produk apa yang ingin Anda cari?' }]); showToast('Sesi baru dimulai.'); 
 }}>
@@ -258,30 +382,36 @@ return;
                             </div>
 
                             {/* Chat Input Field */}
-                            <div className="space-y-4 border-t border-zinc-100 pt-4">
-                                <div className="flex items-center gap-2 overflow-x-auto pb-1 select-none">
-                                    {['Beli Beras Organik', 'Minta Pupuk', 'Promo Terbaik Hari Ini', 'Alat Tani Lokal'].map((pill, pIdx) => (
-                                        <button 
-                                            key={pIdx} 
-                                            onClick={() => handleSend(pill)}
-                                            className="px-4 py-1.5 rounded-full border border-zinc-200 hover:bg-slate-50 text-xs text-zinc-600 transition-colors whitespace-nowrap"
-                                        >
-                                            {pill}
-                                        </button>
-                                    ))}
-                                </div>
-                                <div className="glass-input rounded-2xl p-1.5 shadow-lg border border-zinc-200/60 flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white">
-                                    <input 
-                                        className="flex-grow bg-transparent border-none py-3 px-4 text-sm focus:ring-0 outline-none text-zinc-800" 
-                                        placeholder='Tanyakan apa pun: "Saya butuh beras dan pupuk organik"'
-                                        type="text"
-                                        value={input}
-                                        onChange={e => setInput(e.target.value)}
+                    <div className="space-y-4 border-t border-zinc-100 pt-4">
+                        {debugInfo ? (
+                            <div className="text-[10px] text-zinc-500 bg-slate-50 border border-zinc-200 rounded-xl px-3 py-2">
+                                {debugInfo}
+                            </div>
+                        ) : null}
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1 select-none">
+                                {modeLabels.map((pill) => (
+                                    <button 
+                                        key={pill.mode} 
+                                        onClick={() => setSelectedMode(pill.mode)}
+                                        className={`px-4 py-1.5 rounded-full border text-xs transition-colors whitespace-nowrap ${selectedMode === pill.mode ? 'border-primary text-primary bg-primary/5' : 'border-zinc-200 hover:bg-slate-50 text-zinc-600'}`}
+                                    >
+                                        {pill.label}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="glass-input rounded-2xl p-1.5 shadow-lg border border-zinc-200/60 flex items-center gap-3 focus-within:ring-2 focus-within:ring-primary/20 transition-all bg-white">
+                                <input 
+                                    className="flex-grow bg-transparent border-none py-3 px-4 text-sm focus:ring-0 outline-none text-zinc-800" 
+                                    placeholder={`Mode ${selectedMode}: "Saya butuh beras dan pupuk organik"`}
+                                    type="text"
+                                    value={input}
+                                    onChange={e => setInput(e.target.value)}
                                         onKeyDown={e => e.key === 'Enter' && handleSend()}
                                     />
                                     <button 
                                         onClick={() => handleSend()}
                                         className="ai-gradient-bg w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md active:scale-95 transition-transform"
+                                        disabled={isSending}
                                     >
                                         <Send className="h-5 w-5" />
                                     </button>

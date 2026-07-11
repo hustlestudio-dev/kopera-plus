@@ -9,7 +9,18 @@ interface Message {
     showCard?: boolean;
 }
 
+type WorkspaceMode = 'assistant' | 'onboarding' | 'commerce' | 'rat_summary' | 'governance' | 'cross_kopdes' | 'nudge';
+
 export default function Workspace() {
+    const cooperativeContext = {
+        cooperative_name: 'KOPERA-PLUS',
+        cooperative_location: 'Indonesia',
+        main_commodity: 'produk koperasi',
+        total_members: 4821,
+        total_points: 4250,
+        current_level: 'Gold',
+        user_name: 'Anggota',
+    };
     const [messages, setMessages] = useState<Message[]>([
         { sender: 'user', text: 'Saya ingin membeli Beras Premium.' },
         { 
@@ -22,6 +33,7 @@ export default function Workspace() {
     const [isTyping, setIsTyping] = useState(false);
     const [toastVisible, setToastVisible] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    const [selectedMode, setSelectedMode] = useState<WorkspaceMode>('assistant');
 
     const showToast = (msg: string) => {
         setToastMessage(msg);
@@ -29,23 +41,92 @@ export default function Workspace() {
         setTimeout(() => setToastVisible(false), 3000);
     };
 
-    const handleSend = (textToSend = input) => {
+    const handleSend = async (textToSend = input, mode: WorkspaceMode = selectedMode) => {
         if (!textToSend.trim()) {
-return;
-}
+            return;
+        }
 
         setMessages(prev => [...prev, { sender: 'user', text: textToSend }]);
         setInput('');
         setIsTyping(true);
 
-        setTimeout(() => {
-            setIsTyping(false);
+        try {
+            const response = await fetch('/assistant/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector<HTMLMetaElement>('meta[name="csrf-token"]')?.content ?? '',
+                },
+                body: JSON.stringify({
+                    mode,
+                    message: textToSend,
+                    stream: true,
+                    context: cooperativeContext,
+                }),
+            });
+
+            if (!response.body) {
+                throw new Error('Streaming body unavailable');
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let assistantText = '';
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) {
+                    break;
+                }
+
+                buffer += decoder.decode(value, { stream: true });
+
+                while (buffer.includes('\n\n')) {
+                    const separatorIndex = buffer.indexOf('\n\n');
+                    const block = buffer.slice(0, separatorIndex);
+                    buffer = buffer.slice(separatorIndex + 2);
+
+                    const eventLine = block.split('\n').find(line => line.startsWith('event:'));
+                    const dataLine = block.split('\n').find(line => line.startsWith('data:'));
+
+                    if (!dataLine) {
+                        continue;
+                    }
+
+                    const eventName = eventLine?.replace('event:', '').trim();
+                    const payload = JSON.parse(dataLine.replace('data:', '').trim()) as { chunk?: string; provider?: string };
+
+                    if (eventName === 'message') {
+                        assistantText = payload.chunk ?? assistantText;
+                        setMessages(prev => {
+                            const next = [...prev];
+                            const lastIndex = next.length - 1;
+                            if (next[lastIndex]?.sender === 'ai') {
+                                next[lastIndex] = { sender: 'ai', text: assistantText };
+                            } else {
+                                next.push({ sender: 'ai', text: assistantText });
+                            }
+                            return next;
+                        });
+                    }
+
+                    if (eventName === 'done') {
+                        showToast(payload.provider === 'fallback' ? 'Mode fallback aktif.' : 'AI menganalisis pesan');
+                    }
+                }
+            }
+        } catch {
             setMessages(prev => [...prev, {
                 sender: 'ai',
-                text: `Saya telah menganalisis pertanyaan Anda "${textToSend}". Saya akan mengambil inventaris terkini dan memeriksa basis data manfaat koperasi.`
+                text: 'Terjadi gangguan saat memanggil AI. Coba lagi sebentar.'
             }]);
-            showToast('AI menganalisis pesan');
-        }, 1500);
+            showToast('Gagal memanggil AI.');
+        } finally {
+            setIsTyping(false);
+        }
     };
 
     return (
@@ -225,13 +306,18 @@ return;
                         <div className="max-w-3xl mx-auto">
                             {/* Option Chips */}
                             <div className="flex gap-2 overflow-x-auto pb-2 mb-3 scrollbar-none select-none">
-                                {['Beli Produk', 'Cek SHU', 'Hadiah', 'Pelatihan'].map((chip, cIdx) => (
+                                {[
+                                    { label: 'Beli Produk', mode: 'commerce' as WorkspaceMode },
+                                    { label: 'Cek SHU', mode: 'assistant' as WorkspaceMode },
+                                    { label: 'Hadiah', mode: 'assistant' as WorkspaceMode },
+                                    { label: 'Pelatihan', mode: 'onboarding' as WorkspaceMode },
+                                ].map((chip, cIdx) => (
                                     <button 
                                         key={cIdx} 
-                                        onClick={() => handleSend(chip)}
+                                        onClick={() => handleSend(chip.label, chip.mode)}
                                         className="px-4 py-2 bg-white border border-zinc-200 rounded-xl text-[10px] text-zinc-600 hover:border-primary hover:text-primary transition-all font-semibold whitespace-nowrap shadow-sm"
                                     >
-                                        {chip}
+                                        {chip.label}
                                     </button>
                                 ))}
                             </div>
@@ -243,7 +329,7 @@ return;
                                 </button>
                                 <input 
                                     className="flex-grow bg-transparent border-none text-xs py-3.5 focus:ring-0 outline-none text-zinc-850 placeholder:text-zinc-450 font-medium" 
-                                    placeholder="Tanyakan apa pun tentang koperasi Anda..."
+                                    placeholder={`Mode ${selectedMode}: Tanyakan apa pun tentang koperasi Anda...`}
                                     type="text"
                                     value={input}
                                     onChange={e => setInput(e.target.value)}

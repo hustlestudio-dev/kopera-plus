@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ai\AssistantMessageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Middleware\EnsureTeamMembership;
@@ -14,6 +15,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('/assistant', 'assistant')->name('assistant');
     Route::inertia('/admin-dashboard', 'admin-dashboard')->name('admin-dashboard');
     Route::inertia('/explorer-dashboard', 'explorer-dashboard')->name('explorer-dashboard');
+    Route::post('/assistant/messages', [AssistantMessageController::class, 'store'])->name('assistant.messages.store');
+    Route::get('/assistant/debug', [AssistantMessageController::class, 'debug'])->name('assistant.messages.debug');
 });
 
 Route::redirect('/demo/auth', '/login', 301);

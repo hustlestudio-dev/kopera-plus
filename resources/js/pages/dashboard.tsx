@@ -268,9 +268,12 @@ return;
 
                                     {/* Quick action buttons row */}
                                     <div className="flex flex-wrap gap-2.5">
-                                        <button className="px-4 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-1.5" onClick={() => showToast("Searching cooperatives...")}>
+                                    <button className="px-4 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-1.5" onClick={() => showToast("Searching cooperatives...")}>
                                             <Compass className="h-3.5 w-3.5 text-primary" /> Find Cooperative
                                         </button>
+                                        <Link href="/onboarding" className="px-4 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-1.5">
+                                            <Sparkles className="h-3.5 w-3.5 text-primary" /> Onboarding
+                                        </Link>
                                         <button className="px-4 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-1.5" onClick={() => setCurrentTab('assistant')}>
                                             <span className="material-symbols-outlined text-[16px] text-primary">shopping_bag</span> Buy Product
                                         </button>
@@ -280,6 +283,9 @@ return;
                                         <button className="px-5 py-2.5 bg-primary text-white rounded-xl text-xs font-bold hover:opacity-95 shadow-lg shadow-primary/20 active:scale-95 transition-all flex items-center gap-1.5" onClick={() => setCurrentTab('rat')}>
                                             <Sparkles className="h-3.5 w-3.5 text-white" /> Join Digital RAT
                                         </button>
+                                        <Link href="/assistant?mode=rat_summary" className="px-4 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-1.5">
+                                            <Brain className="h-3.5 w-3.5 text-primary" /> AI RAT Summary
+                                        </Link>
                                     </div>
 
                                     {/* AI Assistant Preview Card */}
@@ -300,6 +306,9 @@ return;
                                             </div>
                                         </div>
                                         <div className="flex justify-end gap-3 pt-4 border-t border-zinc-100">
+                                            <Link href="/assistant?mode=assistant" className="px-4 py-2.5 bg-white border border-zinc-200 text-zinc-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition-all flex items-center gap-1">
+                                                Open AI Assistant
+                                            </Link>
                                             <button onClick={() => setCurrentTab('rewards')} className="px-4 py-2.5 bg-primary text-white rounded-xl text-xs font-bold hover:brightness-105 active:scale-95 transition-all">
                                                 Yes, please show me the available rewards.
                                             </button>
