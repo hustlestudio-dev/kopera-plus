@@ -84,7 +84,7 @@ berkasnya harus ditangani sebelum submission:
 1. Terjemahkan seluruh teks di atas ke Bahasa Indonesia (lihat daftar per berkas).
 2. Hapus atau feature-flag `PrototypeHud.tsx`.
 3. Tambahkan gerbang pra-commit untuk mencegah regresi:
-   `npx impeccable detect` (rujukan: `todolist.md` milestone **M14** — Lokalisasi
+   `bun run impeccable` (rujukan: `todolist.md` milestone **M14** — Lokalisasi
    100% Bahasa Indonesia).
 4. Jalankan kembali perintah `grep` verifikasi di atas; pastikan tidak ada lagi
    teks Inggris yang terlihat pengguna.

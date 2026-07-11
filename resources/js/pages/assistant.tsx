@@ -182,7 +182,6 @@ export default function Assistant() {
                             Digital RAT
                         </Link>
                     </nav>
-                    
                 </aside>
 
                 {/* Main Content Area */}

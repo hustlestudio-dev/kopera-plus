@@ -35,7 +35,11 @@ export function NavMain({ groups = [] }: { groups: NavGroup[] }) {
                                     isActive={isCurrentOrParentUrl(item.href)}
                                     tooltip={{ children: item.title }}
                                 >
-                                    <Link href={item.href} prefetch onClick={closeMobileSidebar}>
+                                    <Link
+                                        href={item.href}
+                                        prefetch
+                                        onClick={closeMobileSidebar}
+                                    >
                                         {item.icon && <item.icon />}
                                         <span>{item.title}</span>
                                     </Link>

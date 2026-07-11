@@ -24,7 +24,7 @@ Tujuan: membuat berkoperasi lebih mudah, transparan, dan menarik melalui AI Memb
 ## Requirement
 
 - PHP >= 8.3, Composer
-- Node >= 20, npm
+- Node >= 20, bun
 - PostgreSQL >= 14 (atau SQLite untuk dev cepat)
 - Akses ke `docs/backup-hackathon_*.sql` (data referensi SIMKOPDES)
 
@@ -35,7 +35,7 @@ Tujuan: membuat berkoperasi lebih mudah, transparan, dan menarik melalui AI Memb
 ```sh
 # 1. Dependensi
 composer install
-npm install
+bun install
 
 # 2. Environment
 cp .env.example .env          # sesuaikan DB_*
@@ -53,8 +53,8 @@ php artisan key:generate
 php artisan migrate --seed
 
 # 5. Frontend
-npm run dev                   # Vite dev (SSR otomatis via @inertiajs/vite)
-# atau build: npm run build
+bun run dev                   # Vite dev (SSR otomatis via @inertiajs/vite)
+# atau build: bun run build
 ```
 
 Buka URL yang ditampilkan Vite/Artisan. Tidak ada langkah deploy — aplikasi sudah live di hosting mandiri + PostgreSQL.

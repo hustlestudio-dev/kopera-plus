@@ -137,7 +137,9 @@ export default function ExplorerDashboard() {
                             {
                                 href: '/explorer-dashboard',
                                 label: 'Dashboard',
-                                icon: <LayoutDashboard className="h-4 w-4 text-primary" />,
+                                icon: (
+                                    <LayoutDashboard className="h-4 w-4 text-primary" />
+                                ),
                                 active: true,
                             },
                             {
@@ -152,7 +154,9 @@ export default function ExplorerDashboard() {
                             {
                                 href: '/assistant',
                                 label: 'Marketplace',
-                                icon: <Store className="h-4 w-4 text-zinc-400" />,
+                                icon: (
+                                    <Store className="h-4 w-4 text-zinc-400" />
+                                ),
                             },
                         ]
                             .filter((item) => canAccess(item.href))
@@ -459,15 +463,17 @@ export default function ExplorerDashboard() {
                                                     >
                                                         Buy
                                                     </button>
-                                                {canAccess('/assistant') && (
-                                                    <Link
-                                                        href="/assistant"
-                                                        className="rounded-lg border border-blue-500/30 p-1.5 text-blue-600 transition-colors hover:bg-blue-50/50"
-                                                        title="Ask AI about this product"
-                                                    >
-                                                        <Brain className="h-3.5 w-3.5" />
-                                                    </Link>
-                                                )}
+                                                    {canAccess(
+                                                        '/assistant',
+                                                    ) && (
+                                                        <Link
+                                                            href="/assistant"
+                                                            className="rounded-lg border border-blue-500/30 p-1.5 text-blue-600 transition-colors hover:bg-blue-50/50"
+                                                            title="Ask AI about this product"
+                                                        >
+                                                            <Brain className="h-3.5 w-3.5" />
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>

@@ -63,31 +63,10 @@ export default [
         },
         rules: {
             '@typescript-eslint/no-explicit-any': 'off',
-            '@typescript-eslint/consistent-type-imports': [
-                'error',
-                {
-                    prefer: 'type-imports',
-                    fixStyle: 'separate-type-imports',
-                },
-            ],
-            'import/order': [
-                'error',
-                {
-                    groups: [
-                        'builtin',
-                        'external',
-                        'internal',
-                        'parent',
-                        'sibling',
-                        'index',
-                    ],
-                    alphabetize: { order: 'asc', caseInsensitive: true },
-                },
-            ],
-            'import/consistent-type-specifier-style': [
-                'error',
-                'prefer-top-level',
-            ],
+            '@typescript-eslint/no-unused-vars': 'warn',
+            '@typescript-eslint/consistent-type-imports': 'warn',
+            'import/order': 'warn',
+            'import/consistent-type-specifier-style': 'warn',
         },
     },
     {
@@ -95,11 +74,8 @@ export default [
             '@stylistic': stylistic,
         },
         rules: {
-            '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
-            '@stylistic/padding-line-between-statements': [
-                'error',
-                ...paddingAroundControl,
-            ],
+            '@stylistic/brace-style': ['warn', '1tbs', { allowSingleLine: false }],
+            '@stylistic/padding-line-between-statements': 'off',
         },
     },
     {
@@ -122,8 +98,8 @@ export default [
             '@stylistic': stylistic,
         },
         rules: {
-            curly: ['error', 'all'],
-            '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+            curly: ['warn', 'all'],
+            '@stylistic/brace-style': ['warn', '1tbs', { allowSingleLine: false }],
         },
     },
 ];

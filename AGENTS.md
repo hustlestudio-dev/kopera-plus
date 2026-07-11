@@ -52,7 +52,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 ## Frontend Bundling
 
-- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
+- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `bun run build`, `bun run dev`, or `composer run dev`. Ask them.
 
 ## Documentation Files
 
@@ -175,7 +175,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 ## Vite Error
 
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `bun run build` or ask the user to run `bun run dev` or `composer run dev`.
 
 === wayfinder/core rules ===
 
@@ -266,7 +266,7 @@ SLOWER, not faster. One brain plans; many hands execute.
 2. ONE orchestrator by default. Delegate via sub-agents / parallel runs, not by cloning the planner.
 3. One (sub-)agent = one git worktree = one branch. Never two on the same worktree or branch.
 4. Claim file ownership before editing. No agent edits a file it did not claim.
-5. Serialize ONLY shared, order-sensitive resources (composer.lock, package-lock.json, database/migrations, `pint --dirty`, artisan caches, `.env`). Everything else runs free in parallel.
+5. Serialize ONLY shared, order-sensitive resources (composer.lock, bun.lockb, database/migrations, `pint --dirty`, artisan caches, `.env`). Everything else runs free in parallel.
 6. Never `git stash` / `git checkout --` / `git reset` / `git revert` another agent's work. Recover by rebase + merge.
 7. Commit atomically and often ON YOUR OWN BRANCH. Integration is a separate, serialized step.
 8. On collision: pause, lock, reconcile, continue. Never abandon the flow.
@@ -280,7 +280,7 @@ SLOWER, not faster. One brain plans; many hands execute.
 | 3 | Stash clobber (reported) | A commits; B runs `git stash` assuming WIP, hiding/A's work under B | Never stash others; if you must, label + log in board |
 | 4 | Rebase race | A rebases branch; B merges same base -> duplicate/conflicting commits | Rebase only inside your worktree after `git fetch` |
 | 5 | Migration order clash | Both `make:migration`; same timestamp bucket or both alter same table -> `migrate` fails / data loss | Serialized migration lock; one agent owns `database/migrations` |
-| 6 | Lock-file race | Both `composer require` / `npm i`; lock overwritten -> dependency drift, install fails | Serialized `composer.lock` / `package-lock.json` lock |
+| 6 | Lock-file race | Both `composer require` / `bun add`; lock overwritten -> dependency drift, install fails | Serialized `composer.lock` / `bun.lockb` lock |
 | 7 | Pint churn | Both `pint` over overlapping set, re-stage each other's formatting | Serialized `pint --dirty` lock; only format your claimed files |
 | 8 | Artisan cache race | A `config:cache`; B `config:clear` mid-run -> app breaks for B | Serialized cache commands; prefer per-worktree cache |
 | 9 | Shared DB state | A seeds/migrates/truncates; B's tests assert on that data -> flaky failures | Per-agent test DB (`DB_DATABASE=kopera_<agent>`) |
@@ -289,7 +289,7 @@ SLOWER, not faster. One brain plans; many hands execute.
 | 12 | New-file name clash | Both `make:model`/`make:test` same name -> create conflict/overwrite | Claim names up front; namespace by agent |
 | 13 | Autoload race | Both `composer dump-autoload` while files added -> missing class | Serialized after adding classes |
 | 14 | Scratch artifact clash | Agents write `scratch_stitch/*.html` same name -> overwrite | Per-agent scratch dir (`scratch_stitch/<agent>/`) |
-| 15 | Port/PID clash | Both `npm run dev` / `artisan serve` same port -> bind fail | Per-worktree port or stop shared dev server |
+| 15 | Port/PID clash | Both `bun run dev` / `artisan serve` same port -> bind fail | Per-worktree port or stop shared dev server |
 | 16 | Git index lock | Two git processes write `.git/index.lock` -> "Unable to create .git/index.lock" | One git op at a time; use worktrees so index is separate |
 | 17 | AI rollback loop | Agent sees a diff it didn't make, assumes error, reverts it (the "reverse" observed) | Treat unknown diffs as another agent's WIP, NOT an error |
 | 18 | Coverage/test cache clash | Parallel `phpunit` writing same coverage/build dir | Per-agent `--coverage-...`/build path or `--filter` only owned tests |
@@ -331,7 +331,7 @@ lock() {            # usage: lock <name> <command...>
 lock composer.lock composer require spatie/once
 lock migrations    bash -c 'php artisan migrate --force'
 lock pint          vendor/bin/pint --dirty --format agent
-lock lockfiles     bash -c 'git add composer.lock package-lock.json && git commit -m "deps: lockfiles"'
+lock lockfiles     bash -c 'git add composer.lock bun.lockb && git commit -m "deps: lockfiles"'
 ```
 The agent WAITs (sleep + retry), runs the command, releases the lock, and
 continues its flow. `.locks/` must be git-ignored.
@@ -362,7 +362,7 @@ on its own branch until the integrator pulls it in, in a chosen order.
 Responsibilities:
 - Decide merge ORDER to minimize conflicts. Rule of thumb:
   1. Order-sensitive first: migrations / schema, then `composer.lock` &
-     `package-lock.json` (lockfiles), then shared config, then features.
+     `bun.lockb` (lockfiles), then shared config, then features.
   2. Leaf branches (disjoint file globs) can be merged in any order; merges
      are still done one-at-a-time to avoid index races.
   3. If two pending branches touch overlapping files, merge the smaller /

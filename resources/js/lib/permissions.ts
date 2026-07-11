@@ -35,7 +35,10 @@ export const ROUTE_ROLES: Record<string, RoleSlug[]> = {
  * from a user's roles so the welcome / landing screen cannot drift from the
  * server's post-login routing. Keep in sync with that enum.
  */
-export function roleHomePath(roles: string[], teamSlug?: string | null): string {
+export function roleHomePath(
+    roles: string[],
+    teamSlug?: string | null,
+): string {
     if (roles.includes(ROLE.ADMIN)) {
         return '/admin-dashboard';
     }
@@ -84,5 +87,12 @@ export function usePermissions() {
         return hasAnyRole(needed);
     };
 
-    return { roles, permissions, hasRole, hasAnyRole, hasPermission, canAccess };
+    return {
+        roles,
+        permissions,
+        hasRole,
+        hasAnyRole,
+        hasPermission,
+        canAccess,
+    };
 }

@@ -54,7 +54,7 @@ interface AdminDashboardProps {
     ratParticipation?: RatParticipationItem[];
 }
 
-export default function AdminDashboard({ kpis = null, ratParticipation = [] }: AdminDashboardProps) {
+export default function AdminDashboard({ kpis = null }: AdminDashboardProps) {
     const [toastVisible, setToastVisible] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
 
@@ -75,14 +75,62 @@ export default function AdminDashboard({ kpis = null, ratParticipation = [] }: A
         new Intl.NumberFormat('id-ID').format(value);
 
     const kpiCards: KPIItem[] = [
-        { label: 'Total Koperasi', value: formatNumber(kpis?.total_koperasi ?? 0), change: '', positive: true, data: [] },
-        { label: 'Total Anggota', value: formatNumber(kpis?.total_anggota ?? 0), change: '', positive: true, data: [] },
-        { label: 'Total Simpanan', value: formatRupiah(kpis?.total_simpanan ?? 0), change: '', positive: true, data: [] },
-        { label: 'Total Pendapatan', value: formatRupiah(kpis?.total_pendapatan ?? 0), change: '', positive: true, data: [] },
-        { label: 'Total Produk', value: formatNumber(kpis?.total_produk ?? 0), change: '', positive: true, data: [] },
-        { label: 'Total Gerai', value: formatNumber(kpis?.total_gerai ?? 0), change: '', positive: true, data: [] },
-        { label: 'Total RAT', value: formatNumber(kpis?.total_rat ?? 0), change: '', positive: true, data: [] },
-        { label: 'Tahun Buku RAT Terbaru', value: String(kpis?.latest_rat_tahun_buku ?? '-'), change: '', positive: true, data: [] },
+        {
+            label: 'Total Koperasi',
+            value: formatNumber(kpis?.total_koperasi ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Total Anggota',
+            value: formatNumber(kpis?.total_anggota ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Total Simpanan',
+            value: formatRupiah(kpis?.total_simpanan ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Total Pendapatan',
+            value: formatRupiah(kpis?.total_pendapatan ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Total Produk',
+            value: formatNumber(kpis?.total_produk ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Total Gerai',
+            value: formatNumber(kpis?.total_gerai ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Total RAT',
+            value: formatNumber(kpis?.total_rat ?? 0),
+            change: '',
+            positive: true,
+            data: [],
+        },
+        {
+            label: 'Tahun Buku RAT Terbaru',
+            value: String(kpis?.latest_rat_tahun_buku ?? '-'),
+            change: '',
+            positive: true,
+            data: [],
+        },
     ];
 
     const recommendations: RecItem[] = [
@@ -472,7 +520,7 @@ export default function AdminDashboard({ kpis = null, ratParticipation = [] }: A
                                                         <span
                                                             className={`rounded px-2 py-0.5 text-[9px] font-extrabold uppercase ${
                                                                 rec.type ===
-                                                                'Critical'
+                                                                'Kritis'
                                                                     ? 'bg-red-100 text-red-700'
                                                                     : 'bg-blue-100 text-blue-700'
                                                             }`}

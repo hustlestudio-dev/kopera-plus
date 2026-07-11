@@ -40,14 +40,14 @@ flowchart LR
   dari repo Vercel) agar auto-trigger, atau fetch on-demand.
 
 ### A.2 Tool: react-doctor (Million)
-- Paket npm: `react-doctor` — scannya deterministik: **state & effects, performance, architecture, security, accessibility**. Framework-agnostic (Vite/React/Next/RN).
+- Paket & tools dijalankan via **bun** (bukan npm) untuk kecepatan: `bun add -D react-doctor`, audit `bun run doctor` (alias `bunx react-doctor@latest`).
 - Perintah:
-  - Audit lokal: `npx react-doctor@latest`  (atau `npm run doctor`)
-  - Pasang skill ke coding agent: `npx react-doctor@latest install`
-  - Gate per-PR (GitHub Actions): `npx react-doctor@latest ci install` (hanya lapor issue dari perubahan Anda, bukan backlog)
+  - Audit lokal: `bun run doctor` (alias `bunx react-doctor@latest`)
+  - Pasang skill ke coding agent: `bunx react-doctor@latest install`
+  - Gate per-PR (GitHub Actions): `bunx react-doctor@latest ci install` (hanya lapor issue dari perubahan Anda, bukan backlog)
   - Matikan telemetry: `--no-telemetry` / `doctor.config.ts`
-- Konfigurasi: `doctor.config.ts` (sudah ada di root, scope `resources/js`, telemetry off). Tune dengan `npx react-doctor@latest ci config`.
-- Script `package.json`: `"doctor": "npx react-doctor@latest"`, `"doctor:ci": "npx react-doctor@latest ci"`.
+- Konfigurasi: `doctor.config.ts` (sudah ada di root, scope `resources/js`, telemetry off). Tune dengan `bunx react-doctor@latest ci config`.
+- Script `package.json`: `"doctor": "bunx react-doctor@latest"`, `"doctor:ci": "bunx react-doctor@latest ci"`.
 
 ---
 
@@ -82,16 +82,16 @@ flowchart LR
 
 Pre-commit (Husky atau `.git/hooks/pre-commit`), urutan:
 ```sh
-npm run lint:check        # ESLint
-npm run format:check      # Prettier
-npm run types:check       # tsc --noEmit
-npx react-doctor@latest --no-telemetry   # React gate
+bun run lint:check        # ESLint
+bun run format:check      # Prettier
+bun run types:check       # tsc --noEmit
+bunx react-doctor@latest --no-telemetry   # React gate
 vendor/bin/pint --test --format agent    # PHP style
 phpstan analyse                          # PHP static
 ```
 PR / CI (GitHub Actions, `.github/workflows`):
 ```sh
-npm run doctor:ci         # react-doctor ci (komentar PR)
+bun run doctor:ci         # react-doctor ci (komentar PR)
 php artisan test --compact
 ```
 
@@ -108,6 +108,6 @@ php artisan test --compact
 - [x] `laravel-best-practices` skill aktif (lokal `.agents/skills/laravel-best-practices`) — auto-trigger
 - [x] `vercel-react-best-practices` skill terpasang (`.agents/skills/react-best-practices`) — auto-trigger
 - [x] Pre-commit gate terpasang (`.githooks/pre-commit`): eslint + prettier + tsc + react-doctor + pint + phpstan + impeccable; bloc ker commit bad code. Pastikan aktif: `git config core.hooksPath .githooks` (sudah jika hook lama jalan) & `chmod +x .githooks/pre-commit`.
-- [~] `react-doctor` perlu `npm install` lalu audit pertama (`npm run doctor`)
-- [ ] `react-doctor ci install` (PR gate GitHub Actions)
+- [~] `react-doctor` perlu `bun add -D react-doctor` lalu audit pertama (`bun run doctor` / `bunx react-doctor@latest`)
+- [ ] `bun run doctor:ci` (PR gate GitHub Actions)
 - [ ] `Model::preventLazyLoading()` di `AppServiceProvider` (dev) — deteksi N+1

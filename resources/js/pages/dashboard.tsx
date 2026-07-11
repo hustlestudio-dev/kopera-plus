@@ -264,7 +264,6 @@ export default function Dashboard() {
                                 <span>Logout</span>
                             </Link>
                         </div>
-
                     </div>
                 </aside>
 

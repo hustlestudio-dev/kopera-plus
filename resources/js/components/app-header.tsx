@@ -57,12 +57,14 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
         if (profileMenuCloseTimer.current) {
             clearTimeout(profileMenuCloseTimer.current);
         }
+
         setProfileMenuOpen(true);
     };
     const scheduleCloseProfileMenu = () => {
         if (profileMenuCloseTimer.current) {
             clearTimeout(profileMenuCloseTimer.current);
         }
+
         profileMenuCloseTimer.current = setTimeout(
             () => setProfileMenuOpen(false),
             120,
@@ -84,7 +86,10 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                 <div className="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
                     {/* Mobile Menu */}
                     <div className="lg:hidden">
-                        <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+                        <Sheet
+                            open={mobileNavOpen}
+                            onOpenChange={setMobileNavOpen}
+                        >
                             <SheetTrigger asChild>
                                 <Button
                                     variant="ghost"

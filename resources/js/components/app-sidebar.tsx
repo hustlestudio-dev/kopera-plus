@@ -17,7 +17,6 @@ import {
     SidebarFooter,
     SidebarHeader,
     SidebarMenu,
-    SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
 } from '@/components/ui/sidebar';
@@ -34,7 +33,9 @@ export function AppSidebar() {
     // the single standardized check shared by every gated surface, so a role can
     // never be shown a link that would 403 (e.g. explorer -> /workspace).
     const canSee = (item: NavItem): boolean =>
-        item.roles ? canAccess(item.href, item.roles) : canAccess(item.href);
+        item.roles
+            ? canAccess(String(item.href), item.roles)
+            : canAccess(String(item.href));
 
     // Grouping mirrors the role areas defined in routes/web.php:
     //  - Beranda: role-specific dashboards (one per platform role)
@@ -44,8 +45,18 @@ export function AppSidebar() {
         {
             label: 'Beranda',
             items: [
-                { title: 'Anggota', href: dashboardUrl, icon: LayoutGrid, roles: [ROLE.MEMBER] },
-                { title: 'Penjelajah', href: '/explorer-dashboard', icon: Compass, roles: [ROLE.EXPLORER] },
+                {
+                    title: 'Anggota',
+                    href: dashboardUrl,
+                    icon: LayoutGrid,
+                    roles: [ROLE.MEMBER],
+                },
+                {
+                    title: 'Penjelajah',
+                    href: '/explorer-dashboard',
+                    icon: Compass,
+                    roles: [ROLE.EXPLORER],
+                },
                 {
                     title: 'Administrator',
                     href: '/admin-dashboard',
@@ -57,15 +68,29 @@ export function AppSidebar() {
         {
             label: 'Alat Kerja',
             items: [
-                { title: 'Workspace', href: '/workspace', icon: FolderKanban, roles: [ROLE.MEMBER, ROLE.ADMIN] },
-                { title: 'Asisten AI', href: '/assistant', icon: Bot, roles: [ROLE.MEMBER, ROLE.ADMIN] },
+                {
+                    title: 'Workspace',
+                    href: '/workspace',
+                    icon: FolderKanban,
+                    roles: [ROLE.MEMBER, ROLE.ADMIN],
+                },
+                {
+                    title: 'Asisten AI',
+                    href: '/assistant',
+                    icon: Bot,
+                    roles: [ROLE.MEMBER, ROLE.ADMIN],
+                },
             ],
         },
         {
             label: 'Akun',
             items: [
                 { title: 'Profil', href: '/settings/profile', icon: User },
-                { title: 'Wilayah Koperasi', href: '/settings/teams', icon: Users },
+                {
+                    title: 'Wilayah Koperasi',
+                    href: '/settings/teams',
+                    icon: Users,
+                },
             ],
         },
     ];

@@ -1,5 +1,4 @@
 import { Form, Head, Link } from '@inertiajs/react';
-import { useState } from 'react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import PrototypeHud from '@/components/PrototypeHud';
@@ -12,27 +11,9 @@ import { store } from '@/routes/register';
 
 type Props = {
     passwordRules: string;
-    roles: { value: string; label: string }[];
 };
 
-const ROLE_COPY: Record<string, { title: string; description: string }> = {
-    explorer: {
-        title: 'Explorer Koperasi',
-        description: 'Jelajahi koperasi, temukan produk lokal, dan jelajahi katalog anggota.',
-    },
-    member: {
-        title: 'Anggota Koperasi',
-        description: 'Akses layanan koperasi, asisten AI, poin & reward, belanja, dan RAT Digital.',
-    },
-    administrator: {
-        title: 'Administrator',
-        description: 'Kelola anggota, produk, inventaris, tata kelola, dan analitik koperasi.',
-    },
-};
-
-export default function Register({ passwordRules, roles }: Props) {
-    const [role, setRole] = useState<string>(roles[0]?.value ?? 'member');
-    const activeCopy = ROLE_COPY[role];
+export default function Register({ passwordRules }: Props) {
     return (
         <>
             <Head title="Buat Akun | KOPERA-PLUS" />

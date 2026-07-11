@@ -43,4 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('invitations/{invitation}', [TeamInvitationController::class, 'decline'])->name('invitations.decline');
 });
 
+require __DIR__.'/e-rat.php';
+require __DIR__.'/gamification.php';
+require __DIR__.'/kopdes.php';
+require __DIR__.'/whatsapp.php';
 require __DIR__.'/settings.php';
