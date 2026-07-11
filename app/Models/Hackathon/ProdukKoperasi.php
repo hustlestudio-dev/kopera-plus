@@ -14,6 +14,8 @@ class ProdukKoperasi extends HackathonModel
 
     protected $primaryKey = 'produk_sample_id';
 
+    protected $keyType = 'string';
+
     protected function casts(): array
     {
         return [
