@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Schema;
  * identifiable fields (national id number, phone number, contact mailbox, member
  * name, residence address, ...) are never queried. When the dump is not loaded the
  * methods degrade to safe empty/zero defaults so the dashboards still render.
+ *
+ * ponytail: results are cached as plain ARRAYs (paginator->toArray()), never as
+ * Eloquent/Paginator OBJECTS. Caching hydrated objects poisons the cache after
+ * optimize/clear or model changes, yielding __PHP_Incomplete_Class at read time.
  */
 final class HackathonData
 {
@@ -79,13 +83,15 @@ final class HackathonData
         });
     }
 
-    public static function cooperatives(): LengthAwarePaginator
+    public static function cooperatives(): array
     {
         if (! self::available()) {
-            return new Paginator([], 0, 50);
+            return (new Paginator([], 0, 50))->toArray();
         }
 
-        return Cache::remember('hackathon:cooperatives', now()->addMinutes(15), static function (): LengthAwarePaginator {
+        // ponytail: cache the plain array form, not the Paginator object, so the
+        // cache survives optimize:clear / model reloads without __PHP_Incomplete_Class.
+        return Cache::remember('hackathon:cooperatives', now()->addMinutes(15), static function (): array {
             return ProfilKoperasi::query()
                 ->select([
                     'koperasi_ref',
@@ -108,17 +114,18 @@ final class HackathonData
                         }]);
                 }])
                 ->orderBy('nama_koperasi')
-                ->paginate(50);
+                ->paginate(50)
+                ->toArray();
         });
     }
 
-    public static function products(): LengthAwarePaginator
+    public static function products(): array
     {
         if (! self::available()) {
-            return new Paginator([], 0, 50);
+            return (new Paginator([], 0, 50))->toArray();
         }
 
-        return Cache::remember('hackathon:products', now()->addMinutes(15), static function (): LengthAwarePaginator {
+        return Cache::remember('hackathon:products', now()->addMinutes(15), static function (): array {
             return ProdukKoperasi::query()
                 ->select([
                     'produk_sample_id',
@@ -132,7 +139,8 @@ final class HackathonData
                 }])
                 ->withSum('inventaris', 'stok')
                 ->orderBy('nama_produk')
-                ->paginate(50);
+                ->paginate(50)
+                ->toArray();
         });
     }
 }
