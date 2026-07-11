@@ -27,15 +27,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('role:explorer|administrator')->group(function () {
         Route::get('/explorer-dashboard', [DashboardController::class, 'explorer'])->name('explorer.dashboard');
     });
-
-    // MEMBER
-    Route::middleware('role:member|administrator')->group(function () {
-        Route::get('{current_team}/dashboard', DashboardController::class)
-            ->middleware(EnsureTeamMembership::class)
-            ->name('dashboard');
-        Route::inertia('workspace', 'workspace')->name('member.workspace');
-        Route::inertia('assistant', 'assistant')->name('member.assistant');
-    });
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -46,5 +37,6 @@ Route::middleware(['auth'])->group(function () {
 require __DIR__.'/e-rat.php';
 require __DIR__.'/gamification.php';
 require __DIR__.'/kopdes.php';
+require __DIR__.'/member.php';
 require __DIR__.'/whatsapp.php';
 require __DIR__.'/settings.php';
