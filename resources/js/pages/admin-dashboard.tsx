@@ -9,6 +9,7 @@ import {
     Bell,
     MessageSquare,
     ChevronRight,
+    LogOut,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
@@ -29,7 +30,31 @@ interface RecItem {
     recommendation: string;
 }
 
-export default function AdminDashboard() {
+interface KPIShape {
+    total_koperasi: number;
+    total_anggota: number;
+    total_simpanan: number;
+    total_pendapatan: number;
+    total_produk: number;
+    total_gerai: number;
+    total_rat: number;
+    latest_rat_tahun_buku: number;
+}
+
+interface RatParticipationItem {
+    status_rat: string;
+    tahap_rat: string;
+    jumlah_rat: number;
+    total_peserta: number | null;
+    rata_peserta: number | null;
+}
+
+interface AdminDashboardProps {
+    kpis?: KPIShape | null;
+    ratParticipation?: RatParticipationItem[];
+}
+
+export default function AdminDashboard({ kpis = null, ratParticipation = [] }: AdminDashboardProps) {
     const [toastVisible, setToastVisible] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
 
@@ -39,35 +64,25 @@ export default function AdminDashboard() {
         setTimeout(() => setToastVisible(false), 3000);
     };
 
-    const kpis: KPIItem[] = [
-        {
-            label: 'Anggota Aktif',
-            value: '4,821',
-            change: '+12%',
-            positive: true,
-            data: [2, 4, 3, 6],
-        },
-        {
-            label: 'Baru Bulan Ini',
-            value: '142',
-            change: '+5%',
-            positive: true,
-            data: [3, 2, 5, 4],
-        },
-        {
-            label: 'Transaksi',
-            value: '12.4k',
-            change: '-2%',
-            positive: false,
-            data: [6, 5, 4, 2],
-        },
-        {
-            label: 'Pendapatan',
-            value: 'Rp24.8M',
-            change: '+8%',
-            positive: true,
-            data: [2, 3, 5, 7],
-        },
+    const formatRupiah = (value: number): string =>
+        new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            maximumFractionDigits: 0,
+        }).format(value);
+
+    const formatNumber = (value: number): string =>
+        new Intl.NumberFormat('id-ID').format(value);
+
+    const kpiCards: KPIItem[] = [
+        { label: 'Total Koperasi', value: formatNumber(kpis?.total_koperasi ?? 0), change: '', positive: true, data: [] },
+        { label: 'Total Anggota', value: formatNumber(kpis?.total_anggota ?? 0), change: '', positive: true, data: [] },
+        { label: 'Total Simpanan', value: formatRupiah(kpis?.total_simpanan ?? 0), change: '', positive: true, data: [] },
+        { label: 'Total Pendapatan', value: formatRupiah(kpis?.total_pendapatan ?? 0), change: '', positive: true, data: [] },
+        { label: 'Total Produk', value: formatNumber(kpis?.total_produk ?? 0), change: '', positive: true, data: [] },
+        { label: 'Total Gerai', value: formatNumber(kpis?.total_gerai ?? 0), change: '', positive: true, data: [] },
+        { label: 'Total RAT', value: formatNumber(kpis?.total_rat ?? 0), change: '', positive: true, data: [] },
+        { label: 'Tahun Buku RAT Terbaru', value: String(kpis?.latest_rat_tahun_buku ?? '-'), change: '', positive: true, data: [] },
     ];
 
     const recommendations: RecItem[] = [
@@ -131,101 +146,113 @@ export default function AdminDashboard() {
                                     href="/workspace"
                                 >
                                     <span className="material-symbols-outlined">
-                                        group
+                                        widgets
                                     </span>
-                                    <span>Anggota</span>
+                                    <span>Workspace</span>
                                 </Link>
                                 <Link
                                     className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
                                     href="/assistant"
                                 >
                                     <span className="material-symbols-outlined">
-                                        inventory_2
+                                        smart_toy
                                     </span>
-                                    <span>Produk</span>
+                                    <span>Asisten AI</span>
                                 </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                                    href="/workspace"
+                                <p className="px-4 pt-5 pb-1 text-[10px] font-bold tracking-wide text-zinc-400 uppercase">
+                                    Segera Hadir
+                                </p>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         widgets
                                     </span>
                                     <span>Inventaris</span>
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                                    href="/workspace"
+                                </span>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         receipt_long
                                     </span>
                                     <span>Transaksi</span>
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                                    href="/workspace"
+                                </span>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         military_tech
                                     </span>
                                     <span>Hadiah</span>
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                                    href="/workspace"
+                                </span>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         forum
                                     </span>
                                     <span>Komunitas</span>
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                                    href="/workspace"
+                                </span>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         analytics
                                     </span>
                                     <span>Digital RAT</span>
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                                    href="/workspace"
+                                </span>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         assessment
                                     </span>
                                     <span>Laporan</span>
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-xl bg-blue-50/50 px-4 py-3 text-sm font-bold text-[#004ac6]"
-                                    href="/workspace"
+                                </span>
+                                <span
+                                    className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-300"
+                                    title="Segera Hadir"
                                 >
                                     <span className="material-symbols-outlined">
                                         psychology
                                     </span>
                                     <span>AI Insight</span>
-                                </Link>
+                                </span>
                             </nav>
                         </div>
 
                         <div className="space-y-1 px-4">
                             <Link
                                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-600 hover:bg-slate-50"
-                                href="/workspace"
+                                href="/settings/profile"
                             >
                                 <span className="material-symbols-outlined">
                                     settings
                                 </span>
                                 <span>Pengaturan</span>
                             </Link>
-                            <Link
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-600 hover:bg-slate-50"
-                                href="/workspace"
+                            <span
+                                className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3 text-sm text-zinc-300"
+                                title="Segera Hadir"
                             >
-                                <HelpCircle className="h-4 w-4 text-zinc-400" />
+                                <HelpCircle className="h-4 w-4 text-zinc-300" />
                                 <span>Pusat Bantuan</span>
+                            </span>
+                            <Link
+                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
+                                href="/logout"
+                                method="post"
+                                as="button"
+                            >
+                                <LogOut className="h-4 w-4 text-zinc-400" />
+                                <span>Keluar</span>
                             </Link>
                         </div>
                     </div>
@@ -363,7 +390,7 @@ export default function AdminDashboard() {
 
                         {/* KPI Bento Grid */}
                         <section className="grid grid-cols-2 gap-6 lg:grid-cols-4">
-                            {kpis.map((kpi, kIdx) => (
+                            {kpiCards.map((kpi, kIdx) => (
                                 <div
                                     key={kIdx}
                                     className="bento-card flex flex-col justify-between border border-zinc-100 p-6 shadow-sm"

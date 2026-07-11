@@ -5,9 +5,7 @@ import {
     Bell,
     LayoutDashboard,
     Store,
-    BookOpen,
     Brain,
-    Calendar,
     HelpCircle,
     ArrowRight,
     CheckCircle2,
@@ -16,6 +14,7 @@ import {
 } from 'lucide-react';
 import React, { useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
+import { usePermissions } from '@/lib/permissions';
 
 interface CoopItem {
     name: string;
@@ -38,6 +37,7 @@ export default function ExplorerDashboard() {
     const [input, setInput] = useState('');
     const [toastVisible, setToastVisible] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    const { canAccess } = usePermissions();
 
     const showToast = (msg: string) => {
         setToastMessage(msg);
@@ -133,43 +133,44 @@ export default function ExplorerDashboard() {
                     </div>
 
                     <nav className="flex-1 space-y-1">
-                        <Link
-                            className="mx-2 flex items-center gap-3 rounded-xl bg-primary/5 px-4 py-3 text-sm font-bold text-primary"
-                            href="/explorer-dashboard"
-                        >
-                            <LayoutDashboard className="h-4 w-4 text-primary" />
-                            <span>Dashboard</span>
-                        </Link>
-                        <Link
-                            className="mx-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                            href="/workspace"
-                        >
-                            <span className="material-symbols-outlined text-zinc-400">
-                                groups
-                            </span>
-                            <span>Explore Coops</span>
-                        </Link>
-                        <Link
-                            className="mx-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                            href="/assistant"
-                        >
-                            <Store className="h-4 w-4 text-zinc-400" />
-                            <span>Marketplace</span>
-                        </Link>
-                        <Link
-                            className="mx-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                            href="/workspace"
-                        >
-                            <Calendar className="h-4 w-4 text-zinc-400" />
-                            <span>Events</span>
-                        </Link>
-                        <Link
-                            className="mx-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:bg-slate-50"
-                            href="/workspace"
-                        >
-                            <BookOpen className="h-4 w-4 text-zinc-400" />
-                            <span>Learning Center</span>
-                        </Link>
+                        {[
+                            {
+                                href: '/explorer-dashboard',
+                                label: 'Dashboard',
+                                icon: <LayoutDashboard className="h-4 w-4 text-primary" />,
+                                active: true,
+                            },
+                            {
+                                href: '/workspace',
+                                label: 'Explore Coops',
+                                icon: (
+                                    <span className="material-symbols-outlined text-zinc-400">
+                                        groups
+                                    </span>
+                                ),
+                            },
+                            {
+                                href: '/assistant',
+                                label: 'Marketplace',
+                                icon: <Store className="h-4 w-4 text-zinc-400" />,
+                            },
+                        ]
+                            .filter((item) => canAccess(item.href))
+                            .map((item) => (
+                                <Link
+                                    key={item.label}
+                                    className={
+                                        'mx-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ' +
+                                        (item.active
+                                            ? 'bg-primary/5 text-primary'
+                                            : 'text-zinc-600 hover:bg-slate-50')
+                                    }
+                                    href={item.href}
+                                >
+                                    {item.icon}
+                                    <span>{item.label}</span>
+                                </Link>
+                            ))}
                     </nav>
 
                     <div className="mt-auto px-4 pb-4">
@@ -403,13 +404,15 @@ export default function ExplorerDashboard() {
                                 <h3 className="font-headline-md text-lg font-bold">
                                     Popular Products
                                 </h3>
-                                <Link
-                                    className="flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
-                                    href="/assistant"
-                                >
-                                    Explore Marketplace
-                                    <ArrowRight className="h-4 w-4" />
-                                </Link>
+                                {canAccess('/assistant') && (
+                                    <Link
+                                        className="flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+                                        href="/assistant"
+                                    >
+                                        Explore Marketplace
+                                        <ArrowRight className="h-4 w-4" />
+                                    </Link>
+                                )}
                             </div>
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                                 {products.map((prod, pIdx) => (
@@ -456,6 +459,7 @@ export default function ExplorerDashboard() {
                                                     >
                                                         Buy
                                                     </button>
+                                                {canAccess('/assistant') && (
                                                     <Link
                                                         href="/assistant"
                                                         className="rounded-lg border border-blue-500/30 p-1.5 text-blue-600 transition-colors hover:bg-blue-50/50"
@@ -463,6 +467,7 @@ export default function ExplorerDashboard() {
                                                     >
                                                         <Brain className="h-3.5 w-3.5" />
                                                     </Link>
+                                                )}
                                                 </div>
                                             </div>
                                         </div>

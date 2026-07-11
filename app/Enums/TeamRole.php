@@ -14,9 +14,9 @@ enum TeamRole: string
     public function label(): string
     {
         return match ($this) {
-            self::Owner => 'Pemilik',
-            self::Admin => 'Admin',
-            self::Member => 'Anggota',
+            self::Owner => 'Pemilik Wilayah',
+            self::Admin => 'Pengelola Wilayah',
+            self::Member => 'Anggota Wilayah',
         };
     }
 

@@ -12,7 +12,6 @@ import {
     Wrench,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import AppLogoIcon from '@/components/app-logo-icon';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -136,9 +135,6 @@ export default function Error({ status }: ErrorPageProps) {
 
                 <div className="relative w-full max-w-md">
                     <div className="mb-8 flex items-center justify-center gap-2 text-sm font-semibold tracking-tight">
-                        <span className="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                            <AppLogoIcon className="size-5 fill-current text-white dark:text-black" />
-                        </span>
                         <span>KOPERA-PLUS</span>
                     </div>
 

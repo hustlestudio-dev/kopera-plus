@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Middleware\EnsureTeamMembership;
@@ -19,12 +20,12 @@ Route::redirect('/demo/auth', '/login', 301);
 Route::middleware(['auth', 'verified'])->group(function () {
     // ADMINISTRATOR
     Route::middleware('role:administrator')->group(function () {
-        Route::inertia('/admin-dashboard', 'admin-dashboard')->name('admin.dashboard');
+        Route::get('/admin-dashboard', [AdminDashboardController::class, '__invoke'])->name('admin.dashboard');
     });
 
     // EXPLORER
     Route::middleware('role:explorer|administrator')->group(function () {
-        Route::inertia('/explorer-dashboard', 'explorer-dashboard')->name('explorer.dashboard');
+        Route::get('/explorer-dashboard', [DashboardController::class, 'explorer'])->name('explorer.dashboard');
     });
 
     // MEMBER

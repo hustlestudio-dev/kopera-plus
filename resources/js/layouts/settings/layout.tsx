@@ -23,7 +23,7 @@ const sidebarNavItems: NavItem[] = [
         icon: null,
     },
     {
-        title: 'Tim',
+        title: 'Wilayah Koperasi',
         href: teams(),
         icon: null,
     },

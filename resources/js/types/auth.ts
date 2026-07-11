@@ -15,6 +15,13 @@ export type Auth = {
     user: User;
 };
 
+export type PageProps = {
+    auth: Auth;
+    currentTeam?: unknown;
+    teams?: unknown;
+    [key: string]: unknown;
+};
+
 /* @chisel-passkeys */
 export type Passkey = {
     id: number;

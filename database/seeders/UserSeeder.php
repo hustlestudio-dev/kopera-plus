@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
 
             // A personal team lets the member/administrator dashboards resolve.
             if (! $user->ownedTeams()->where('is_personal', true)->exists()) {
-                $createTeam->handle($user, $user->name."'s Team", isPersonal: true);
+                $createTeam->handle($user, $user->name."'s Wilayah Koperasi", isPersonal: true);
             }
         }
     }

@@ -1,6 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react';
 import PrototypeHud from '@/components/PrototypeHud';
+import { usePermissions, roleHomePath } from '@/lib/permissions';
 
 export default function Welcome() {
     const { auth, currentTeam } = usePage().props;
@@ -10,13 +11,11 @@ export default function Welcome() {
 
     // Mirror the server-side role-based landing (RedirectsToCurrentTeam): only
     // route to a role-guarded dashboard when the user actually holds that role.
-    const dashboardUrl = user?.roles?.includes('administrator')
-        ? '/admin-dashboard'
-        : user?.roles?.includes('explorer')
-          ? '/explorer-dashboard'
-          : user?.roles?.includes('member') && teamSlug
-            ? `/${teamSlug}/dashboard`
-            : '/settings/teams';
+    // Single source of truth: derive the landing path from roles via
+    // roleHomePath() (mirrors App\Enums\UserRole::homePath()), instead of the
+    // previous per-page `user.roles.includes(...)` strings that could drift.
+    const { roles } = usePermissions();
+    const dashboardUrl = roleHomePath(roles, teamSlug);
 
     const [activeSection, setActiveSection] = useState('home');
 

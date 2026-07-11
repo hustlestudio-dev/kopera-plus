@@ -46,7 +46,7 @@ export default function CreateTeamModal({ children }: PropsWithChildren) {
                                     id="name"
                                     name="name"
                                     data-test="create-team-name"
-                                    placeholder="Tim saya"
+                                    placeholder="Wilayah saya"
                                     required
                                 />
                                 <InputError message={errors.name} />

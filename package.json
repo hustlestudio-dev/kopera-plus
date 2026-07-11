@@ -11,8 +11,10 @@
         "impeccable": "impeccable detect resources/",
         "lint": "eslint . --fix",
         "lint:check": "eslint .",
-        "types:check": "tsc --noEmit"
-    },
+        "types:check": "tsc --noEmit",
+        "doctor": "npx react-doctor@latest",
+        "doctor:ci": "npx react-doctor@latest ci"
+      },
     "devDependencies": {
         "@eslint/js": "^9.19.0",
         "@laravel/vite-plugin-wayfinder": "^0.1.3",

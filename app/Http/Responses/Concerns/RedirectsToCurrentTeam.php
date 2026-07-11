@@ -2,9 +2,8 @@
 
 namespace App\Http\Responses\Concerns;
 
-use App\Models\Team;
+use App\Enums\UserRole;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 
 trait RedirectsToCurrentTeam
 {
@@ -17,24 +16,15 @@ trait RedirectsToCurrentTeam
             return '/';
         }
 
-        if ($user->hasRole('administrator')) {
-            return '/admin-dashboard';
-        }
-
-        if ($user->hasRole('explorer')) {
-            return '/explorer-dashboard';
-        }
-
-        // Members land on their team dashboard. Anyone without a platform role
-        // yet (or without a team) is sent to the teams screen instead of a hard
-        // 403 — they can create or join a team from there.
-        if ($user->hasRole('member')) {
-            $team = $user->personalTeam() ?? $user->currentTeam;
-
-            if ($team) {
-                URL::defaults(['current_team' => $team->slug]);
-
-                return '/'.$team->slug.'/dashboard';
+        // The role enum is the single source of truth for where each role lands.
+        // Enumerating UserRole::orderedForLanding() (instead of hard-coding
+        // hasRole('explorer') strings) means adding or renaming a role forces
+        // this match to handle it, so a role can never silently fall through to
+        // the wrong destination. This is what previously let an explorer be
+        // mis-routed to a page it could not open.
+        foreach (UserRole::orderedForLanding() as $role) {
+            if ($user->hasRole($role->value)) {
+                return $role->homePath($user);
             }
         }
 
