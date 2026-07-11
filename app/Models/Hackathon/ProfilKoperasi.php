@@ -16,6 +16,7 @@ class ProfilKoperasi extends HackathonModel
     protected function casts(): array
     {
         return [
+            'koperasi_ref' => 'string',
             'dibuat_pada' => 'datetime',
             'diperbarui_pada' => 'datetime',
         ];
