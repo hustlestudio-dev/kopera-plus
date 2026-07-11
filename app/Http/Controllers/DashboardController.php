@@ -45,4 +45,14 @@ class DashboardController extends Controller
             'products' => HackathonData::products(),
         ]);
     }
+
+    public function workspace(): Response
+    {
+        return Inertia::render('workspace');
+    }
+
+    public function assistant(): Response
+    {
+        return Inertia::render('assistant');
+    }
 }

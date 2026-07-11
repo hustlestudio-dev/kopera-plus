@@ -1,4 +1,10 @@
 <?php
 
-// M10 Gamification & Loyalty routes. Owned by agent-m10.
-// Populate with Route:: definitions; controller: App\Http\Controllers\GamificationController.
+use App\Http\Controllers\GamificationController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/rewards', GamificationController::class)
+        ->middleware('role:member|administrator')
+        ->name('rewards');
+});

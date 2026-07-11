@@ -1,5 +1,5 @@
-import { Head, useForm } from '@inertiajs/react';
-import { CalendarDays, Info, Users, Vote } from 'lucide-react';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { ArrowLeft, CalendarDays, Info, Users, Vote } from 'lucide-react';
 
 type VoteOption = 'setuju' | 'tidak_setuju' | 'abstain';
 
@@ -143,9 +143,17 @@ export default function ERat({ sessions, results, myVotes }: ERatProps) {
 
     return (
         <div className="min-h-screen bg-slate-50">
-            <Head title="e-RAT Digital Voting" />
+            <Head title="e-RAT Digital | KOPERA-PLUS" />
 
             <div className="mx-auto max-w-3xl px-4 py-8">
+                <Link
+                    href="/dashboard"
+                    className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-800"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Kembali ke Dashboard
+                </Link>
+
                 <header className="mb-6">
                     <div className="flex items-center gap-2 text-indigo-700">
                         <Vote className="h-6 w-6" />
